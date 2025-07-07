@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 256916429}
   - component: {fileID: 256916428}
   - component: {fileID: 256916432}
-  - component: {fileID: 256916431}
   - component: {fileID: 256916433}
+  - component: {fileID: 256916431}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -316,8 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac92038fe5f25f44699fff143afa508d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
-  jumpForce: 8
+  moveSpeed: 5
+  jumpForce: 5
   playerRigidbody: {fileID: 256916432}
   playerAnimator: {fileID: 256916431}
   playerCollider: {fileID: 256916428}
