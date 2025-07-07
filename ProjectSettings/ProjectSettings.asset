@@ -706,11 +706,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: e6f8251a-a179-41e6-b644-1a1abf4e124a
+  cloudProjectId: b905d8eb-df16-4b4a-8150-96636047d26d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: PRO124_DuAn1
-  organizationId: lephanhoathuan2006
+  projectName: My project 2025-07-06_22-23-07
+  organizationId: trannguyenyennhi30102000
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
