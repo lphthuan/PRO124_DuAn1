@@ -1,11 +1,22 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(Animator))] //tự thêm components
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
 	[Header("Movement Settings")]
 	[SerializeField] public float moveSpeed = 7f;
 	[SerializeField] public float jumpForce = 8f;
+
+	[Header("Roll Settings")]
+	[SerializeField] private float rollSpeed = 8f;
+	[SerializeField] private float rollDuration = 0.3f;
+	[SerializeField] private int maxRolls = 2;
+	[SerializeField] private float rollCooldown = 1.5f;
+
+	private bool isRolling = false;
+	private int rollCount = 0;
+	private bool isOnCooldown = false;
 
 	[Header("Components")]
 	[SerializeField] private Rigidbody2D playerRigidbody;
@@ -19,27 +30,33 @@ public class PlayerController : MonoBehaviour
 	// Input values
 	private float horizontalInput;
 	private bool jumpPressed;
+	private bool rollPressed;
 
 	void Update()
 	{
-		if (canMove)
+		if (!isRolling && canMove)
 		{
 			HandleInput();
 			Move();
 			HandleJump();
+
+			// Điều kiện để được roll
+			if (rollPressed && rollCount < maxRolls && !isOnCooldown && IsGrounded())
+			{
+				StartCoroutine(PerformRoll());
+			}
 		}
 
 		UpdateAnimator();
 	}
 
-	// Tách input – dễ nâng cấp sang tay cầm hoặc mobile
 	private void HandleInput()
 	{
 		horizontalInput = Input.GetAxisRaw("Horizontal");
 		jumpPressed = Input.GetKeyDown(KeyCode.Space);
+		rollPressed = Input.GetKeyDown(KeyCode.LeftShift);
 	}
 
-	// Di chuyển trái/phải
 	private void Move()
 	{
 		playerRigidbody.velocity = new Vector2(horizontalInput * moveSpeed, playerRigidbody.velocity.y);
@@ -51,7 +68,6 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	// Xử lý nhảy & double jump
 	private void HandleJump()
 	{
 		if (jumpPressed)
@@ -59,7 +75,7 @@ public class PlayerController : MonoBehaviour
 			if (IsGrounded())
 			{
 				Jump();
-				jumpUsed = false; // reset air jump
+				jumpUsed = false;
 			}
 			else if (!jumpUsed)
 			{
@@ -80,7 +96,6 @@ public class PlayerController : MonoBehaviour
 			Vector2.down, 0.1f, terrainLayer);
 	}
 
-	// Giữ nguyên như yêu cầu
 	private void UpdateAnimator()
 	{
 		if (!canMove) return;
@@ -121,7 +136,32 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	// Cho phép control từ bên ngoài
+	private IEnumerator PerformRoll()
+	{
+		isRolling = true;
+		canMove = false;
+		rollCount++;
+
+		float direction = transform.localScale.x > 0 ? 1f : -1f;
+		playerRigidbody.velocity = new Vector2(direction * rollSpeed, 0f);
+
+		playerAnimator.SetTrigger("IsRoll");
+
+		yield return new WaitForSeconds(rollDuration);
+
+		isRolling = false;
+		canMove = true;
+
+		// Nếu đạt giới hạn roll → bắt đầu cooldown
+		if (rollCount >= maxRolls)
+		{
+			isOnCooldown = true;
+			yield return new WaitForSeconds(rollCooldown);
+			rollCount = 0;
+			isOnCooldown = false;
+		}
+	}
+
 	public void SetCanMove(bool value)
 	{
 		canMove = value;
