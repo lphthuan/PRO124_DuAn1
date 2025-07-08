@@ -1,51 +1,77 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(Animator))] //tự thêm components
 public class PlayerController : MonoBehaviour
 {
+	[Header("Movement Settings")]
 	[SerializeField] public float moveSpeed = 7f;
 	[SerializeField] public float jumpForce = 8f;
 
+	[Header("Components")]
 	[SerializeField] private Rigidbody2D playerRigidbody;
 	[SerializeField] private Animator playerAnimator;
 	[SerializeField] private BoxCollider2D playerCollider;
-	[SerializeField] private Transform playerTransform;
 	[SerializeField] private LayerMask terrainLayer;
 
 	private bool canMove = true;
-	private bool jumpCheck = false;
+	private bool jumpUsed = false;
+
+	// Input values
+	private float horizontalInput;
+	private bool jumpPressed;
 
 	void Update()
 	{
 		if (canMove)
 		{
-			Movement();
+			HandleInput();
+			Move();
+			HandleJump();
 		}
 
 		UpdateAnimator();
 	}
 
-	private void Movement()
+	// Tách input – dễ nâng cấp sang tay cầm hoặc mobile
+	private void HandleInput()
 	{
-		if (!canMove) return;
-		float horizontal = Input.GetAxis("Horizontal");
-		playerRigidbody.velocity = new Vector2(horizontal * moveSpeed, playerRigidbody.velocity.y);
+		horizontalInput = Input.GetAxisRaw("Horizontal");
+		jumpPressed = Input.GetKeyDown(KeyCode.Space);
+	}
 
-		if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+	// Di chuyển trái/phải
+	private void Move()
+	{
+		playerRigidbody.velocity = new Vector2(horizontalInput * moveSpeed, playerRigidbody.velocity.y);
+
+		if (horizontalInput != 0)
 		{
-			playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce);
+			float newScaleX = Mathf.Sign(horizontalInput) * Mathf.Abs(transform.localScale.x);
+			transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
 		}
-		if (IsGrounded() == true)
+	}
+
+	// Xử lý nhảy & double jump
+	private void HandleJump()
+	{
+		if (jumpPressed)
 		{
-			jumpCheck = true;
+			if (IsGrounded())
+			{
+				Jump();
+				jumpUsed = false; // reset air jump
+			}
+			else if (!jumpUsed)
+			{
+				Jump();
+				jumpUsed = true;
+			}
 		}
-		if (IsGrounded() == false && jumpCheck == true && Input.GetKeyDown(KeyCode.Space))
-		{
-			playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce);
-			jumpCheck = false;
-		}
+	}
+
+	private void Jump()
+	{
+		playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce);
 	}
 
 	private bool IsGrounded()
@@ -54,18 +80,21 @@ public class PlayerController : MonoBehaviour
 			Vector2.down, 0.1f, terrainLayer);
 	}
 
+	// Giữ nguyên như yêu cầu
 	private void UpdateAnimator()
 	{
 		if (!canMove) return;
-		var currentScale = playerTransform.localScale;
+
+		var currentScale = transform.localScale;
+
 		if (playerRigidbody.velocity.x < 0)
 		{
-			playerTransform.localScale = new Vector3(-1f * Mathf.Abs(currentScale.x),
+			transform.localScale = new Vector3(-1f * Mathf.Abs(currentScale.x),
 				currentScale.y, currentScale.z);
 		}
 		else if (playerRigidbody.velocity.x > 0)
 		{
-			playerTransform.localScale = new Vector3(1f * Mathf.Abs(currentScale.x),
+			transform.localScale = new Vector3(1f * Mathf.Abs(currentScale.x),
 				currentScale.y, currentScale.z);
 		}
 
@@ -77,6 +106,7 @@ public class PlayerController : MonoBehaviour
 		{
 			playerAnimator.SetBool("IsMove", false);
 		}
+
 		if (playerRigidbody.velocity.y > .1f)
 		{
 			playerAnimator.SetInteger("State", 1);
@@ -89,5 +119,11 @@ public class PlayerController : MonoBehaviour
 		{
 			playerAnimator.SetInteger("State", 0);
 		}
+	}
+
+	// Cho phép control từ bên ngoài
+	public void SetCanMove(bool value)
+	{
+		canMove = value;
 	}
 }
