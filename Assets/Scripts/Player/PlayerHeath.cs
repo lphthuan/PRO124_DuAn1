@@ -23,12 +23,17 @@ public class PlayerHeath : MonoBehaviour
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
-    }
+	}
 
     void Update()
     {
         UpdateHealthBar();
-    }
+
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			TakeDamage(30);
+		}
+	}
 
 
     private void OnTriggerEnter2D(Collider2D collision)
