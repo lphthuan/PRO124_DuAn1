@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Animator playerAnimator;
 	[SerializeField] private BoxCollider2D playerCollider;
 	[SerializeField] private LayerMask terrainLayer;
-
-	private bool canMove = true;
+    
+    private bool canMove = true;
 	private bool jumpUsed = false;
 
 	// Input values
@@ -67,8 +67,9 @@ public class PlayerController : MonoBehaviour
 			transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
 		}
 	}
+   
 
-	private void HandleJump()
+    private void HandleJump()
 	{
 		if (jumpPressed)
 		{
