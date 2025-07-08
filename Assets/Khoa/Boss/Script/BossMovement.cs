@@ -9,6 +9,7 @@ public class BossMovement : MonoBehaviour
     public float PlayerCheckRange = 10f;
     private bool isChasing = false;
     public Animator animator;
+    private bool lastIsRunState = false;
     // Start is called before the first 
     void Start()
     {
@@ -20,6 +21,10 @@ public class BossMovement : MonoBehaviour
     {
         DetectPlayer();
         animatorController();
+        if(isChasing)
+        {
+            MoveToPlayer();
+        }
     }
 
 
@@ -41,14 +46,32 @@ public class BossMovement : MonoBehaviour
 
     public void animatorController()
     {
-        if (isChasing == true) 
+        if (isChasing != lastIsRunState) 
         {
-         animator.SetBool("IsRun", true);
-        }
-        else
-        {
-            animator.SetBool("IsRun", false);
-            
+         animator.SetBool("IsRun", isChasing);
+         lastIsRunState = isChasing;
         }
     }
+
+    public void MoveToPlayer()
+    {
+        // Tạo một vector đích chỉ thay đổi trục X, giữ nguyên Y
+        Vector3 targetPosition = new Vector3(Player.position.x, transform.position.y, transform.position.z);
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        transform.position += direction * speed * Time.deltaTime;
+
+
+        if (direction.x > 0)
+        {
+            // Player ở bên phải boss, hướng mặt sang phải
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (direction.x < 0)
+        {
+            // Player ở bên trái boss, hướng mặt sang trái (lật sprite)
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+    }
+
+
 }
