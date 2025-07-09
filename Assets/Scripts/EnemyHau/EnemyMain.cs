@@ -1,74 +1,95 @@
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class EnemyMain : MonoBehaviour
 {
     [Header("Stats")]
     public int maxHealth = 5;
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
 
-    [Header("Attack Settings")]
+    [Header("Detection & Attack Settings")]
     public Transform player;
+    public float detectionRange = 6f;
+    public float attackRange = 2f;
+    public float fireCooldown = 1f;
+
     public GameObject bulletPrefab;
     public Transform firePoint;
     public GameObject miniEnemyPrefab;
 
-    public float fireCooldown = 1f;
-    private float fireTimer = 0f;
-    private int attackCount = 0;
+    [Header("Sound Effects")]
+    public AudioClip hitClip;
+    public AudioClip dieClip;
+    public AudioClip spawnMiniClip;
 
-    private bool playerInRange = false;
+    private AudioSource audioSource;
+    private int attackCount = 0;
     private Animator animator;
     private bool isDead = false;
+    private bool isAttacking = false;
 
     void Start()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (isDead || player == null || !playerInRange) return;
+        if (isDead || player == null) return;
 
-       
-        Vector3 scale = transform.localScale;
-        scale.x = (player.position.x < transform.position.x) ? -1 : 1;
-        transform.localScale = scale;
+        float distance = Vector2.Distance(transform.position, player.position);
 
-       
-        fireTimer += Time.deltaTime;
-        if (fireTimer >= fireCooldown && attackCount < 5)
+        if (distance <= detectionRange)
         {
-            fireTimer = 0f;
-            Fire();
-            attackCount++;
+            Vector3 scale = transform.localScale;
+            scale.x = (player.position.x < transform.position.x) ? -1 : 1;
+            transform.localScale = scale;
 
-            if (attackCount == 5)
+            if (distance <= attackRange)
             {
-                SpawnMiniEnemies();
+                if (!isAttacking)
+                {
+                    StartCoroutine(AttackRoutine());
+                }
             }
         }
     }
 
-    private void Fire()
+    private IEnumerator AttackRoutine()
     {
-        animator.SetTrigger("Attack");
+        isAttacking = true;
 
-        if (bulletPrefab != null && firePoint != null)
+        if (attackCount >= 5)
         {
-            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            animator.SetTrigger("SpawnMiniEnemy");
+            PlaySound(spawnMiniClip);
+            yield return new WaitForSeconds(0.3f);
+
+            for (int i = 0; i < 2; i++)
+            {
+                Vector3 spawnPos = transform.position + new Vector3(i == 0 ? -1 : 1, 0.5f, 0);
+                Instantiate(miniEnemyPrefab, spawnPos, Quaternion.identity);
+            }
+
+            attackCount = 0;
         }
-    }
-
-    private void SpawnMiniEnemies()
-    {
-        animator.SetTrigger("SpawnMiniEnemy");
-
-        for (int i = 0; i < 2; i++)
+        else
         {
-            Vector3 spawnPos = transform.position + new Vector3(i == 0 ? -1 : 1, 0.5f, 0);
-            Instantiate(miniEnemyPrefab, spawnPos, Quaternion.identity);
+            animator.SetTrigger("Attack");
+            yield return new WaitForSeconds(0.2f);
+
+            if (bulletPrefab != null && firePoint != null)
+            {
+                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            }
+
+            attackCount++;
         }
+
+        yield return new WaitForSeconds(fireCooldown);
+        isAttacking = false;
     }
 
     private void TakeDamage(int damage)
@@ -77,6 +98,7 @@ public class EnemyMain : MonoBehaviour
 
         currentHealth -= damage;
         animator.SetTrigger("Hit");
+        PlaySound(hitClip);
 
         if (currentHealth <= 0)
         {
@@ -88,27 +110,24 @@ public class EnemyMain : MonoBehaviour
     {
         isDead = true;
         animator.SetTrigger("Die");
+        PlaySound(dieClip);
         Destroy(gameObject, 1.2f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-        else if (other.CompareTag("PlayerBullet"))
+        if (other.CompareTag("PlayerBullet"))
         {
             TakeDamage(1);
-            Destroy(other.gameObject); 
+            Destroy(other.gameObject);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void PlaySound(AudioClip clip)
     {
-        if (other.CompareTag("Player"))
+        if (audioSource != null && clip != null)
         {
-            playerInRange = false;
+            audioSource.PlayOneShot(clip);
         }
     }
 }
