@@ -14,9 +14,11 @@ public class PlayerHeath : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
 
     [SerializeField] private PlayerController playerController;
-    //[SerializeField] private PlayerAttack playerAttack;
+	//[SerializeField] private PlayerAttack playerAttack;
 
-    private bool isDead = false; 
+	[SerializeField] private float knockbackForce = 5f;
+
+	private bool isDead = false; 
 
 
     void Start()
@@ -31,17 +33,31 @@ public class PlayerHeath : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.R))
 		{
-			TakeDamage(30);
+			TakeDamage(300);
 		}
 	}
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            TakeDamage(40);
-        }
+		if (other.CompareTag("Saw")
+		|| other.CompareTag("Enemy"))
+		{
+			TakeDamage(1);
+			if (playerController != null)
+			{
+				Vector2 knockbackDirection = (transform.position - other.transform.position);
+				if (knockbackDirection.sqrMagnitude < 0.001f)
+				{
+					knockbackDirection = new Vector2(UnityEngine.Random.Range(-1f, 1f) < 0 ? -1f : 1f, 0.2f);
+					if (knockbackDirection.x == 0) knockbackDirection.x = 1f;
+				}
+				knockbackDirection = knockbackDirection.normalized;
+				knockbackDirection.y += 0.5f;
+				knockbackDirection = knockbackDirection.normalized;
+				playerController.ApplyKnockback(knockbackDirection, knockbackForce);
+			}
+		}
 	}
 
 
@@ -58,6 +74,11 @@ public class PlayerHeath : MonoBehaviour
 		{
 			playerAnimator.SetTrigger("IsHurt");
 		}
+
+		if (currentHealth <= 0 && !isDead)
+		{
+			StartCoroutine(HandleDeath());
+		}
 	}
 
     public void UpdateHealthBar()
@@ -70,28 +91,30 @@ public class PlayerHeath : MonoBehaviour
 
 	private IEnumerator HandleDeath()
 	{
-		if (playerAnimator != null)
+		isDead = true;
+		if (playerController != null)
 		{
-			playerAnimator.SetTrigger("IsDead");
+			playerController.TriggerDeathAnimation();
 		}
 
-        // Vô hiệu hóa các thành phần điều khiển và tấn công của người chơi
-        if (playerController != null) playerController.enabled = false;
+		// Vô hiệu hóa các thành phần điều khiển và tấn công của người chơi
+		if (playerController != null) playerController.enabled = false;
         //if (playerAttack != null) playerAttack.enabled = false;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.7f);
 
 		Respawn();
 	}
 
 	private void Respawn()
 	{
-        if (playerController != null) playerController.enabled = true;
-        //if (playerAttack != null) playerAttack.enabled = true;
+		if (playerController != null) playerController.enabled = true;
+		//if (playerAttack != null) playerAttack.enabled = true;
+		playerController.ResetAfterRespawn();
 
-        currentHealth = maxHealth;
-		isDead = false; // cho phép chết lại sau khi hồi sinh
+		currentHealth = maxHealth;
+		isDead = false;
 
-		UpdateHealthBar(); // cập nhật lại thanh máu
+		UpdateHealthBar();
 	}
 }

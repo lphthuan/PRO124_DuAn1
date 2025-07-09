@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     
     private bool canMove = true;
 	private bool jumpUsed = false;
+	private bool isKnockedBack = false;
+	private float knockbackDuration = 0.3f;
+	private float currentKnockbackTimer = 0f;
 
 	// Input values
 	private float horizontalInput;
@@ -34,7 +37,9 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		if (!isRolling && canMove)
+		HandleKnockbackState();
+
+		if (CanReceiveInput())
 		{
 			HandleInput();
 			Move();
@@ -56,6 +61,12 @@ public class PlayerController : MonoBehaviour
 		jumpPressed = Input.GetKeyDown(KeyCode.Space);
 		rollPressed = Input.GetKeyDown(KeyCode.LeftShift);
 	}
+
+	private bool CanReceiveInput()
+	{
+		return canMove && !isRolling && !isKnockedBack;
+	}
+
 
 	private void Move()
 	{
@@ -137,6 +148,32 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	public void TriggerDeathAnimation()
+	{
+		canMove = false;
+		isKnockedBack = false;
+		playerAnimator.SetTrigger("IsDead");
+		playerRigidbody.velocity = Vector2.zero;
+		playerRigidbody.isKinematic = true;
+	}
+
+	public void ResetAfterRespawn()
+	{
+		canMove = true;
+		isRolling = false;
+		isKnockedBack = false;
+		currentKnockbackTimer = 0f;
+		rollCount = 0;
+		isOnCooldown = false;
+
+		playerRigidbody.isKinematic = false;
+		playerRigidbody.velocity = Vector2.zero;
+
+		playerAnimator.ResetTrigger("IsDead");
+		playerAnimator.Play("Player_Idle"); // hoặc animation idle default của bạn
+	}
+
+
 	private IEnumerator PerformRoll()
 	{
 		isRolling = true;
@@ -166,5 +203,25 @@ public class PlayerController : MonoBehaviour
 	public void SetCanMove(bool value)
 	{
 		canMove = value;
+	}
+
+	void HandleKnockbackState()
+	{
+		if (isKnockedBack)
+		{
+			currentKnockbackTimer -= Time.deltaTime;
+			if (currentKnockbackTimer <= 0)
+			{
+				isKnockedBack = false;
+			}
+		}
+	}
+	public void ApplyKnockback(Vector2 direction, float force)
+	{
+		if (!canMove) return;
+		isKnockedBack = true;
+		currentKnockbackTimer = knockbackDuration;
+		playerRigidbody.velocity = Vector2.zero;
+		playerRigidbody.AddForce(direction * force, ForceMode2D.Impulse);
 	}
 }
