@@ -7,10 +7,13 @@ public class PlayerAttack : MonoBehaviour
 	[SerializeField] private Transform firePoint;
 	[SerializeField] private float spellSpeed = 12f;
 	[SerializeField] private float attackAngle = 120f;
-	[SerializeField] private Animator playerAnimator;
+
+	public SpellData currentSpell;
 
 	public void PerformAttack()
 	{
+		if (currentSpell == null) return;
+
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector3 direction = (mousePos - firePoint.position);
 		direction.z = 0f;
@@ -19,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
 		bool facingRight = transform.localScale.x > 0;
 		Vector2 facing = facingRight ? Vector2.right : Vector2.left;
 		float angle = Vector2.Angle(facing, dirNormalized);
+
 
 		if (angle <= attackAngle / 2f)
 		{
@@ -30,10 +34,6 @@ public class PlayerAttack : MonoBehaviour
 
 			Rigidbody2D rb = spell.GetComponent<Rigidbody2D>();
 			rb.velocity = dirNormalized * spellSpeed;
-
-			// 🔥 Animation
-			if (playerAnimator != null)
-				playerAnimator.SetTrigger("IsShoot");
 		}
 	}
 

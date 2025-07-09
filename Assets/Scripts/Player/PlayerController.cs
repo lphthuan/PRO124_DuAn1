@@ -24,18 +24,28 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private BoxCollider2D playerCollider;
 	[SerializeField] private LayerMask terrainLayer;
 	[SerializeField] private PlayerAttack playerAttack;
+	[SerializeField] private SpellData[] availableSpells;
 
 
+	private int currentSpellIndex = 0;
 	private bool canMove = true;
 	private bool jumpUsed = false;
 	private bool isKnockedBack = false;
 	private float knockbackDuration = 0.3f;
 	private float currentKnockbackTimer = 0f;
+	private bool isAttacking = false; // kiểm soát trạng thái tấn công
+	private bool attackPressed = false; // input bấm chuột
 
 	// Input values
 	private float horizontalInput;
 	private bool jumpPressed;
 	private bool rollPressed;
+
+	private void Start()
+	{
+		playerAttack.currentSpell = availableSpells[currentSpellIndex];
+
+	}
 
 	void Update()
 	{
@@ -54,9 +64,9 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		if (Input.GetMouseButtonDown(0)) // Click chuột trái
+		if (attackPressed)
 		{
-			playerAttack.PerformAttack(); // Gọi bắn
+			TryAttack(); // Gọi riêng phần tấn công
 		}
 
 
@@ -68,6 +78,7 @@ public class PlayerController : MonoBehaviour
 		horizontalInput = Input.GetAxisRaw("Horizontal");
 		jumpPressed = Input.GetKeyDown(KeyCode.Space);
 		rollPressed = Input.GetKeyDown(KeyCode.LeftShift);
+		attackPressed = Input.GetMouseButtonDown(0);
 	}
 
 	private bool CanReceiveInput()
@@ -115,6 +126,39 @@ public class PlayerController : MonoBehaviour
 		return Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size, 0f,
 			Vector2.down, 0.1f, terrainLayer);
 	}
+
+	private void TryAttack()
+	{
+		if (isAttacking || isRolling || !IsGrounded()) return;
+
+		isAttacking = true;
+
+		if (playerAnimator != null && playerAttack.currentSpell != null)
+		{
+			playerAnimator.SetTrigger(playerAttack.currentSpell.animationTrigger);
+		}
+	}
+
+
+	public void PerformAttack()
+	{
+		if (playerAttack != null)
+		{
+			playerAttack.PerformAttack();
+		}
+		isAttacking = false;
+	}
+
+
+	private void SwitchSpell(int index)
+	{
+		if (index >= 0 && index < availableSpells.Length)
+		{
+			currentSpellIndex = index;
+			playerAttack.currentSpell = availableSpells[index];
+		}
+	}
+
 
 	private void UpdateAnimator()
 	{
