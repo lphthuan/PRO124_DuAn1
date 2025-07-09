@@ -23,8 +23,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Animator playerAnimator;
 	[SerializeField] private BoxCollider2D playerCollider;
 	[SerializeField] private LayerMask terrainLayer;
-    
-    private bool canMove = true;
+	[SerializeField] private PlayerAttack playerAttack;
+
+
+	private bool canMove = true;
 	private bool jumpUsed = false;
 	private bool isKnockedBack = false;
 	private float knockbackDuration = 0.3f;
@@ -51,6 +53,12 @@ public class PlayerController : MonoBehaviour
 				StartCoroutine(PerformRoll());
 			}
 		}
+
+		if (Input.GetMouseButtonDown(0)) // Click chuột trái
+		{
+			playerAttack.PerformAttack(); // Gọi bắn
+		}
+
 
 		UpdateAnimator();
 	}

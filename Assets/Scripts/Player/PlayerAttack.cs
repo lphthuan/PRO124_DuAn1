@@ -2,25 +2,39 @@
 
 public class PlayerAttack : MonoBehaviour
 {
+	[Header("Attack Settings")]
 	[SerializeField] private GameObject spellPrefab;
 	[SerializeField] private Transform firePoint;
-	[SerializeField] private float spellSpeed = 10f;
+	[SerializeField] private float spellSpeed = 12f;
+	[SerializeField] private float attackAngle = 120f;
+	[SerializeField] private Animator playerAnimator;
 
-	void Update()
+	public void PerformAttack()
 	{
-		if (Input.GetMouseButtonDown(0)) // Chuột trái
+		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		Vector3 direction = (mousePos - firePoint.position);
+		direction.z = 0f;
+		Vector2 dirNormalized = direction.normalized;
+
+		bool facingRight = transform.localScale.x > 0;
+		Vector2 facing = facingRight ? Vector2.right : Vector2.left;
+		float angle = Vector2.Angle(facing, dirNormalized);
+
+		if (angle <= attackAngle / 2f)
 		{
-			ShootSpell();
+			// ✨ Tính góc xoay
+			float zRotation = Mathf.Atan2(dirNormalized.y, dirNormalized.x) * Mathf.Rad2Deg;
+
+			// 🌀 Tạo spell xoay đúng hướng
+			GameObject spell = Instantiate(spellPrefab, firePoint.position, Quaternion.Euler(0, 0, zRotation));
+
+			Rigidbody2D rb = spell.GetComponent<Rigidbody2D>();
+			rb.velocity = dirNormalized * spellSpeed;
+
+			// 🔥 Animation
+			if (playerAnimator != null)
+				playerAnimator.SetTrigger("IsShoot");
 		}
 	}
 
-	void ShootSpell()
-	{
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector2 direction = (mousePos - firePoint.position).normalized;
-
-		GameObject spell = Instantiate(spellPrefab, firePoint.position, Quaternion.identity);
-		Rigidbody2D rb = spell.GetComponent<Rigidbody2D>();
-		rb.velocity = direction * spellSpeed;
-	}
 }

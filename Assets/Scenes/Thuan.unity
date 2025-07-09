@@ -279,6 +279,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2247967482211942796, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 452140258135804719}
+    - target: {fileID: 2247967482211942796, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: playerSpriteRenderer
+      value: 
+      objectReference: {fileID: 452140258135804720}
+    - target: {fileID: 2697966939241004358, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: playerAttack
+      value: 
+      objectReference: {fileID: 452140258135804721}
     - target: {fileID: 5579747650445305098, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: healthText
       value: 
@@ -332,6 +344,27 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+--- !u!95 &452140258135804719 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7980729927624721473, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+  m_PrefabInstance: {fileID: 452140258135804718}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &452140258135804720 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2328794411827431868, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+  m_PrefabInstance: {fileID: 452140258135804718}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &452140258135804721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2247967482211942796, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+  m_PrefabInstance: {fileID: 452140258135804718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62fbc1dd7ee59048a092293e2c95b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &845882589645738111
 MonoBehaviour:
   m_ObjectHideFlags: 0
