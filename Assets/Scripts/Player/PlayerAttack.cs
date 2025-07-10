@@ -6,10 +6,12 @@ public class PlayerAttack : MonoBehaviour
 	[SerializeField] private Transform firePoint;
 	[SerializeField] private float spellSpeed = 12f;
 	[SerializeField] private float attackAngle = 120f;
+	[SerializeField] private float attackCooldown = 0.8f;
 
 	public SpellData currentSpell;
 
-	// Kiểm tra xem chuột có trong vùng bắn hợp lệ không
+	private float lastAttackTime = -Mathf.Infinity;
+
 	public bool IsValidAttackAngle()
 	{
 		if (currentSpell == null) return false;
@@ -23,13 +25,20 @@ public class PlayerAttack : MonoBehaviour
 		Vector2 facing = facingRight ? Vector2.right : Vector2.left;
 		float angle = Vector2.Angle(facing, dirNormalized);
 
-		Debug.Log($"[Attack] Facing: {(facingRight ? "Right" : "Left")} | Angle to mouse: {angle}");
+		//Debug.Log($"[Attack] Facing: {(facingRight ? "Right" : "Left")} | Angle to mouse: {angle}");
 
 		return angle <= attackAngle / 2f;
 	}
 
 	public void PerformAttack()
 	{
+		if (Time.time - lastAttackTime < attackCooldown)
+		{
+			return;
+		}
+
+		lastAttackTime = Time.time;
+
 		if (currentSpell == null) return;
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -42,7 +51,5 @@ public class PlayerAttack : MonoBehaviour
 		GameObject spell = Instantiate(currentSpell.spellPrefab, firePoint.position, Quaternion.Euler(0, 0, zRotation));
 		Rigidbody2D rb = spell.GetComponent<Rigidbody2D>();
 		rb.velocity = dirNormalized * spellSpeed;
-
-		Debug.Log($"[Attack] Spell casted at angle: {zRotation}°");
 	}
 }

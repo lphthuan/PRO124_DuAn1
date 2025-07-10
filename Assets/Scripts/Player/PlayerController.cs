@@ -35,26 +35,34 @@ public class PlayerController : MonoBehaviour
 	private bool isAttacking = false;
 	private Coroutine attackRoutine;
 
+	// Spell Idle State
+	private bool isHoldingSpellIdle = false;
+	private Coroutine spellIdleCoroutine;
+	private float spellIdleDuration = 20f;
+
 	// Input values
 	private float horizontalInput;
 	private bool jumpPressed;
 	private bool rollPressed;
-	private bool attackPressed = false;
+	private bool attackPressed;
+	private bool switchSpellPressed;
 
 	private void Start()
 	{
 		playerAttack.currentSpell = availableSpells[currentSpellIndex];
+		SetAnimatorIdleState(); // chuyển idle ban đầu
 	}
 
 	private void Update()
 	{
 		HandleKnockbackState();
-
 		HandleInput();
+
+		HandleSpellSwitch(); // chuyển phép bằng Q
 
 		if (CanReceiveInput())
 		{
-			if (rollPressed && rollCount < maxRolls && !isOnCooldown && IsGrounded())
+			if (rollPressed && rollCount < maxRolls && !isOnCooldown && IsGrounded() && !isAttacking)
 			{
 				StartCoroutine(PerformRoll());
 			}
@@ -63,18 +71,15 @@ public class PlayerController : MonoBehaviour
 			{
 				TryAttack();
 			}
-		}
 
-		// Chặn move nếu đang tấn công
-		if (!isAttacking && CanReceiveInput())
-		{
 			Move();
 		}
 
 		HandleJump();
 		UpdateAnimator();
 
-		attackPressed = false; // reset input mỗi frame
+		attackPressed = false;
+		switchSpellPressed = false;
 	}
 
 	private void HandleInput()
@@ -83,19 +88,83 @@ public class PlayerController : MonoBehaviour
 		jumpPressed = Input.GetKeyDown(KeyCode.Space);
 		rollPressed = Input.GetKeyDown(KeyCode.LeftShift);
 		attackPressed = Input.GetMouseButtonDown(0);
+		switchSpellPressed = Input.GetKeyDown(KeyCode.Q);
 	}
+
+	private void HandleSpellSwitch()
+	{
+		if (switchSpellPressed)
+		{
+			int nextIndex = (currentSpellIndex + 1) % availableSpells.Length;
+			SwitchSpell(nextIndex);
+		}
+	}
+
+	private void SwitchSpell(int index)
+	{
+		if (index >= 0 && index < availableSpells.Length)
+		{
+			currentSpellIndex = index;
+			playerAttack.currentSpell = availableSpells[currentSpellIndex];
+			SetAnimatorIdleState();
+			Debug.Log($"[Spell] Chuyển sang phép: {availableSpells[currentSpellIndex].name}");
+		}
+	}
+
+	private void SetAnimatorIdleState()
+	{
+		if (playerAnimator != null && playerAttack.currentSpell != null)
+		{
+			int spellState = playerAttack.currentSpell.StateIntAnim;
+			playerAnimator.SetInteger("State", spellState);
+			Debug.Log($"[Idle] Chuyển sang idle phép: {spellState}");
+
+			isHoldingSpellIdle = true;
+
+			// Nếu đang đếm trước đó thì hủy
+			if (spellIdleCoroutine != null) StopCoroutine(spellIdleCoroutine);
+			spellIdleCoroutine = StartCoroutine(SpellIdleCountdown());
+		}
+	}
+
+	private IEnumerator SpellIdleCountdown()
+	{
+		yield return new WaitForSeconds(spellIdleDuration);
+
+		if (isHoldingSpellIdle)
+		{
+			playerAnimator.SetInteger("State", 0); // về idle thường
+			Debug.Log("[Idle] Hết thời gian → về idle mặc định (0)");
+			isHoldingSpellIdle = false;
+		}
+	}
+
+	private void CancelSpellIdle()
+	{
+		if (isHoldingSpellIdle)
+		{
+			isHoldingSpellIdle = false;
+			playerAnimator.SetInteger("State", 0);
+			if (spellIdleCoroutine != null) StopCoroutine(spellIdleCoroutine);
+			Debug.Log("[Idle] Ngắt idle phép do hành động");
+		}
+	}
+
 
 	private bool CanReceiveInput()
 	{
-		return canMove && !isRolling && !isKnockedBack;
+		return canMove && !isRolling && !isKnockedBack && !isAttacking;
 	}
 
 	private void Move()
 	{
+		if (isAttacking || !canMove) return;
+		
 		playerRigidbody.velocity = new Vector2(horizontalInput * moveSpeed, playerRigidbody.velocity.y);
 
 		if (horizontalInput != 0)
 		{
+			CancelSpellIdle();
 			float newScaleX = Mathf.Sign(horizontalInput) * Mathf.Abs(transform.localScale.x);
 			transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
 		}
@@ -105,6 +174,9 @@ public class PlayerController : MonoBehaviour
 	{
 		if (jumpPressed)
 		{
+			CancelSpellIdle();
+			if (isRolling || isAttacking || isKnockedBack) return; // Không nhảy khi đang lăn, tấn công hay bị đẩy lùi
+
 			if (IsGrounded())
 			{
 				Jump();
@@ -131,6 +203,7 @@ public class PlayerController : MonoBehaviour
 
 	private void TryAttack()
 	{
+		CancelSpellIdle();
 		if (isAttacking || isRolling || !IsGrounded()) return;
 		if (!playerAttack.IsValidAttackAngle())
 		{
@@ -147,24 +220,28 @@ public class PlayerController : MonoBehaviour
 		isAttacking = true;
 		canMove = false;
 
+		playerRigidbody.velocity = Vector2.zero;
+
 		if (playerAnimator != null && playerAttack.currentSpell != null)
 		{
 			string trigger = playerAttack.currentSpell.animationTrigger;
-			Debug.Log($"[Attack] Trigger animation: {trigger}");
 			playerAnimator.SetTrigger(trigger);
 		}
 
-		// Đợi animation kết thúc
-		yield return new WaitForSeconds(0.8f); // Đặt thời gian bằng độ dài animation
+		yield return new WaitForSeconds(0.8f);
 
+		// Reset trigger tránh stuck
+		if (playerAnimator != null && playerAttack.currentSpell != null)
+		{
+			playerAnimator.ResetTrigger(playerAttack.currentSpell.animationTrigger);
+		}
+
+		SetAnimatorIdleState(); // về idle tương ứng
 		canMove = true;
 		isAttacking = false;
-
-		Debug.Log("[Attack] Attack finished, player can move again.");
 	}
 
-	// Hàm này sẽ được gọi từ Animation Event
-	public void PerformAttack()
+	public void PerformAttack() // animation event gọi hàm này
 	{
 		if (playerAttack != null)
 		{
@@ -172,31 +249,9 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void SwitchSpell(int index)
-	{
-		if (index >= 0 && index < availableSpells.Length)
-		{
-			currentSpellIndex = index;
-			playerAttack.currentSpell = availableSpells[index];
-		}
-	}
-
 	private void UpdateAnimator()
 	{
-		if (!canMove) return;
-
-		var currentScale = transform.localScale;
-
-		if (playerRigidbody.velocity.x < 0)
-		{
-			transform.localScale = new Vector3(-1f * Mathf.Abs(currentScale.x),
-				currentScale.y, currentScale.z);
-		}
-		else if (playerRigidbody.velocity.x > 0)
-		{
-			transform.localScale = new Vector3(1f * Mathf.Abs(currentScale.x),
-				currentScale.y, currentScale.z);
-		}
+		if (!canMove || isHoldingSpellIdle) return;
 
 		playerAnimator.SetBool("IsMove", Mathf.Abs(playerRigidbody.velocity.x) > 0.1f);
 
@@ -241,6 +296,7 @@ public class PlayerController : MonoBehaviour
 
 	private IEnumerator PerformRoll()
 	{
+		CancelSpellIdle();
 		isRolling = true;
 		canMove = false;
 		rollCount++;
