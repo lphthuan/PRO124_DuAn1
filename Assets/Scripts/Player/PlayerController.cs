@@ -26,15 +26,14 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private PlayerAttack playerAttack;
 	[SerializeField] private SpellData[] availableSpells;
 
-
 	private int currentSpellIndex = 0;
 	private bool canMove = true;
 	private bool jumpUsed = false;
 	private bool isKnockedBack = false;
 	private float knockbackDuration = 0.3f;
 	private float currentKnockbackTimer = 0f;
-	private bool isAttacking = false; // kiểm soát trạng thái tấn công
-	
+	private bool isAttacking = false;
+	private Coroutine attackRoutine;
 
 	// Input values
 	private float horizontalInput;
@@ -45,33 +44,37 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		playerAttack.currentSpell = availableSpells[currentSpellIndex];
-
 	}
 
-	void Update()
+	private void Update()
 	{
 		HandleKnockbackState();
 
+		HandleInput();
+
 		if (CanReceiveInput())
 		{
-			HandleInput();
-			Move();
-			HandleJump();
-
-			// Điều kiện để được roll
 			if (rollPressed && rollCount < maxRolls && !isOnCooldown && IsGrounded())
 			{
 				StartCoroutine(PerformRoll());
 			}
+
+			if (attackPressed)
+			{
+				TryAttack();
+			}
 		}
 
-		if (attackPressed)
+		// Chặn move nếu đang tấn công
+		if (!isAttacking && CanReceiveInput())
 		{
-			TryAttack(); // Gọi riêng phần tấn công
+			Move();
 		}
 
-
+		HandleJump();
 		UpdateAnimator();
+
+		attackPressed = false; // reset input mỗi frame
 	}
 
 	private void HandleInput()
@@ -87,7 +90,6 @@ public class PlayerController : MonoBehaviour
 		return canMove && !isRolling && !isKnockedBack;
 	}
 
-
 	private void Move()
 	{
 		playerRigidbody.velocity = new Vector2(horizontalInput * moveSpeed, playerRigidbody.velocity.y);
@@ -98,9 +100,8 @@ public class PlayerController : MonoBehaviour
 			transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
 		}
 	}
-   
 
-    private void HandleJump()
+	private void HandleJump()
 	{
 		if (jumpPressed)
 		{
@@ -131,25 +132,45 @@ public class PlayerController : MonoBehaviour
 	private void TryAttack()
 	{
 		if (isAttacking || isRolling || !IsGrounded()) return;
+		if (!playerAttack.IsValidAttackAngle())
+		{
+			Debug.Log("[Attack] Chuột không nằm trong vùng bắn hợp lệ!");
+			return;
+		}
 
+		if (attackRoutine != null) StopCoroutine(attackRoutine);
+		attackRoutine = StartCoroutine(AttackRoutine());
+	}
+
+	private IEnumerator AttackRoutine()
+	{
 		isAttacking = true;
+		canMove = false;
 
 		if (playerAnimator != null && playerAttack.currentSpell != null)
 		{
-			playerAnimator.SetTrigger(playerAttack.currentSpell.animationTrigger);
+			string trigger = playerAttack.currentSpell.animationTrigger;
+			Debug.Log($"[Attack] Trigger animation: {trigger}");
+			playerAnimator.SetTrigger(trigger);
 		}
+
+		// Đợi animation kết thúc
+		yield return new WaitForSeconds(0.8f); // Đặt thời gian bằng độ dài animation
+
+		canMove = true;
+		isAttacking = false;
+
+		Debug.Log("[Attack] Attack finished, player can move again.");
 	}
 
-
+	// Hàm này sẽ được gọi từ Animation Event
 	public void PerformAttack()
 	{
 		if (playerAttack != null)
 		{
 			playerAttack.PerformAttack();
 		}
-		isAttacking = false;
 	}
-
 
 	private void SwitchSpell(int index)
 	{
@@ -159,7 +180,6 @@ public class PlayerController : MonoBehaviour
 			playerAttack.currentSpell = availableSpells[index];
 		}
 	}
-
 
 	private void UpdateAnimator()
 	{
@@ -178,14 +198,7 @@ public class PlayerController : MonoBehaviour
 				currentScale.y, currentScale.z);
 		}
 
-		if (Mathf.Abs(playerRigidbody.velocity.x) > 0.1f)
-		{
-			playerAnimator.SetBool("IsMove", true);
-		}
-		else
-		{
-			playerAnimator.SetBool("IsMove", false);
-		}
+		playerAnimator.SetBool("IsMove", Mathf.Abs(playerRigidbody.velocity.x) > 0.1f);
 
 		if (playerRigidbody.velocity.y > .1f)
 		{
@@ -223,9 +236,8 @@ public class PlayerController : MonoBehaviour
 		playerRigidbody.velocity = Vector2.zero;
 
 		playerAnimator.ResetTrigger("IsDead");
-		playerAnimator.Play("Player_Idle"); // hoặc animation idle default của bạn
+		playerAnimator.Play("Player_Idle");
 	}
-
 
 	private IEnumerator PerformRoll()
 	{
@@ -243,7 +255,6 @@ public class PlayerController : MonoBehaviour
 		isRolling = false;
 		canMove = true;
 
-		// Nếu đạt giới hạn roll → bắt đầu cooldown
 		if (rollCount >= maxRolls)
 		{
 			isOnCooldown = true;
@@ -269,6 +280,7 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 	}
+
 	public void ApplyKnockback(Vector2 direction, float force)
 	{
 		if (!canMove) return;

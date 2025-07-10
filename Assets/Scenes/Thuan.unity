@@ -280,6 +280,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2247967482211942796, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: attackAngle
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 2247967482211942796, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: playerAnimator
       value: 
       objectReference: {fileID: 452140258135804719}
