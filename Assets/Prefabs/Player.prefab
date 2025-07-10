@@ -190,6 +190,7 @@ MonoBehaviour:
   playerAttack: {fileID: 2247967482211942796}
   availableSpells:
   - {fileID: 11400000, guid: f2ef32be9205c454b8f58bd3d1140565, type: 2}
+  - {fileID: 11400000, guid: 383cb11c40e17314a81dda5b1e376aed, type: 2}
 --- !u!95 &7980729927624721473
 Animator:
   serializedVersion: 5
@@ -245,6 +246,7 @@ MonoBehaviour:
   firePoint: {fileID: 6334282930948738194}
   spellSpeed: 10
   attackAngle: 170
+  attackCooldown: 0.8
   currentSpell: {fileID: 0}
 --- !u!1 &4833630742058476355
 GameObject:
