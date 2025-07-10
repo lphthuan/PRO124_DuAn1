@@ -14,6 +14,7 @@ public class BossMovement : MonoBehaviour
     private bool lastIsRunState = false;
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
+    public float HPBoss = 20f;
 
     void Update()
     {
@@ -80,28 +81,7 @@ public class BossMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator AttackCoroutine()
-    {
-        
-        isChasing = false;
-        isAttacking = true;
-        isWaiting = true;
 
-        animator.SetBool("IsRun", false);   
-        animator.SetBool("IsAtk", true);    
-
-       
-        yield return new WaitForSeconds(0.8f);
-
-        animator.SetBool("IsAtk", false);   //quay về Idle
-        isAttacking = false;                //cho phép nhận Attack tiếp theo
-
-        
-        yield return new WaitForSeconds(1f); 
-        isWaiting = false;
-
-        isChasing = true; //boss có thể rượt tiếp
-    }
 
     public void SpawnAttackCollider()
     {
@@ -117,5 +97,53 @@ public class BossMovement : MonoBehaviour
         }
 
         Destroy(vungSatThuong, 0.3f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerBullet") && HPBoss > 0)
+        {
+            HPBoss -= 5f;
+        }
+        if (HPBoss <= 0)
+        {
+            StartCoroutine(isDead());
+        }
+    }
+
+
+    private IEnumerator AttackCoroutine()
+    {
+
+        isChasing = false;
+        isAttacking = true;
+        isWaiting = true;
+
+        animator.SetBool("IsRun", false);
+        animator.SetBool("IsAtk", true);
+
+
+        yield return new WaitForSeconds(0.8f);
+
+        animator.SetBool("IsAtk", false);   //quay về Idle
+        isAttacking = false;                //cho phép nhận Attack tiếp theo
+
+
+        yield return new WaitForSeconds(1f);
+        isWaiting = false;
+
+        isChasing = true; //boss có thể rượt tiếp
+    }
+
+
+    private IEnumerator isDead()
+    {
+        isChasing = false;
+        isAttacking = false;
+        isWaiting = true;
+        animator.SetBool("IsRun", false);
+        animator.SetBool("IsDead", true);
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject); // Xóa Boss sau khi chết
     }
 }
