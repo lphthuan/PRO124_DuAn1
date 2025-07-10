@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wind
   m_EditorClassIdentifier: 
   spellName: Wind
-  spellPrefab: {fileID: 0}
+  spellPrefab: {fileID: 9146088961179750802, guid: a9036cf2f64ca1b49a2b55d8be594bb7, type: 3}
   spellSpeed: 7
   animationTrigger: IsAtkWind
   StateIntAnim: 4
