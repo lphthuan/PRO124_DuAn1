@@ -16,7 +16,7 @@ public class BossMovement : MonoBehaviour
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
     public float HPBoss = 20f;
-
+    
 
     private void Start()
     {
@@ -92,7 +92,7 @@ public class BossMovement : MonoBehaviour
 
     public void SpawnAttackCollider()
     {
-
+        SpawnColliderMagicCheck();
         float huongQuai = (visualTransform != null) ? Mathf.Sign(visualTransform.localScale.x) : Mathf.Sign(transform.localScale.x);
 
         Vector3 offset = new Vector3(5 * huongQuai, 1, 0);
@@ -117,6 +117,21 @@ public class BossMovement : MonoBehaviour
             StartCoroutine(isDead());
         }
     }
+    private int normalAtkCount = 0;
+    private void SpawnColliderMagicCheck()
+    {
+
+        if (isAttacking)
+        {
+            normalAtkCount++;
+            if (normalAtkCount == 2)
+            {
+                StartCoroutine(SpawnRadaCheckMagic());
+                return; // Đảm bảo chỉ chạy radar, không làm gì thêm!
+            }
+        }
+    }
+
 
 
     private IEnumerator AttackCoroutine()
@@ -152,5 +167,13 @@ public class BossMovement : MonoBehaviour
         animator.SetBool("IsDead", true);
         yield return new WaitForSeconds(3f);
         Destroy(gameObject); // Xóa Boss sau khi chết
+    }
+
+    IEnumerator SpawnRadaCheckMagic()
+    {
+        MagicAreaCheck.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        MagicAreaCheck.SetActive(false);
+        normalAtkCount = 0;
     }
 }
