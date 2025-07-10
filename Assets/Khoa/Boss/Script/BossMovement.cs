@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossMovement : MonoBehaviour
 {
     [SerializeField] private GameObject dmgArea;
+    [SerializeField] GameObject MagicAreaCheck;
     public Transform Player;
     public float speed = 5f;
     public float PlayerCheckRange = 10f;
@@ -15,6 +16,12 @@ public class BossMovement : MonoBehaviour
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
     public float HPBoss = 20f;
+
+
+    private void Start()
+    {
+        MagicAreaCheck.SetActive(false);
+    }
 
     void Update()
     {
