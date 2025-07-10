@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4fd92c9287b394cb6851786f662f93, type: 3}
   m_Name: Lightning
   m_EditorClassIdentifier: 
-  spellName: 
-  spellPrefab: {fileID: 0}
+  spellName: Lightning
+  spellPrefab: {fileID: 6062709998323662030, guid: 4b89b37c1be86e646b0a378cc449c31e, type: 3}
   spellSpeed: 10
-  animationTrigger: 
+  animationTrigger: IsAtkLight
   icon: {fileID: 0}

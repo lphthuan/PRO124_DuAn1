@@ -293,8 +293,12 @@ PrefabInstance:
       objectReference: {fileID: 452140258135804721}
     - target: {fileID: 2697966939241004358, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: availableSpells.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2697966939241004358, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: availableSpells.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: f2ef32be9205c454b8f58bd3d1140565, type: 2}
     - target: {fileID: 5579747650445305098, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: healthText
       value: 
@@ -303,6 +307,14 @@ PrefabInstance:
       propertyPath: healthBarFill
       value: 
       objectReference: {fileID: 845882589645738111}
+    - target: {fileID: 6334282930948738194, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334282930948738194, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.11
+      objectReference: {fileID: 0}
     - target: {fileID: 8572418809735927629, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.976925
