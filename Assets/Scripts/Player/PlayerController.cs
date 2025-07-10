@@ -34,12 +34,13 @@ public class PlayerController : MonoBehaviour
 	private float knockbackDuration = 0.3f;
 	private float currentKnockbackTimer = 0f;
 	private bool isAttacking = false; // kiểm soát trạng thái tấn công
-	private bool attackPressed = false; // input bấm chuột
+	
 
 	// Input values
 	private float horizontalInput;
 	private bool jumpPressed;
 	private bool rollPressed;
+	private bool attackPressed = false;
 
 	private void Start()
 	{
