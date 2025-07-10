@@ -187,6 +187,9 @@ MonoBehaviour:
   terrainLayer:
     serializedVersion: 2
     m_Bits: 8
+  playerAttack: {fileID: 2247967482211942796}
+  availableSpells:
+  - {fileID: 11400000, guid: f2ef32be9205c454b8f58bd3d1140565, type: 2}
 --- !u!95 &7980729927624721473
 Animator:
   serializedVersion: 5
@@ -239,9 +242,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62fbc1dd7ee59048a092293e2c95b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellPrefab: {fileID: 6062709998323662030, guid: 4b89b37c1be86e646b0a378cc449c31e, type: 3}
   firePoint: {fileID: 6334282930948738194}
   spellSpeed: 10
+  attackAngle: 170
+  currentSpell: {fileID: 0}
 --- !u!1 &4833630742058476355
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 4833630742058476355}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.581, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0.69, y: 0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

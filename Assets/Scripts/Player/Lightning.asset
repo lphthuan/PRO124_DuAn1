@@ -16,4 +16,4 @@ MonoBehaviour:
   spellPrefab: {fileID: 6062709998323662030, guid: 4b89b37c1be86e646b0a378cc449c31e, type: 3}
   spellSpeed: 10
   animationTrigger: IsAtkLight
-  icon: {fileID: 0}
+  StateIntAnim: 3
