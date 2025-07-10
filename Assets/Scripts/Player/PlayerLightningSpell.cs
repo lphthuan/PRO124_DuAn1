@@ -17,7 +17,7 @@ public class PlayerLightningSpell : MonoBehaviour
 		if (other.CompareTag("Enemy"))
 		{
 			// Gây sát thương nếu enemy có health
-			// other.GetComponent<EnemyHealth>()?.TakeDamage(damage);
+			//other.GetComponent<EnemyHealth>()?.TakeDamage(damage);
 			Destroy(gameObject);
 		}
 	}
