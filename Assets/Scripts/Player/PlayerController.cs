@@ -174,16 +174,18 @@ public class PlayerController : MonoBehaviour
 	{
 		if (jumpPressed)
 		{
-			CancelSpellIdle();
+			//CancelSpellIdle();
 			if (isRolling || isAttacking || isKnockedBack) return; // Không nhảy khi đang lăn, tấn công hay bị đẩy lùi
 
 			if (IsGrounded())
 			{
+				CancelSpellIdle();
 				Jump();
 				jumpUsed = false;
 			}
 			else if (!jumpUsed)
 			{
+				CancelSpellIdle();
 				Jump();
 				jumpUsed = true;
 			}
