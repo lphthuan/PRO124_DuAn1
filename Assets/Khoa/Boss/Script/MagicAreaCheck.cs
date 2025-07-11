@@ -14,7 +14,7 @@ public class MagicAreaCheck : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            
+            bossScript.startSpawnMagicAreaDmg();
         }
     }
 }
