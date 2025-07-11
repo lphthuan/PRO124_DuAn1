@@ -133,6 +133,34 @@ public class BossMovement : MonoBehaviour
     }
 
 
+    public void startSpawnMagicAreaDmg()
+    {
+        StartCoroutine(SpawnMagicAreaDmg());
+    }
+
+
+
+
+
+
+
+
+    //dưới đây để kiểm soát Coroutine
+
+    private IEnumerator SpawnMagicAreaDmg()
+    {
+        isChasing = false;
+        isAttacking = true;
+        isWaiting = true;
+        animator.SetBool("IsAtk2", true);
+        yield return new WaitForSeconds(0.8f);
+        animator.SetBool("IsAtk2", false); //quay về Idle
+        yield return new WaitForSeconds(2f);
+        isWaiting = false;
+        isChasing = true;
+    }
+
+
 
     private IEnumerator AttackCoroutine()
     {
@@ -166,7 +194,7 @@ public class BossMovement : MonoBehaviour
         animator.SetBool("IsRun", false);
         animator.SetBool("IsDead", true);
         yield return new WaitForSeconds(3f);
-        Destroy(gameObject); // Xóa Boss sau khi chết
+        Destroy(gameObject); 
     }
 
     IEnumerator SpawnRadaCheckMagic()
