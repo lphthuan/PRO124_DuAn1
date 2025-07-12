@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class ASyncLoading : MonoBehaviour
 {
-    [Header("Menu Screen")]
+    public static ASyncLoading Instance;
+
+    [Header("Menu UI")]
     [SerializeField] private GameObject loadingScreen;
     [SerializeField] private GameObject mainMenu;
 
@@ -17,34 +20,58 @@ public class ASyncLoading : MonoBehaviour
     [SerializeField] private Text tipsText;
     [SerializeField][TextArea] private string[] tipsArray;
 
+    [Header("Transitions")]
+    [SerializeField] private GameObject transitionsContainer;
+
+    private SceneTranstation[] transitions;
     private int currentTipIndex = 0;
 
-    public void PlayGameBtn(int sceneIndex)
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        transitions = transitionsContainer.GetComponentsInChildren<SceneTranstation>(true);
+    }
+
+    public void PlayGameBtn(int sceneIndex, string transitionName)
     {
         mainMenu.SetActive(false);
         loadingScreen.SetActive(true);
 
-        // Bắt đầu hiện tips
+        currentTipIndex = 0;
         StartCoroutine(ShowTipsLoop());
-
-        // Bắt đầu load scene
-        StartCoroutine(PreLoadDelay(sceneIndex));
+        StartCoroutine(LoadSceneAsync(sceneIndex, transitionName));
     }
 
-    IEnumerator PreLoadDelay(int sceneIndex)
+    public void PlaySceneFadeBlack(int sceneIndex)
     {
-        yield return null;
-        StartCoroutine(LoadSceneAsync(sceneIndex));
+        PlayGameBtn(sceneIndex, "CrossCircle");
     }
 
-    IEnumerator LoadSceneAsync(int index)
+    IEnumerator LoadSceneAsync(int sceneIndex, string transitionName)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(index);
+        SceneTranstation transition = transitions.First(t => t.name == transitionName);
+
+        yield return transition.AnimateTransitionIn();
+
+        loadingSlider.value = 0f;
+        loadingSlider.gameObject.SetActive(true);
+
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         operation.allowSceneActivation = false;
 
         float displayedProgress = 0f;
 
-        // Giai đoạn từ 0 đến 90%
         while (operation.progress < 0.9f)
         {
             float targetProgress = Mathf.Clamp01(operation.progress / 0.9f);
@@ -55,18 +82,23 @@ public class ASyncLoading : MonoBehaviour
             yield return null;
         }
 
-        // Giai đoạn 90 → 100%
         while (displayedProgress < 0.995f)
         {
             displayedProgress = Mathf.MoveTowards(displayedProgress, 1f, Time.deltaTime * 0.2f);
-
             loadingSlider.value = displayedProgress;
             ValueText.text = Mathf.RoundToInt(displayedProgress * 100f) + "%";
             yield return null;
         }
 
         yield return new WaitForSeconds(1f);
+
+        StopCoroutine("ShowTipsLoop");
+
         operation.allowSceneActivation = true;
+
+        loadingSlider.gameObject.SetActive(false);
+
+        yield return transition.AnimateTransitionOut();
     }
 
     IEnumerator ShowTipsLoop()
@@ -76,11 +108,10 @@ public class ASyncLoading : MonoBehaviour
             if (tipsArray.Length > 0)
             {
                 tipsText.text = "Tips:\n " + tipsArray[currentTipIndex];
-
                 currentTipIndex = (currentTipIndex + 1) % tipsArray.Length;
             }
-
             yield return new WaitForSeconds(2f);
         }
     }
+
 }
