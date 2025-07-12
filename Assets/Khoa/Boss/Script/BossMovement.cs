@@ -6,6 +6,7 @@ public class BossMovement : MonoBehaviour
 {
     [SerializeField] private GameObject dmgArea;
     [SerializeField] GameObject MagicAreaCheck;
+    
     public Transform Player;
     public float speed = 5f;
     public float PlayerCheckRange = 10f;
@@ -16,8 +17,7 @@ public class BossMovement : MonoBehaviour
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
     public float HPBoss = 20f;
-    
-
+    public bool castSkil = false;
     private void Start()
     {
         MagicAreaCheck.SetActive(false);
@@ -25,12 +25,16 @@ public class BossMovement : MonoBehaviour
 
     void Update()
     {
+        if (!castSkil)
+        {
+            AttackMagicCoroutine();
+        }
         if (isWaiting || isAttacking)
         {
             animator.SetBool("IsRun", false); //Đứng yên trong khi tấn công/cooldown
             return;
         }
-
+        CountAttack();
         DetectPlayer();
         animatorController();
 
@@ -80,13 +84,47 @@ public class BossMovement : MonoBehaviour
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
+
+
+
+
+
+
+
+
+    private int normalAttackCount = 0;
     public void OnHitPlayer(GameObject playerObj)
     {
-        if (!isAttacking && !isWaiting) 
+        if (!isAttacking && normalAtkCount < 3) 
         {
+            normalAttackCount++;
             StartCoroutine(AttackCoroutine());
         }
+        if (normalAttackCount == 3)
+        {
+            castSkil = true;
+        }
     }
+
+    public void CountAttack()
+    {
+        if (normalAttackCount > 3)
+        {
+            StartCoroutine(AttackMagicCoroutine());
+            normalAttackCount = 0;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -126,17 +164,13 @@ public class BossMovement : MonoBehaviour
             normalAtkCount++;
             if (normalAtkCount == 2)
             {
+                
                 StartCoroutine(SpawnRadaCheckMagic());
                 return; // Đảm bảo chỉ chạy radar, không làm gì thêm!
             }
         }
     }
 
-
-    public void startSpawnMagicAreaDmg()
-    {
-        StartCoroutine(SpawnMagicAreaDmg());
-    }
 
 
 
@@ -147,20 +181,8 @@ public class BossMovement : MonoBehaviour
 
     //dưới đây để kiểm soát Coroutine
 
-    private IEnumerator SpawnMagicAreaDmg()
-    {
-        isChasing = false;
-        isAttacking = true;
-        isWaiting = true;
-        animator.SetBool("IsAtk2", true);
-        yield return new WaitForSeconds(0.8f);
-        animator.SetBool("IsAtk2", false); //quay về Idle
-        yield return new WaitForSeconds(2f);
-        isWaiting = false;
-        isChasing = true;
-    }
 
-
+    
 
     private IEnumerator AttackCoroutine()
     {
@@ -185,6 +207,30 @@ public class BossMovement : MonoBehaviour
         isChasing = true; //boss có thể rượt tiếp
     }
 
+    private IEnumerator AttackMagicCoroutine()
+    {
+
+        isChasing = false;
+        isAttacking = true;
+        isWaiting = true;
+
+        animator.SetBool("IsRun", false);
+        animator.SetBool("IsAtk2", true);
+
+
+        yield return new WaitForSeconds(0.8f);
+
+        animator.SetBool("IsAtk2", false);   
+        isAttacking = false;                
+
+
+        yield return new WaitForSeconds(1f);
+        isWaiting = false;
+
+        isChasing = true;
+        castSkil = false;
+    }
+
 
     private IEnumerator isDead()
     {
@@ -199,9 +245,11 @@ public class BossMovement : MonoBehaviour
 
     IEnumerator SpawnRadaCheckMagic()
     {
+        
         MagicAreaCheck.SetActive(true);
         yield return new WaitForSeconds(3f);
         MagicAreaCheck.SetActive(false);
+        
         normalAtkCount = 0;
     }
 }
