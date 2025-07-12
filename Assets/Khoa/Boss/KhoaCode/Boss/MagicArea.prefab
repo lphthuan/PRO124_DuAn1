@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8692053564501121643}
   - component: {fileID: 6628335920425969253}
-  - component: {fileID: 301680470659184319}
   - component: {fileID: 2934741987842353495}
+  - component: {fileID: 1574371797751103069}
   m_Layer: 0
   m_Name: MagicArea
   m_TagString: Untagged
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &301680470659184319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8892079453164663205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ebeb4f5ae57eca4385d07ce28c76893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MagicDmgArea: {fileID: 7602124620335857545, guid: dd559a858063d714785b184626249b7a, type: 3}
 --- !u!95 &2934741987842353495
 Animator:
   serializedVersion: 5
@@ -120,3 +107,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1574371797751103069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8892079453164663205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c7e2577a9a4db4786a265ca3db511e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MagicDmgArea: {fileID: 7602124620335857545, guid: dd559a858063d714785b184626249b7a, type: 3}
