@@ -40,10 +40,9 @@ public class PlayerHeath : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-		if (other.CompareTag("Saw")
-		|| other.CompareTag("Enemy"))
+		if (other.CompareTag("Enemy"))
 		{
-			TakeDamage(1);
+			TakeDamage(30);
 			if (playerController != null)
 			{
 				Vector2 knockbackDirection = (transform.position - other.transform.position);
