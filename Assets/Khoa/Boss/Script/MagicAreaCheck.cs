@@ -12,9 +12,6 @@ public class MagicAreaCheck : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            bossScript.startSpawnMagicAreaDmg();
-        }
+
     }
 }
