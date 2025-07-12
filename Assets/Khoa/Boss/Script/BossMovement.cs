@@ -218,7 +218,7 @@ public class BossMovement : MonoBehaviour
         animator.SetBool("IsAtk2", true);
 
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1.3f);
 
         animator.SetBool("IsAtk2", false);   
         isAttacking = false;                
