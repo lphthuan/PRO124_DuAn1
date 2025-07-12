@@ -36,6 +36,14 @@ public class EnemyController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 2f;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip shootClip;
+    public AudioClip hitClip;
+    public AudioClip dieClip;
+    public AudioClip teleportClip;
+    public AudioClip meleeAttackClip;
+
     private bool hasDiedOnce = false;
     private EnemyState currentState = EnemyState.Idle;
 
@@ -132,16 +140,16 @@ public class EnemyController : MonoBehaviour
     {
         animator.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(1.5f); 
+        yield return new WaitForSeconds(1.5f);
 
         if (currentState == EnemyState.Attacking)
         {
             SpawnMeleeHitbox();
+            PlaySound(meleeAttackClip);
         }
 
-        yield return new WaitForSeconds(fireCooldown); 
+        yield return new WaitForSeconds(fireCooldown);
 
-       
         float dist = Vector2.Distance(transform.position, player.position);
         currentState = (dist <= attackRange) ? EnemyState.Attacking : EnemyState.Chasing;
 
@@ -171,6 +179,7 @@ public class EnemyController : MonoBehaviour
         if (bulletPrefab && firePoint)
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            PlaySound(shootClip);
         }
     }
 
@@ -196,6 +205,7 @@ public class EnemyController : MonoBehaviour
 
         currentHealth -= amount;
         animator.SetTrigger("Hit");
+        PlaySound(hitClip);
 
         if (currentHealth <= 0)
         {
@@ -204,6 +214,7 @@ public class EnemyController : MonoBehaviour
                 currentState = EnemyState.DyingFirst;
                 hasDiedOnce = true;
                 animator.SetTrigger("Die");
+                PlaySound(dieClip);
                 StopAttackRoutine();
                 StartCoroutine(RespawnRoutine());
             }
@@ -211,6 +222,7 @@ public class EnemyController : MonoBehaviour
             {
                 currentState = EnemyState.DyingFinal;
                 animator.SetTrigger("Die");
+                PlaySound(dieClip);
                 StopAttackRoutine();
                 Destroy(gameObject, 2f);
             }
@@ -234,6 +246,7 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         currentState = EnemyState.Respawning;
         animator.SetTrigger("TeleportSpawn");
+        PlaySound(teleportClip);
 
         yield return new WaitForSeconds(1f);
         currentHealth = maxHealth;
@@ -248,6 +261,14 @@ public class EnemyController : MonoBehaviour
         {
             TakeDamage(1);
             Destroy(collision.gameObject);
+        }
+    }
+
+    void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 }
