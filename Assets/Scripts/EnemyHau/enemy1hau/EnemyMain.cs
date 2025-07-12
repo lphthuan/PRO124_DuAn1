@@ -21,6 +21,7 @@ public class EnemyMain : MonoBehaviour
     public AudioClip hitClip;
     public AudioClip dieClip;
     public AudioClip spawnMiniClip;
+    public AudioClip shootClip; 
 
     private AudioSource audioSource;
     private int attackCount = 0;
@@ -83,6 +84,7 @@ public class EnemyMain : MonoBehaviour
             if (bulletPrefab != null && firePoint != null)
             {
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+                PlaySound(shootClip); 
             }
 
             attackCount++;
