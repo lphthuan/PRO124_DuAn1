@@ -6,7 +6,8 @@ public class BossMovement : MonoBehaviour
 {
     [SerializeField] private GameObject dmgArea;
     [SerializeField] GameObject MagicAreaCheck;
-    
+    [SerializeField] GameObject Magic;
+    [HideInInspector] public Transform playerTransform;
     public Transform Player;
     public float speed = 5f;
     public float PlayerCheckRange = 10f;
@@ -172,7 +173,21 @@ public class BossMovement : MonoBehaviour
     }
 
 
+    public void SpawnSkill1Effect()
+    {
+        if (playerTransform == null)
+            playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
 
+        if (playerTransform != null)
+        {
+            // Lấy vị trí player, cộng offset lên trên đầu
+            Vector3 spawnPos = playerTransform.position + new Vector3(0, 2f, 0);
+
+            GameObject vungtrieuhoi = Instantiate(Magic, spawnPos, Quaternion.identity); // cần học chỗ này
+            Debug.Log("Skill1 được kích hoạt!");
+            Destroy(vungtrieuhoi, 1.6f);
+        }
+    }
 
 
 
@@ -182,7 +197,7 @@ public class BossMovement : MonoBehaviour
     //dưới đây để kiểm soát Coroutine
 
 
-    
+
 
     private IEnumerator AttackCoroutine()
     {
@@ -218,13 +233,13 @@ public class BossMovement : MonoBehaviour
         animator.SetBool("IsAtk2", true);
 
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(2.4f);
 
         animator.SetBool("IsAtk2", false);   
         isAttacking = false;                
 
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         isWaiting = false;
 
         isChasing = true;
@@ -252,4 +267,6 @@ public class BossMovement : MonoBehaviour
         
         normalAtkCount = 0;
     }
+
+
 }

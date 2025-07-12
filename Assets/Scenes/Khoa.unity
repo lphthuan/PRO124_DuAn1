@@ -764,6 +764,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
+      propertyPath: Magic
+      value: 
+      objectReference: {fileID: 8892079453164663205, guid: 2fd19f2574a3f4441b2f2f43030e6c4e, type: 3}
+    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 1558256156}
@@ -779,6 +783,10 @@ PrefabInstance:
       propertyPath: MagicAreaCheck
       value: 
       objectReference: {fileID: 778690396}
+    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
+      propertyPath: MagicAreaSpawn
+      value: 
+      objectReference: {fileID: 8892079453164663205, guid: 2fd19f2574a3f4441b2f2f43030e6c4e, type: 3}
     - target: {fileID: 1892602981268834945, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.28
