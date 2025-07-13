@@ -17,8 +17,9 @@ public class BossMovement : MonoBehaviour
     private bool lastIsRunState = false;
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
-    public float HPBoss = 20f;
+    public float HPBoss = 50f;
     public bool castSkil = false;
+
     private void Start()
     {
         MagicAreaCheck.SetActive(false);
@@ -26,6 +27,7 @@ public class BossMovement : MonoBehaviour
 
     void Update()
     {
+        Phase2Boss();
         if (!castSkil)
         {
             AttackMagicCoroutine();
@@ -48,11 +50,12 @@ public class BossMovement : MonoBehaviour
     private void DetectPlayer()
     {
         if (isAttacking)
-            return; //Nếu đang tấn công, không kiểm tra Player
+            return; // Nếu đang tấn công, không kiểm tra Player
 
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.position);
+        // Tìm tất cả Collider2D trong bán kính PlayerCheckRange
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, PlayerCheckRange, LayerMask.GetMask("Player"));
 
-        if (distanceToPlayer <= PlayerCheckRange)
+        if (hit != null && hit.CompareTag("Player"))
         {
             isChasing = true;
         }
@@ -61,6 +64,7 @@ public class BossMovement : MonoBehaviour
             isChasing = false;
         }
     }
+
 
     private void animatorController()
     {
@@ -94,9 +98,10 @@ public class BossMovement : MonoBehaviour
 
 
     private int normalAttackCount = 0;
+    private int MagicAttackCount = 0;
     public void OnHitPlayer(GameObject playerObj)
     {
-        if (!isAttacking && normalAtkCount < 3) 
+        if (!isAttacking && normalAtkCount < 2) 
         {
             normalAttackCount++;
             StartCoroutine(AttackCoroutine());
@@ -109,10 +114,27 @@ public class BossMovement : MonoBehaviour
 
     public void CountAttack()
     {
-        if (normalAttackCount > 3)
+        if (normalAttackCount > 3 && MagicAttackCount < 3)
         {
             StartCoroutine(AttackMagicCoroutine());
             normalAttackCount = 0;
+            MagicAttackCount++;
+        }
+
+    }
+
+
+    public int phase = 1;
+    public void Phase2Boss()
+    {
+        if (phase == 2)
+        {
+            return;
+        }
+        if (HPBoss <= 25f)
+        {
+            StartCoroutine(SpawnMagicCoroutine());
+            phase = 2;
         }
     }
 
@@ -201,7 +223,6 @@ public class BossMovement : MonoBehaviour
 
     private IEnumerator AttackCoroutine()
     {
-
         isChasing = false;
         isAttacking = true;
         isWaiting = true;
@@ -209,22 +230,22 @@ public class BossMovement : MonoBehaviour
         animator.SetBool("IsRun", false);
         animator.SetBool("IsAtk", true);
 
-
         yield return new WaitForSeconds(0.8f);
 
-        animator.SetBool("IsAtk", false);   //quay về Idle
-        isAttacking = false;                //cho phép nhận Attack tiếp theo
-
+        animator.SetBool("IsAtk", false);   
+        isAttacking = false;                
 
         yield return new WaitForSeconds(1f);
         isWaiting = false;
 
-        isChasing = true; //boss có thể rượt tiếp
+        isChasing = true; 
+        animator.SetBool("IsRun", true); 
+        lastIsRunState = true;           // Cập nhật trạng thái
     }
+
 
     private IEnumerator AttackMagicCoroutine()
     {
-
         isChasing = false;
         isAttacking = true;
         isWaiting = true;
@@ -232,18 +253,44 @@ public class BossMovement : MonoBehaviour
         animator.SetBool("IsRun", false);
         animator.SetBool("IsAtk2", true);
 
+        yield return new WaitForSeconds(2.4f);
+
+        animator.SetBool("IsAtk2", false);
+        isAttacking = false;
+
+        yield return new WaitForSeconds(2f);
+        isWaiting = false;
+
+        isChasing = true; 
+        castSkil = false;
+
+        animator.SetBool("IsRun", true); 
+        lastIsRunState = true;           //Cập nhật trạng thái
+        
+    }
+    private IEnumerator SpawnMagicCoroutine()
+    {
+        isChasing = false;
+        isAttacking = true;
+        isWaiting = true;
+
+        animator.SetBool("IsRun", false);
+        animator.SetBool("IsSpawn", true);
 
         yield return new WaitForSeconds(2.4f);
 
-        animator.SetBool("IsAtk2", false);   
-        isAttacking = false;                
-
+        animator.SetBool("IsSpawn", false);
+        isAttacking = false;
 
         yield return new WaitForSeconds(2f);
         isWaiting = false;
 
         isChasing = true;
         castSkil = false;
+
+        animator.SetBool("IsRun", true);
+        lastIsRunState = true;           //Cập nhật trạng thái
+
     }
 
 
