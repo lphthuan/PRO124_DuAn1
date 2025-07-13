@@ -30,12 +30,12 @@ public class Fireball : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Gây sát thương nếu có script PlayerHealth
-            //PlayerHealth player = collision.GetComponent<PlayerHealth>();
-            //if (player != null)
-            //{
-            //    player.TakeDamage(damage);
-            //}
+            //Gây sát thương nếu có script PlayerHealth
+            PlayerHealth player = collision.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                player.TakeDamage(damage);
+            }
             Destroy(gameObject);
         }
         else if (!collision.isTrigger) // chạm tường hoặc đối tượng khác
