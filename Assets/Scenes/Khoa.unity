@@ -428,7 +428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864929509}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -564,7 +564,7 @@ Transform:
   m_GameObject: {fileID: 1254245056}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48, y: -24.55, z: 0}
+  m_LocalPosition: {x: 0.48, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 1558256156}
   - component: {fileID: 1558256155}
   - component: {fileID: 1558256157}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (1)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ Transform:
   m_GameObject: {fileID: 1558256154}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.28, y: -1.65, z: 0}
+  m_LocalPosition: {x: 14.86, y: 10.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -768,6 +768,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8892079453164663205, guid: 2fd19f2574a3f4441b2f2f43030e6c4e, type: 3}
     - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
+      propertyPath: HPBoss
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 1558256156}
@@ -787,6 +791,10 @@ PrefabInstance:
       propertyPath: MagicAreaSpawn
       value: 
       objectReference: {fileID: 8892079453164663205, guid: 2fd19f2574a3f4441b2f2f43030e6c4e, type: 3}
+    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
+      propertyPath: PlayerCheckRange
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1892602981268834945, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.28
@@ -854,8 +862,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 864929512}
   - {fileID: 606772942}
   - {fileID: 4042907898212202699}
   - {fileID: 1558256156}
   - {fileID: 1254245059}
+  - {fileID: 864929512}

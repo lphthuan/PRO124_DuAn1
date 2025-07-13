@@ -10,8 +10,5 @@ public class MagicAreaCheck : MonoBehaviour
     {
         bossScript = GetComponentInParent<BossMovement>();
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
 
-    }
 }
