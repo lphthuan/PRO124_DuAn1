@@ -7,7 +7,9 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private GameObject dmgArea;
     [SerializeField] GameObject MagicAreaCheck;
     [SerializeField] GameObject Magic;
+    [SerializeField] GameObject SummonMagic;
     [HideInInspector] public Transform playerTransform;
+    [SerializeField] public Transform BossTransform;
     public Transform Player;
     public float speed = 5f;
     public float PlayerCheckRange = 10f;
@@ -209,6 +211,24 @@ public class BossMovement : MonoBehaviour
             Debug.Log("Skill1 được kích hoạt!");
             Destroy(vungtrieuhoi, 1.6f);
         }
+    }
+    public void SpawnModEffect1()
+    {
+
+            Vector3 spawnMod1 = BossTransform.position + new Vector3(2f, 1f, 0);
+            GameObject SummonArea1 = Instantiate(SummonMagic, spawnMod1, Quaternion.identity);
+            Debug.Log("Skill1 được kích hoạt!");
+            Destroy(SummonArea1, 1.6f);
+
+
+    }
+    public void SpawnModEffect2()
+    {
+        Vector3 spawnMod2 = BossTransform.position + new Vector3(-2f, 1f, 0);
+        GameObject SummonArea2 = Instantiate(SummonMagic, spawnMod2, Quaternion.identity);// cần học chỗ này
+        Debug.Log("Skill1 được kích hoạt!");
+        Destroy(SummonArea2, 1.6f);
+
     }
 
 
