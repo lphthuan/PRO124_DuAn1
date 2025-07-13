@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerLightningSpell : MonoBehaviour
 {
 	[SerializeField] private float lifetime = 2f;
-	[SerializeField] private int damage = 1;
+	//[SerializeField] private int damage = 1;
 
 	void Start()
 	{
