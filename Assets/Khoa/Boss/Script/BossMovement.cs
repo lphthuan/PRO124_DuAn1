@@ -11,7 +11,7 @@ public class BossMovement : MonoBehaviour
     [HideInInspector] public Transform playerTransform;
     [SerializeField] public Transform BossTransform;
     public Transform Player;
-    public float speed = 5f;
+    public float speed = 2.5f;
     public float PlayerCheckRange = 10f;
     private bool isChasing = false;
     public Animator animator;
@@ -19,7 +19,7 @@ public class BossMovement : MonoBehaviour
     private bool lastIsRunState = false;
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
-    public float HPBoss = 50f;
+    public float HPBoss = 100f;
     public bool castSkil = false;
 
     private void Start()
@@ -169,8 +169,13 @@ public class BossMovement : MonoBehaviour
         Destroy(vungSatThuong, 0.3f);
     }
 
+    public int deadCheck = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (deadCheck > 0)
+        {
+            return;
+        }
         if (collision.CompareTag("PlayerBullet") && HPBoss > 0)
         {
             HPBoss -= 5f;
@@ -178,6 +183,7 @@ public class BossMovement : MonoBehaviour
         if (HPBoss <= 0)
         {
             StartCoroutine(isDead());
+            deadCheck++;
         }
     }
     private int normalAtkCount = 0;
