@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour
     public float health = 3f;
     private Animator anim;
     private bool isDead = false;
+    [SerializeField] private Rigidbody2D enemyRigidbody;
     public float currentHealth { get; private set; }
 
     void Start()
@@ -15,7 +16,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("bullet"))
+        if (other.CompareTag("PlayerBullet"))
         {
             TakeDamage(1f);
             Destroy(other.gameObject);
@@ -46,7 +47,10 @@ public class EnemyHealth : MonoBehaviour
 
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
+        enemyRigidbody.velocity = Vector2.zero;
+        enemyRigidbody.isKinematic = true;
 
-        Destroy(gameObject, 1f);
+
+		Destroy(gameObject, 1f);
     }
 }

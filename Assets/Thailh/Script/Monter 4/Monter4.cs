@@ -124,11 +124,11 @@ public class Monter4 : MonoBehaviour
             Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);
             if (hit != null)
             {
-                //PlayerHealth playerHealth = hit.GetComponent<PlayerHealth>();
-                //if (playerHealth != null)
-                //{
-                //    playerHealth.TakeDamage(damage);
-                //}
+                PlayerHealth playerHealth = hit.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(damage);
+                }
             }
 
             attackTimer = attackCooldown;

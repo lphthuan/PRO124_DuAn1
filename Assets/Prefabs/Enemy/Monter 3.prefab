@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 3275621922805507187}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.37, y: -2.02, z: -0.062274385}
+  m_LocalPosition: {x: 6.55, y: -2.19, z: -0.062274385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 5676251833885004591}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.23, y: -1.97, z: -0.062274385}
+  m_LocalPosition: {x: 2.39, y: -1.97, z: -0.062274385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 5380114383465276835}
   - component: {fileID: 2197807200888115815}
   - component: {fileID: 3424920889546927305}
+  - component: {fileID: 5567327463300054562}
   m_Layer: 0
   m_Name: Monter3
   m_TagString: Untagged
@@ -157,7 +158,7 @@ Transform:
   m_GameObject: {fileID: 7861005899573158416}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.1997385, y: -1.5852888, z: -0.062274385}
+  m_LocalPosition: {x: 3.28, y: -2.08, z: -0.062274385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -290,7 +291,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7861005899573158416}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -331,3 +332,17 @@ MonoBehaviour:
   fireballPrefab: {fileID: 18095109319929313, guid: fcfada0dfaae56940b17ced6228879d0, type: 3}
   firePoint: {fileID: 5505517707337764430}
   attackCooldown: 0
+--- !u!114 &5567327463300054562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861005899573158416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7da996d3b25db49b5eb0deed3d58b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  enemyRigidbody: {fileID: 2197807200888115815}

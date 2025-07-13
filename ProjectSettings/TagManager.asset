@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PlayerBullet
   - Enemy
+  - EnemyBullet
+  - CauLuaQuai2
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - Terrain
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

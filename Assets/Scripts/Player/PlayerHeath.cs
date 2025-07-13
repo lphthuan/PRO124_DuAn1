@@ -3,33 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHeath : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    [Header("Player Health Settings")]
-    [SerializeField] private int maxHealth = 1000;
-    [SerializeField] public int currentHealth;
-    
-    [SerializeField] private Image healthBarFill;
-    [SerializeField] private Text healthText;
-    [SerializeField] private Animator playerAnimator;
+	[Header("Player Health Settings")]
+	[SerializeField] private int maxHealth = 1000;
+	[SerializeField] public int currentHealth;
 
-    [SerializeField] private PlayerController playerController;
-	//[SerializeField] private PlayerAttack playerAttack;
+	[SerializeField] private Image healthBarFill;
+	[SerializeField] private Text healthText;
+	[SerializeField] private Animator playerAnimator;
+
+	[SerializeField] private PlayerController playerController;
+	[SerializeField] private PlayerAttack playerAttack;
 
 	[SerializeField] private float knockbackForce = 5f;
 
-	private bool isDead = false; 
+	private bool isDead = false;
 
-
-    void Start()
-    {
-        currentHealth = maxHealth;
-        UpdateHealthBar();
+	void Start()
+	{
+		currentHealth = maxHealth;
+		UpdateHealthBar();
 	}
 
-    void Update()
-    {
-        UpdateHealthBar();
+	void Update()
+	{
+		UpdateHealthBar();
 
 		if (Input.GetKeyDown(KeyCode.R))
 		{
@@ -37,37 +36,57 @@ public class PlayerHeath : MonoBehaviour
 		}
 	}
 
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		int damage = 0;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-		if (other.CompareTag("Enemy"))
+		switch (other.tag)
 		{
-			TakeDamage(30);
-			if (playerController != null)
-			{
-				Vector2 knockbackDirection = (transform.position - other.transform.position);
-				if (knockbackDirection.sqrMagnitude < 0.001f)
-				{
-					knockbackDirection = new Vector2(UnityEngine.Random.Range(-1f, 1f) < 0 ? -1f : 1f, 0.2f);
-					if (knockbackDirection.x == 0) knockbackDirection.x = 1f;
-				}
-				knockbackDirection = knockbackDirection.normalized;
-				knockbackDirection.y += 0.5f;
-				knockbackDirection = knockbackDirection.normalized;
-				playerController.ApplyKnockback(knockbackDirection, knockbackForce);
-			}
+			case "Enemy":
+				damage = 30;
+				break;
+			case "EnemyBullet":
+				damage = 70;
+				break;
+			case "CauLuaQuai2":
+				damage = 250;
+				break;
+			case "Trap":
+				damage = 100;
+				break;
+			default:
+				return;
 		}
+
+		TakeDamage(damage);
+		ApplyKnockback(other);
 	}
 
+	private void ApplyKnockback(Collider2D other)
+	{
+		if (playerController == null) return;
 
-    public void TakeDamage(int damage)
-    {
-        if(isDead) return;
-        
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        
-        UpdateHealthBar();
+		Vector2 knockbackDirection = (transform.position - other.transform.position);
+		if (knockbackDirection.sqrMagnitude < 0.001f)
+		{
+			knockbackDirection = new Vector2(Random.Range(-1f, 1f), 0.2f);
+			if (knockbackDirection.x == 0) knockbackDirection.x = 1f;
+		}
+
+		knockbackDirection = knockbackDirection.normalized;
+		knockbackDirection.y += 0.5f;
+		knockbackDirection = knockbackDirection.normalized;
+
+		playerController.ApplyKnockback(knockbackDirection, knockbackForce);
+	}
+
+	public void TakeDamage(int damage)
+	{
+		if (isDead) return;
+
+		currentHealth -= damage;
+		currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+		UpdateHealthBar();
 
 		if (playerAnimator != null && currentHealth > 0 && damage > 20)
 		{
@@ -80,40 +99,40 @@ public class PlayerHeath : MonoBehaviour
 		}
 	}
 
-    public void UpdateHealthBar()
-    {
-        float fillAmount = (float)currentHealth / maxHealth;
-        healthBarFill.fillAmount = fillAmount;
-
-        healthText.text = currentHealth + " / " + maxHealth;
-    }
+	public void UpdateHealthBar()
+	{
+		float fillAmount = (float)currentHealth / maxHealth;
+		healthBarFill.fillAmount = fillAmount;
+		healthText.text = currentHealth + " / " + maxHealth;
+	}
 
 	private IEnumerator HandleDeath()
 	{
 		isDead = true;
+
 		if (playerController != null)
 		{
 			playerController.TriggerDeathAnimation();
+			playerController.enabled = false;
+			playerAttack.enabled = false;
 		}
 
-		// Vô hiệu hóa các thành phần điều khiển và tấn công của người chơi
-		if (playerController != null) playerController.enabled = false;
-        //if (playerAttack != null) playerAttack.enabled = false;
-
-        yield return new WaitForSeconds(2.7f);
+		yield return new WaitForSeconds(2.7f);
 
 		Respawn();
 	}
 
 	private void Respawn()
 	{
-		if (playerController != null) playerController.enabled = true;
-		//if (playerAttack != null) playerAttack.enabled = true;
-		playerController.ResetAfterRespawn();
+		if (playerController != null)
+		{
+			playerController.enabled = true;
+			playerAttack.enabled = true;
+			playerController.ResetAfterRespawn();
+		}
 
 		currentHealth = maxHealth;
 		isDead = false;
-
 		UpdateHealthBar();
 	}
 }
