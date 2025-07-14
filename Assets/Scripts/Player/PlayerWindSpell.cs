@@ -8,7 +8,12 @@ public class PlayerWindSpell : MonoBehaviour
 	public void SetDirection(Vector2 direction)
 	{
 		windDirection = direction.normalized;
-		windDirection.y = 0f; // Không đẩy lên
+		windDirection.y = 0f; // Chỉ đẩy ngang, không hất lên
+	}
+
+	private void Start()
+	{
+		Destroy(gameObject, 2f); // Tự hủy sau 2 giây
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -17,6 +22,12 @@ public class PlayerWindSpell : MonoBehaviour
 		if (knockbackTarget != null)
 		{
 			knockbackTarget.ApplyKnockback(windDirection, knockbackForce);
+		}
+
+		// Nếu chạm vào Enemy thì hủy luồng gió luôn
+		if (other.CompareTag("Enemy"))
+		{
+			Destroy(gameObject);
 		}
 	}
 }
