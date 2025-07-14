@@ -32,14 +32,10 @@ public class PlayerAttack : MonoBehaviour
 
 	public void PerformAttack()
 	{
-		if (Time.time - lastAttackTime < attackCooldown)
-		{
-			return;
-		}
+		if (Time.time - lastAttackTime < attackCooldown) return;
+		if (currentSpell == null) return;
 
 		lastAttackTime = Time.time;
-
-		if (currentSpell == null) return;
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector3 direction = (mousePos - firePoint.position);
@@ -49,7 +45,15 @@ public class PlayerAttack : MonoBehaviour
 		float zRotation = Mathf.Atan2(dirNormalized.y, dirNormalized.x) * Mathf.Rad2Deg;
 
 		GameObject spell = Instantiate(currentSpell.spellPrefab, firePoint.position, Quaternion.Euler(0, 0, zRotation));
+
 		Rigidbody2D rb = spell.GetComponent<Rigidbody2D>();
-		rb.velocity = dirNormalized * spellSpeed;
+		if (rb != null)
+			rb.velocity = dirNormalized * spellSpeed;
+
+		// Truyền hướng cho phép gió
+		var wind = spell.GetComponent<PlayerWindSpell>();
+		if (wind != null)
+			wind.SetDirection(dirNormalized);
 	}
+
 }
