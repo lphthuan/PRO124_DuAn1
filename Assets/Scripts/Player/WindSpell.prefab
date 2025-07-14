@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5920018307189794658}
   - component: {fileID: 6635371248334553823}
   - component: {fileID: 3630769690755695765}
-  - component: {fileID: 9137071226604880994}
+  - component: {fileID: -4675489092915257682}
   m_Layer: 0
   m_Name: WindSpell
   m_TagString: Untagged
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 280510a88b778544a92fe789d378f034, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -165,7 +165,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.23327646, y: -0.074373364}
@@ -181,7 +181,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.803729, y: 0.59212804}
   m_EdgeRadius: 0
---- !u!114 &9137071226604880994
+--- !u!114 &-4675489092915257682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,8 +190,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 9146088961179750802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70850e2e920692a45abc716dc7849ab6, type: 3}
+  m_Script: {fileID: 11500000, guid: a2a0de51865ef0f4bac087d138290ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 2
-  damage: 1
+  knockbackForce: 30
+  lifeTime: 3

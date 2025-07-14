@@ -80,9 +80,10 @@ GameObject:
   - component: {fileID: 7906918818729834921}
   - component: {fileID: 4153281659032619746}
   - component: {fileID: 6559762129907563005}
+  - component: {fileID: 4660693954250460988}
   m_Layer: 0
   m_Name: Monter4
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   pointB: {fileID: 2515306952618672793}
   patrolSpeed: 3
   chaseSpeed: 6
-  detectionRange: 5
+  detectionRange: 1
   attackRange: 1.5
   attackCooldown: 0.6
   damage: 15
@@ -289,6 +290,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   enemyRigidbody: {fileID: 4153281659032619746}
+--- !u!114 &4660693954250460988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053436287964068936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3416214d062e94ca7cc49c2c9b22e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultForce: 8
+  kinematicPushDistance: 1
+  stunDuration: 0.5
 --- !u!1 &5179250975747141494
 GameObject:
   m_ObjectHideFlags: 0

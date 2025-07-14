@@ -142,9 +142,10 @@ GameObject:
   - component: {fileID: 2197807200888115815}
   - component: {fileID: 3424920889546927305}
   - component: {fileID: 5567327463300054562}
+  - component: {fileID: 1410314691001183148}
   m_Layer: 0
   m_Name: Monter3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -331,7 +332,7 @@ MonoBehaviour:
   player: {fileID: 0}
   fireballPrefab: {fileID: 18095109319929313, guid: fcfada0dfaae56940b17ced6228879d0, type: 3}
   firePoint: {fileID: 5505517707337764430}
-  attackCooldown: 0
+  attackCooldown: 0.7
 --- !u!114 &5567327463300054562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,3 +347,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   enemyRigidbody: {fileID: 2197807200888115815}
+--- !u!114 &1410314691001183148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861005899573158416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3416214d062e94ca7cc49c2c9b22e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 10
+  kinematicPushDistance: 1
+  stunDuration: 0.5

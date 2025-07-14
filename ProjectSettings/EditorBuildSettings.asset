@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tin.unity
     guid: 79be8f3a3de75cf43b085fff71eb12cc
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    guid: beafbb93b54e27c4f9b9651087692b73
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: e6f784e2072c19446862101c0d69f022
   m_configObjects: {}
