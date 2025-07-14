@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 6635371248334553823}
   - component: {fileID: 3630769690755695765}
   - component: {fileID: -4675489092915257682}
-  - component: {fileID: 8570181812625171683}
   m_Layer: 0
   m_Name: WindSpell
   m_TagString: Untagged
@@ -166,7 +165,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.23327646, y: -0.074373364}
@@ -194,42 +193,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a0de51865ef0f4bac087d138290ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 10
-  knockbackXPower: 2
-  knockbackYPower: 0.2
-  disableTime: 0.5
---- !u!58 &8570181812625171683
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9146088961179750802}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.5939297, y: -0.05622703}
-  serializedVersion: 2
-  m_Radius: 0.15444666
+  knockbackForce: 30
+  lifeTime: 3

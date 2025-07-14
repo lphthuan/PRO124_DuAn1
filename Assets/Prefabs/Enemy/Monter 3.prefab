@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 3275621922805507187}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.37, y: -2.01, z: -0.062274385}
+  m_LocalPosition: {x: 6.55, y: -2.19, z: -0.062274385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 2197807200888115815}
   - component: {fileID: 3424920889546927305}
   - component: {fileID: 5567327463300054562}
+  - component: {fileID: 1410314691001183148}
   m_Layer: 0
   m_Name: Monter3
   m_TagString: Enemy
@@ -326,8 +327,8 @@ MonoBehaviour:
   pointB: {fileID: 5423736550632114908}
   patrolSpeed: 3
   chaseSpeed: 5
-  detectionRange: 0
-  attackRange: 5
+  detectionRange: 5
+  attackRange: 3
   player: {fileID: 0}
   fireballPrefab: {fileID: 18095109319929313, guid: fcfada0dfaae56940b17ced6228879d0, type: 3}
   firePoint: {fileID: 5505517707337764430}
@@ -346,3 +347,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   enemyRigidbody: {fileID: 2197807200888115815}
+--- !u!114 &1410314691001183148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861005899573158416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db3416214d062e94ca7cc49c2c9b22e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 10
+  kinematicPushDistance: 1
+  stunDuration: 0.5

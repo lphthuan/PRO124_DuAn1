@@ -50,10 +50,10 @@ public class PlayerAttack : MonoBehaviour
 		if (rb != null)
 			rb.velocity = dirNormalized * spellSpeed;
 
+		// Truyền hướng cho phép gió
 		var wind = spell.GetComponent<PlayerWindSpell>();
 		if (wind != null)
-			wind.SetDirection(dirNormalized); // luôn set đúng hướng bắn
-
+			wind.SetDirection(dirNormalized);
 	}
 
 }
