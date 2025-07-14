@@ -328,11 +328,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716766928}
   m_CullTransparentMesh: 1
---- !u!1 &778690396 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7544987314489317460, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-  m_PrefabInstance: {fileID: 4042907898212202699}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &847983415
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,11 +838,6 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &2143742813 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1892602981268834945, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-  m_PrefabInstance: {fileID: 4042907898212202699}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4042907898212202699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -856,10 +846,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: Magic
-      value: 
-      objectReference: {fileID: 8892079453164663205, guid: 2fd19f2574a3f4441b2f2f43030e6c4e, type: 3}
     - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: speed
       value: 2.5
@@ -873,25 +859,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 871721931}
     - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: dmgArea
-      value: 
-      objectReference: {fileID: 8128319916215158861, guid: 9705132ced990b3439c1fa642b9cb8b0, type: 3}
-    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: SummonMagic
       value: 
       objectReference: {fileID: 3823779093632041647, guid: 8010c2f1058f0e741af3e98dcb5a4ae6, type: 3}
-    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: BossTransform
-      value: 
-      objectReference: {fileID: 2143742813}
-    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: MagicAreaCheck
-      value: 
-      objectReference: {fileID: 778690396}
-    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: PlayerCheckRange
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1892602981268834945, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.64
@@ -935,14 +905,6 @@ PrefabInstance:
     - target: {fileID: 3005361609584440805, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: m_Name
       value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523290304688342638, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: m_Size.x
-      value: 4.2176523
-      objectReference: {fileID: 0}
-    - target: {fileID: 3523290304688342638, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: m_Offset.x
-      value: 2.188232
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
