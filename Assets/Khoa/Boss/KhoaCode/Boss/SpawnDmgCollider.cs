@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnDmgCollider : MonoBehaviour
 {
-    private float toaDoY = -0.3f;
+    private float toaDoY = -0.7f;
     [SerializeField] GameObject MagicDmgArea;
     public void SpawnDamageCollider()
     {

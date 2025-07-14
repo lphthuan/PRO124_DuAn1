@@ -19,7 +19,7 @@ public class BossMovement : MonoBehaviour
     private bool lastIsRunState = false;
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
-    public float HPBoss = 100f;
+    public float HPBoss = 1000f;
     public bool castSkil = false;
 
     private void Start()
