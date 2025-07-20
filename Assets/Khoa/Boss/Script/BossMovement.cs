@@ -20,12 +20,15 @@ public class BossMovement : MonoBehaviour
     private bool lastIsRunState = false;
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
-    public float HPBoss = 1000f;
+
     public bool castSkil = false;
 
+    private BossHealth bossHealth;
     private void Start()
     {
         MagicAreaCheck.SetActive(false);
+        bossHealth = GetComponent<BossHealth>();
+        bossHealth.OnBossDead += HandleBossDeath;
     }
 
     void Update()
@@ -134,7 +137,7 @@ public class BossMovement : MonoBehaviour
         {
             return;
         }
-        if (HPBoss <= 25f)
+        if (bossHealth.currentHealth <= 25)
         {
             StartCoroutine(SpawnMagicCoroutine());
             phase = 2;
@@ -177,11 +180,11 @@ public class BossMovement : MonoBehaviour
         {
             return;
         }
-        if (collision.CompareTag("PlayerBullet") && HPBoss > 0)
+        if (collision.CompareTag("PlayerBullet") && bossHealth.currentHealth > 0)
         {
-            HPBoss -= 5f;
+            bossHealth.TakeDamage(5f);
         }
-        if (HPBoss <= 0)
+        if (bossHealth.currentHealth <= 0)
         {
             StartCoroutine(isDead());
             deadCheck++;
@@ -246,7 +249,13 @@ public class BossMovement : MonoBehaviour
         Destroy(ArenaFinalBoss, 4f);
     }
 
+    private void HandleBossDeath()
+    {
+        if (deadCheck > 0) return;
 
+        StartCoroutine(isDead());
+        deadCheck++;
+    }
 
 
 
