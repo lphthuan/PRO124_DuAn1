@@ -8,6 +8,7 @@ public class BossMovement : MonoBehaviour
     [SerializeField] GameObject MagicAreaCheck;
     [SerializeField] GameObject Magic;
     [SerializeField] GameObject SummonMagic;
+    [SerializeField] GameObject SummonArenaFinalBoss;
     [HideInInspector] public Transform playerTransform;
     [SerializeField] public Transform BossTransform;
     public Transform Player;
@@ -237,6 +238,13 @@ public class BossMovement : MonoBehaviour
 
     }
 
+    public void SummonFinalBoss()
+    {
+        Vector3 spawnPos = new Vector3(0, 0, 0);
+        GameObject ArenaFinalBoss = Instantiate(SummonArenaFinalBoss, spawnPos, Quaternion.identity);
+        Debug.Log("Final Boss được triệu hồi!");
+        Destroy(ArenaFinalBoss, 4f);
+    }
 
 
 
@@ -327,9 +335,13 @@ public class BossMovement : MonoBehaviour
         isWaiting = true;
         animator.SetBool("IsRun", false);
         animator.SetBool("IsDead", true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         Destroy(gameObject); 
     }
+
+    
+
+
 
     IEnumerator SpawnRadaCheckMagic()
     {
