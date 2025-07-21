@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7980729927624721473}
   - component: {fileID: 5579747650445305098}
   - component: {fileID: 2247967482211942796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -231,6 +231,7 @@ MonoBehaviour:
   healthText: {fileID: 0}
   playerAnimator: {fileID: 7980729927624721473}
   playerController: {fileID: 2697966939241004358}
+  playerAttack: {fileID: 2247967482211942796}
   knockbackForce: 5
 --- !u!114 &2247967482211942796
 MonoBehaviour:
