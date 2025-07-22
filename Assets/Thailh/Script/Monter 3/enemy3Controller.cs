@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class enemyController : MonoBehaviour
 {
@@ -25,7 +26,6 @@ public class enemyController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-
     [Header("Trạng thái chịu tác động")]
     public bool canMove = true;
 
@@ -40,7 +40,11 @@ public class enemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         currentTarget = pointB;
 
-       
+        // Cảnh báo nếu Body Type không phải Dynamic
+        if (rb.bodyType != RigidbodyType2D.Dynamic)
+        {
+            Debug.LogWarning("Enemy cần đặt Rigidbody2D là Dynamic để bị ảnh hưởng bởi WindSpell.");
+        }
     }
 
     void Update()
@@ -53,7 +57,6 @@ public class enemyController : MonoBehaviour
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        // Xác định trạng thái
         if (distanceToPlayer < attackRange)
             currentState = State.Attack;
         else if (distanceToPlayer < detectionRange)
@@ -61,7 +64,6 @@ public class enemyController : MonoBehaviour
         else
             currentState = State.Walk;
 
-        // Hành vi theo trạng thái
         switch (currentState)
         {
             case State.Walk:
@@ -78,7 +80,7 @@ public class enemyController : MonoBehaviour
 
     void Patrol()
     {
-        if (!canMove) return; // Bị bùa gió làm đứng yên
+        if (!canMove) return;
 
         animator.SetBool("IsWalk", true);
         animator.SetBool("IsRun", false);
@@ -94,7 +96,7 @@ public class enemyController : MonoBehaviour
 
     void RunToPlayer()
     {
-        if (!canMove) return; // Bị bùa gió làm đứng yên
+        if (!canMove) return;
 
         animator.SetBool("IsWalk", false);
         animator.SetBool("IsRun", true);
@@ -107,7 +109,7 @@ public class enemyController : MonoBehaviour
 
     void AttackPlayer()
     {
-        if (!canMove) return; // Bị bùa gió làm đứng yên
+        if (!canMove) return;
 
         animator.SetBool("IsWalk", false);
         animator.SetBool("IsRun", false);
@@ -154,5 +156,32 @@ public class enemyController : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    // gió khống chế
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("WindSpell"))
+        {
+            if (!canMove) return;
+
+            canMove = false; // Dừng di chuyển
+            animator.SetBool("IsWalk", false);
+            animator.SetBool("IsRun", false);
+            animator.SetBool("IsAttack", false);
+
+            // Thêm lực gió thổi (nếu cần)
+            rb.velocity = Vector2.zero;
+            rb.AddForce(new Vector2(5f, 2f), ForceMode2D.Impulse);
+
+            // Hồi phục sau 2 giây
+            StartCoroutine(RestoreMovement());
+        }
+    }
+
+    IEnumerator RestoreMovement()
+    {
+        yield return new WaitForSeconds(2f);
+        canMove = true;
     }
 }
