@@ -97,7 +97,7 @@ public class enemy4Controller : MonoBehaviour
 
     void ChasePlayer()
     {
-        if (!canMove) return; // Không thể đuổi theo nếu bị bùa gió
+        if (!canMove) return;
 
         animator.SetBool("IsRun", true);
         MoveTo(player.position, chaseSpeed);
@@ -105,7 +105,7 @@ public class enemy4Controller : MonoBehaviour
 
     void MoveTo(Vector3 target, float speed)
     {
-        if (!canMove) return; // Kiểm tra trong cả hàm di chuyển
+        if (!canMove) return;
 
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
@@ -162,6 +162,20 @@ public class enemy4Controller : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
         Destroy(gameObject, 2f);
+    }
+
+    public void RemoveWindEffect()
+    {
+        canMove = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("WindSpell"))
+        {
+            canMove = false;
+            Invoke(nameof(RemoveWindEffect), 3f);
+        }
     }
 
     void OnDrawGizmosSelected()
