@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EnemyBullet
   - CauLuaQuai2
+  - Ground
   layers:
   - Default
   - TransparentFX
