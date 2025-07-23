@@ -47,6 +47,8 @@ public class BossFightCam : MonoBehaviour
         CameraManager.SwitchCamera(defaultCamera);
 
         Destroy(gameObject);
+        Destroy(wall1);
+        Destroy(wall2);
 
         boss.OnBossDead -= HandleBossDead; 
     }
