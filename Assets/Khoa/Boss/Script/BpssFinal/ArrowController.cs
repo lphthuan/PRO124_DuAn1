@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ArrowController : MonoBehaviour
 {
-    public float gravityInitial = 0.2f;
+    public float gravityInitial = 0.01f;
     public float gravityAfter = 30f;
     public float delayGravity = 2f;
 
@@ -35,9 +35,9 @@ public class ArrowController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
         }

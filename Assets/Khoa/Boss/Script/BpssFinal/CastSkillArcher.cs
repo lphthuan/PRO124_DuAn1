@@ -4,15 +4,21 @@ public class CastSkillArcher : MonoBehaviour
 {
     [SerializeField] private GameObject areaMagicPrefab; // Prefab vùng triệu hồi
     [HideInInspector] public Transform playerTransform;
-
+    [HideInInspector] public Transform groundTransform;
+    float offsetY = 20f;
     public void CastSkill()
     {
         if (playerTransform == null)
             playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (groundTransform == null)
+            groundTransform = GameObject.FindGameObjectWithTag("Ground")?.transform;
 
-        if (playerTransform != null)
+        if (playerTransform != null && groundTransform != null)
         {
-            Vector3 spawnPos = playerTransform.position + new Vector3(0, 6f, 0);
+            // Lấy vị trí player, nhưng Y là ground
+            Vector3 playerPos = playerTransform.position;
+            Vector3 groundPos = groundTransform.position;
+            Vector3 spawnPos = new Vector3(playerPos.x, groundPos.y + offsetY, playerPos.z);
 
             GameObject magicArea = Instantiate(areaMagicPrefab, spawnPos, Quaternion.identity);
 
