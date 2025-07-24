@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class enemy4Controller : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class enemy4Controller : MonoBehaviour
     public float attackCooldown = 1f;
     public int damage = 3;
 
-    [Header("Tấn công phép")] // --- FIRE ATTACK ---
+    [Header("Tấn công phép")]
     public float fireAttackRange = 3f;
     public GameObject fireballPrefab;
     public float fireballSpeed = 7f;
@@ -72,7 +73,7 @@ public class enemy4Controller : MonoBehaviour
             isChasing = true;
             AttackPlayer();
         }
-        else if (distanceToPlayer <= fireAttackRange) // --- FIRE ATTACK ---
+        else if (distanceToPlayer <= fireAttackRange)
         {
             isChasing = true;
             FireAttack();
@@ -161,7 +162,6 @@ public class enemy4Controller : MonoBehaviour
         }
     }
 
-    // --- FIRE ATTACK ---
     void FireAttack()
     {
         animator.SetBool("IsRun", false);
@@ -179,12 +179,12 @@ public class enemy4Controller : MonoBehaviour
         }
     }
 
-    // --- FIRE ATTACK ---
     IEnumerator SummonFireballs()
     {
         int fireballCount = 3;
-        float spacing = 1.5f; // khoảng cách giữa các fireball
-        Vector3 center = transform.position + new Vector3(0, 3f, 0); // vị trí phía trên đầu enemy
+        float spacing = 1.5f;
+        Vector3 center = transform.position + new Vector3(0, 3f, 0);
+        List<GameObject> fireballs = new List<GameObject>();
 
         for (int i = 0; i < fireballCount; i++)
         {
@@ -192,12 +192,21 @@ public class enemy4Controller : MonoBehaviour
             Vector3 spawnPos = center + new Vector3(offsetX, 0, 0);
 
             GameObject fireball = Instantiate(fireballPrefab, spawnPos, Quaternion.identity);
-
-            Vector2 direction = (player.position - fireball.transform.position).normalized;
-            fireball.GetComponent<Rigidbody2D>().velocity = direction * fireballSpeed;
+            fireballs.Add(fireball);
         }
 
-        yield return null;
+        // Đợi 0.5 giây trước khi bắn
+        yield return new WaitForSeconds(0.5f);
+
+        // Bắn từng quả về phía Player
+        foreach (GameObject fireball in fireballs)
+        {
+            if (fireball != null)
+            {
+                Vector2 direction = (player.position - fireball.transform.position).normalized;
+                fireball.GetComponent<Rigidbody2D>().velocity = direction * fireballSpeed;
+            }
+        }
     }
 
     public void TakeDamage(int damage)
@@ -221,7 +230,6 @@ public class enemy4Controller : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-    // --- WIND SPELL EFFECT ---
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("WindSpell"))
@@ -229,13 +237,12 @@ public class enemy4Controller : MonoBehaviour
             if (!canMove) return;
 
             canMove = false;
-
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
 
             if (rb != null)
             {
                 rb.velocity = Vector2.zero;
-                float knockbackForce = 3f; // đẩy nhẹ
+                float knockbackForce = 3f;
                 rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
             }
 
