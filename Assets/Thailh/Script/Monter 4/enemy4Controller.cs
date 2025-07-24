@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class enemy4Controller : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class enemy4Controller : MonoBehaviour
     public LayerMask playerLayer;
 
     [Header("Trạng thái đặc biệt")]
-    public bool canMove = true; // Bị bùa gió thì false
+    public bool canMove = true;
 
     private Vector3 patrolTarget;
     private Animator animator;
@@ -34,23 +35,28 @@ public class enemy4Controller : MonoBehaviour
     private int currentHealth;
     private bool isDead = false;
     private bool isChasing = false;
+    private Rigidbody2D rb;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         patrolTarget = pointB.position;
         currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody2D>();
 
         if (player == null)
             Debug.LogWarning("Bạn chưa gán Transform Player cho enemy4!");
 
         if (attackPoint == null)
             Debug.LogWarning("Bạn chưa gán AttackPoint cho enemy4!");
+
+        if (rb == null)
+            Debug.LogWarning("Bạn cần thêm Rigidbody2D vào enemy4!");
     }
 
     void Update()
     {
-        if (isDead || player == null || !canMove) return; // Dừng nếu chết hoặc bị bùa gió
+        if (isDead || player == null || !canMove) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -84,12 +90,12 @@ public class enemy4Controller : MonoBehaviour
 
     void Patrol()
     {
-        if (!canMove) return; // Bị bùa gió thì không đi tuần
+        if (!canMove) return;
 
         animator.SetBool("IsRun", true);
         MoveTo(patrolTarget, patrolSpeed);
 
-        if (Mathf.Abs(transform.position.x - patrolTarget.x) < 0.05f)
+        if (Mathf.Abs(transform.position.x - patrolTarget.x) < 0.5f)
         {
             patrolTarget = (patrolTarget == pointA.position) ? pointB.position : pointA.position;
         }
@@ -164,18 +170,33 @@ public class enemy4Controller : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-    public void RemoveWindEffect()
-    {
-        canMove = true;
-    }
-
+    // ----- BÙA GIÓ KHỐNG CHẾ -----
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("WindSpell"))
         {
+            if (!canMove) return;
+
             canMove = false;
-            Invoke(nameof(RemoveWindEffect), 3f);
+
+            // Hướng hất ngược lại WindSpell
+            Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
+
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero; // Ngắt chuyển động
+                float knockbackForce = 5f;
+                rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
+            }
+
+            StartCoroutine(RestoreMovement());
         }
+    }
+
+    private IEnumerator RestoreMovement()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canMove = true;
     }
 
     void OnDrawGizmosSelected()
