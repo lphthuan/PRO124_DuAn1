@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 478411753}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 22.64, y: -0.82, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -407,11 +407,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4786090331154756468, guid: be86accee532f1449ba4094ae60e2865, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.6161184
+      value: 23.14
       objectReference: {fileID: 0}
     - target: {fileID: 4786090331154756468, guid: be86accee532f1449ba4094ae60e2865, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.782882
+      value: -2.52
       objectReference: {fileID: 0}
     - target: {fileID: 4786090331154756468, guid: be86accee532f1449ba4094ae60e2865, type: 3}
       propertyPath: m_LocalPosition.z
@@ -592,8 +592,40 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 913263714}
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: chaseSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: attackRange
+      value: 1.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: patrolSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: attackRadius
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: fireballSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: detectionRange
-      value: 2.13
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: fireballPrefab
+      value: 
+      objectReference: {fileID: 3993894899198019817, guid: d0207aa969521c044a53652467eefa72, type: 3}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: fireAttackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7906918818729834921, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

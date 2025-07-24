@@ -14,10 +14,15 @@ public class enemy4Controller : MonoBehaviour
     public float attackCooldown = 1f;
     public int damage = 3;
 
+    [Header("Tấn công phép")] // --- FIRE ATTACK ---
+    public float fireAttackRange = 3f;
+    public GameObject fireballPrefab;
+    public float fireballSpeed = 7f;
+    public float fireAttackCooldown = 5f;
+
     [Header("Máu")]
     public int maxHealth = 20;
 
-    [Header("Player")]
     public Transform player;
 
     [Header("Cận chiến")]
@@ -31,6 +36,7 @@ public class enemy4Controller : MonoBehaviour
     private Vector3 patrolTarget;
     private Animator animator;
     private float attackTimer;
+    private float fireAttackTimer;
     private int currentHealth;
     private bool isDead = false;
     private bool isChasing = false;
@@ -40,6 +46,11 @@ public class enemy4Controller : MonoBehaviour
         animator = GetComponent<Animator>();
         patrolTarget = pointB.position;
         currentHealth = maxHealth;
+<<<<<<< Updated upstream
+=======
+        rb = GetComponent<Rigidbody2D>();
+        fireAttackTimer = 0f;
+>>>>>>> Stashed changes
 
         if (player == null)
             Debug.LogWarning("Bạn chưa gán Transform Player cho enemy4!");
@@ -58,6 +69,11 @@ public class enemy4Controller : MonoBehaviour
         {
             isChasing = true;
             AttackPlayer();
+        }
+        else if (distanceToPlayer <= fireAttackRange) // --- FIRE ATTACK ---
+        {
+            isChasing = true;
+            FireAttack();
         }
         else if (distanceToPlayer <= detectionRange)
         {
@@ -143,6 +159,45 @@ public class enemy4Controller : MonoBehaviour
         }
     }
 
+    // --- FIRE ATTACK ---
+    void FireAttack()
+    {
+        animator.SetBool("IsRun", false);
+
+        if (player.position.x < transform.position.x)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else
+            transform.localScale = new Vector3(1, 1, 1);
+
+        fireAttackTimer -= Time.deltaTime;
+        if (fireAttackTimer <= 0f)
+        {
+            StartCoroutine(SummonFireballs());
+            fireAttackTimer = fireAttackCooldown;
+        }
+    }
+
+    // --- FIRE ATTACK ---
+    IEnumerator SummonFireballs()
+    {
+        int fireballCount = 3;
+        float spacing = 1.5f; // khoảng cách giữa các fireball
+        Vector3 center = transform.position + new Vector3(0, 3f, 0); // vị trí phía trên đầu enemy
+
+        for (int i = 0; i < fireballCount; i++)
+        {
+            float offsetX = (i - 1) * spacing;
+            Vector3 spawnPos = center + new Vector3(offsetX, 0, 0);
+
+            GameObject fireball = Instantiate(fireballPrefab, spawnPos, Quaternion.identity);
+
+            Vector2 direction = (player.position - fireball.transform.position).normalized;
+            fireball.GetComponent<Rigidbody2D>().velocity = direction * fireballSpeed;
+        }
+
+        yield return null;
+    }
+
     public void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -164,17 +219,35 @@ public class enemy4Controller : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
+<<<<<<< Updated upstream
     public void RemoveWindEffect()
     {
         canMove = true;
     }
 
+=======
+    // --- WIND SPELL EFFECT ---
+>>>>>>> Stashed changes
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("WindSpell"))
         {
             canMove = false;
+<<<<<<< Updated upstream
             Invoke(nameof(RemoveWindEffect), 3f);
+=======
+
+            Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
+
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero;
+                float knockbackForce = 3f; // đẩy nhẹ
+                rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
+            }
+
+            StartCoroutine(RestoreMovement());
+>>>>>>> Stashed changes
         }
     }
 
@@ -189,5 +262,8 @@ public class enemy4Controller : MonoBehaviour
         Gizmos.color = Color.magenta;
         if (attackPoint != null)
             Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, fireAttackRange);
     }
 }
