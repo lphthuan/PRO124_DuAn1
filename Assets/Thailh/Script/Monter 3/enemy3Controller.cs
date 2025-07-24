@@ -40,11 +40,6 @@ public class enemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         currentTarget = pointB;
 
-        // Cảnh báo nếu Body Type không phải Dynamic
-        if (rb.bodyType != RigidbodyType2D.Dynamic)
-        {
-            Debug.LogWarning("Enemy cần đặt Rigidbody2D là Dynamic để bị ảnh hưởng bởi WindSpell.");
-        }
     }
 
     void Update()
@@ -165,23 +160,25 @@ public class enemyController : MonoBehaviour
         {
             if (!canMove) return;
 
-            canMove = false; // Dừng di chuyển
-            animator.SetBool("IsWalk", false);
-            animator.SetBool("IsRun", false);
-            animator.SetBool("IsAttack", false);
+            canMove = false;
 
-            // Thêm lực gió thổi (nếu cần)
-            rb.velocity = Vector2.zero;
-            rb.AddForce(new Vector2(5f, 2f), ForceMode2D.Impulse);
+            // Hướng hất ngược lại WindSpell
+            Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
 
-            // Hồi phục sau 2 giây
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero; // Ngắt chuyển động
+                float knockbackForce = 5f;
+                rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
+            }
+
             StartCoroutine(RestoreMovement());
         }
-    }
+}
 
     IEnumerator RestoreMovement()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         canMove = true;
     }
 }
