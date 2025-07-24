@@ -15,7 +15,7 @@ public class SpawnAreaMagic : MonoBehaviour
         if (ctrl != null)
         {
             ctrl.gravityInitial = 0.01f;   // Gravity ban đầu
-            ctrl.gravityAfter = 30f;      // Gravity sau delay
+            ctrl.gravityAfter = 15f;      // Gravity sau delay
             ctrl.delayGravity = 2f;       // Thời gian delay trước khi tăng gravity
         }
     }

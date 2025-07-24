@@ -4,9 +4,9 @@ using System.Collections;
 public class ArrowController : MonoBehaviour
 {
     public float gravityInitial = 0.01f;
-    public float gravityAfter = 30f;
+    public float gravityAfter = 15f;
     public float delayGravity = 2f;
-
+    [SerializeField] GameObject arrowDmgArea;
     private Rigidbody2D rb2d;
 
     void Start()
@@ -37,8 +37,11 @@ public class ArrowController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Ground"))
         {
+            // Tạo vị trí mới với Y cộng thêm 5
+            Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 6f, transform.position.z);
+            Instantiate(arrowDmgArea, spawnPos, Quaternion.identity);
             Destroy(gameObject);
         }
     }
