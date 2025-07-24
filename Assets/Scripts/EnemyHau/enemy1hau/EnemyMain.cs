@@ -21,7 +21,7 @@ public class EnemyMain : MonoBehaviour
     public AudioClip hitClip;
     public AudioClip dieClip;
     public AudioClip spawnMiniClip;
-    public AudioClip shootClip; 
+    public AudioClip shootClip;
 
     private AudioSource audioSource;
     private int attackCount = 0;
@@ -34,11 +34,32 @@ public class EnemyMain : MonoBehaviour
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+        }
     }
 
     void Update()
     {
-        if (isDead || player == null) return;
+        
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+            return; 
+        }
+
+        if (isDead) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
 
@@ -84,7 +105,7 @@ public class EnemyMain : MonoBehaviour
             if (bulletPrefab != null && firePoint != null)
             {
                 Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                PlaySound(shootClip); 
+                PlaySound(shootClip);
             }
 
             attackCount++;
