@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class enemy4Controller : MonoBehaviour
 {
@@ -14,10 +15,15 @@ public class enemy4Controller : MonoBehaviour
     public float attackCooldown = 1f;
     public int damage = 3;
 
+    [Header("Tấn công phép")] // --- FIRE ATTACK ---
+    public float fireAttackRange = 3f;
+    public GameObject fireballPrefab;
+    public float fireballSpeed = 7f;
+    public float fireAttackCooldown = 5f;
+
     [Header("Máu")]
     public int maxHealth = 20;
 
-    [Header("Player")]
     public Transform player;
 
     [Header("Cận chiến")]
@@ -26,31 +32,38 @@ public class enemy4Controller : MonoBehaviour
     public LayerMask playerLayer;
 
     [Header("Trạng thái đặc biệt")]
-    public bool canMove = true; // Bị bùa gió thì false
+    public bool canMove = true;
 
     private Vector3 patrolTarget;
     private Animator animator;
     private float attackTimer;
+    private float fireAttackTimer;
     private int currentHealth;
     private bool isDead = false;
     private bool isChasing = false;
+    private Rigidbody2D rb;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         patrolTarget = pointB.position;
         currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody2D>();
+        fireAttackTimer = 0f;
 
         if (player == null)
             Debug.LogWarning("Bạn chưa gán Transform Player cho enemy4!");
 
         if (attackPoint == null)
             Debug.LogWarning("Bạn chưa gán AttackPoint cho enemy4!");
+
+        if (rb == null)
+            Debug.LogWarning("Bạn cần thêm Rigidbody2D vào enemy4!");
     }
 
     void Update()
     {
-        if (isDead || player == null || !canMove) return; // Dừng nếu chết hoặc bị bùa gió
+        if (isDead || player == null || !canMove) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -58,6 +71,11 @@ public class enemy4Controller : MonoBehaviour
         {
             isChasing = true;
             AttackPlayer();
+        }
+        else if (distanceToPlayer <= fireAttackRange) // --- FIRE ATTACK ---
+        {
+            isChasing = true;
+            FireAttack();
         }
         else if (distanceToPlayer <= detectionRange)
         {
@@ -84,12 +102,12 @@ public class enemy4Controller : MonoBehaviour
 
     void Patrol()
     {
-        if (!canMove) return; // Bị bùa gió thì không đi tuần
+        if (!canMove) return;
 
         animator.SetBool("IsRun", true);
         MoveTo(patrolTarget, patrolSpeed);
 
-        if (Mathf.Abs(transform.position.x - patrolTarget.x) < 0.05f)
+        if (Mathf.Abs(transform.position.x - patrolTarget.x) < 0.5f)
         {
             patrolTarget = (patrolTarget == pointA.position) ? pointB.position : pointA.position;
         }
@@ -143,6 +161,45 @@ public class enemy4Controller : MonoBehaviour
         }
     }
 
+    // --- FIRE ATTACK ---
+    void FireAttack()
+    {
+        animator.SetBool("IsRun", false);
+
+        if (player.position.x < transform.position.x)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else
+            transform.localScale = new Vector3(1, 1, 1);
+
+        fireAttackTimer -= Time.deltaTime;
+        if (fireAttackTimer <= 0f)
+        {
+            StartCoroutine(SummonFireballs());
+            fireAttackTimer = fireAttackCooldown;
+        }
+    }
+
+    // --- FIRE ATTACK ---
+    IEnumerator SummonFireballs()
+    {
+        int fireballCount = 3;
+        float spacing = 1.5f; // khoảng cách giữa các fireball
+        Vector3 center = transform.position + new Vector3(0, 3f, 0); // vị trí phía trên đầu enemy
+
+        for (int i = 0; i < fireballCount; i++)
+        {
+            float offsetX = (i - 1) * spacing;
+            Vector3 spawnPos = center + new Vector3(offsetX, 0, 0);
+
+            GameObject fireball = Instantiate(fireballPrefab, spawnPos, Quaternion.identity);
+
+            Vector2 direction = (player.position - fireball.transform.position).normalized;
+            fireball.GetComponent<Rigidbody2D>().velocity = direction * fireballSpeed;
+        }
+
+        yield return null;
+    }
+
     public void TakeDamage(int damage)
     {
         if (isDead) return;
@@ -164,18 +221,32 @@ public class enemy4Controller : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
-    public void RemoveWindEffect()
-    {
-        canMove = true;
-    }
-
+    // --- WIND SPELL EFFECT ---
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("WindSpell"))
         {
+            if (!canMove) return;
+
             canMove = false;
-            Invoke(nameof(RemoveWindEffect), 3f);
+
+            Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
+
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero;
+                float knockbackForce = 3f; // đẩy nhẹ
+                rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
+            }
+
+            StartCoroutine(RestoreMovement());
         }
+    }
+
+    private IEnumerator RestoreMovement()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canMove = true;
     }
 
     void OnDrawGizmosSelected()
@@ -189,5 +260,8 @@ public class enemy4Controller : MonoBehaviour
         Gizmos.color = Color.magenta;
         if (attackPoint != null)
             Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, fireAttackRange);
     }
 }
