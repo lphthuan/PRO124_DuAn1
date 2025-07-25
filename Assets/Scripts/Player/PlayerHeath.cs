@@ -80,7 +80,13 @@ public class PlayerHealth : MonoBehaviour
 		playerController.ApplyKnockback(knockbackDirection, knockbackForce);
 	}
 
-	public void TakeDamage(int damage)
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        currentHealth = maxHealth; // Hồi đầy máu sau khi tăng
+        Debug.Log("Increased Max HP: " + maxHealth);
+    }
+    public void TakeDamage(int damage)
 	{
 		if (isDead) return;
 
