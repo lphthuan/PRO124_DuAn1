@@ -25,8 +25,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private LayerMask terrainLayer;
 	[SerializeField] private PlayerAttack playerAttack;
 	[SerializeField] private SpellData[] availableSpells;
+    private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
 
-	private int currentSpellIndex = 0;
+    private int currentSpellIndex = 0;
 	private bool canMove = true;
 	private bool jumpUsed = false;
 	private bool isKnockedBack = false;
@@ -49,7 +51,9 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
-		playerAttack.currentSpell = availableSpells[currentSpellIndex];
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        playerAttack.currentSpell = availableSpells[currentSpellIndex];
 		SetAnimatorIdleState(); // chuyển idle ban đầu
 	}
 
@@ -156,21 +160,22 @@ public class PlayerController : MonoBehaviour
 		return canMove && !isRolling && !isKnockedBack && !isAttacking;
 	}
 
-	private void Move()
-	{
-		if (isAttacking || !canMove) return;
-		
-		playerRigidbody.velocity = new Vector2(horizontalInput * moveSpeed, playerRigidbody.velocity.y);
+    private void Move()
+    {
+        if (isAttacking || !canMove) return;
 
-		if (horizontalInput != 0)
-		{
-			CancelSpellIdle();
-			float newScaleX = Mathf.Sign(horizontalInput) * Mathf.Abs(transform.localScale.x);
-			transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
-		}
-	}
+        playerRigidbody.velocity = new Vector2(horizontalInput * moveSpeed, playerRigidbody.velocity.y);
 
-	private void HandleJump()
+        if (horizontalInput != 0)
+        {
+            CancelSpellIdle();
+
+            // Flip sprite thay vì flip toàn player
+            spriteRenderer.flipX = horizontalInput < 0;
+        }
+    }
+
+    private void HandleJump()
 	{
 		if (jumpPressed)
 		{
