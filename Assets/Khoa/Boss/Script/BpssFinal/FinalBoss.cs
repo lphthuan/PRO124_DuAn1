@@ -23,6 +23,6 @@ public class FinalBoss : MonoBehaviour
         animator.SetBool("Phase1", true);
     }
 
-    public void  
+   
 
 }
