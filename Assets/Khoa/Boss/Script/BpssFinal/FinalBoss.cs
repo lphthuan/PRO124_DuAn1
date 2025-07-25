@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FinalBoss : MonoBehaviour
 {
+    public Animator animator;
+    public int phaseFinalBoss = 0;
+    [SerializeField] GameObject monster;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +18,11 @@ public class FinalBoss : MonoBehaviour
     {
         
     }
+    public void phase1BossFinal()
+    {
+        animator.SetBool("Phase1", true);
+    }
+
+    public void  
+
 }
