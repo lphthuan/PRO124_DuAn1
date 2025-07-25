@@ -308,8 +308,8 @@ public class PlayerController : MonoBehaviour
 		canMove = false;
 		rollCount++;
 
-		float direction = transform.localScale.x > 0 ? 1f : -1f;
-		playerRigidbody.velocity = new Vector2(direction * rollSpeed, 0f);
+        float direction = spriteRenderer.flipX ? -1f : 1f;
+        playerRigidbody.velocity = new Vector2(direction * rollSpeed, 0f);
 
 		playerAnimator.SetTrigger("IsRoll");
 
