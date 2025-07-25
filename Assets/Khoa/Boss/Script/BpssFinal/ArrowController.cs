@@ -7,7 +7,7 @@ public class ArrowController : MonoBehaviour
     [Header("Shake settings")]
     public ShakeData shakeData; // Kéo ShakeData preset vào đây
 
-    public float gravityInitial = 0.01f;
+    public float gravityInitial = 0.1f;
     public float gravityAfter = 15f;
     public float delayGravity = 2f;
     [SerializeField] GameObject arrowDmgArea;

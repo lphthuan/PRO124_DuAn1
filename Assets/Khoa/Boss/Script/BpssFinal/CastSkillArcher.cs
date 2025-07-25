@@ -5,7 +5,7 @@ public class CastSkillArcher : MonoBehaviour
     [SerializeField] private GameObject areaMagicPrefab; // Prefab vùng triệu hồi
     [HideInInspector] public Transform playerTransform;
     [HideInInspector] public Transform groundTransform;
-    float offsetY = 20f;
+    float offsetY = 18f;
     public void CastSkill()
     {
         if (playerTransform == null)

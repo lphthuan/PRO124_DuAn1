@@ -318,8 +318,9 @@ GameObject:
   - component: {fileID: 484542461}
   - component: {fileID: 484542463}
   - component: {fileID: 484542464}
+  - component: {fileID: 484542465}
   m_Layer: 0
-  m_Name: BossTest
+  m_Name: FinalBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,6 +429,18 @@ MonoBehaviour:
   areaMagicPrefab: {fileID: 2632619406721010057, guid: 23cde8fcd9813d948a5fc0647519f3b9, type: 3}
   playerTransform: {fileID: 0}
   groundTransform: {fileID: 0}
+--- !u!114 &484542465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484542460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bc246f9821ca2149b13812e84530410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &606772939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,6 +2235,10 @@ PrefabInstance:
     - target: {fileID: 1195010591724556072, guid: daf402eeef6730c448d78e7056b3a61b, type: 3}
       propertyPath: m_Name
       value: SKill
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195010591724556072, guid: daf402eeef6730c448d78e7056b3a61b, type: 3}
+      propertyPath: m_TagString
+      value: EnemyBullet
       objectReference: {fileID: 0}
     - target: {fileID: 2429701456283752372, guid: daf402eeef6730c448d78e7056b3a61b, type: 3}
       propertyPath: m_LocalPosition.x
