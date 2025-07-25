@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using FirstGearGames.SmoothCameraShaker;
 
 public class ArrowController : MonoBehaviour
 {
+    [Header("Shake settings")]
+    public ShakeData shakeData; // Kéo ShakeData preset vào đây
+
     public float gravityInitial = 0.01f;
     public float gravityAfter = 15f;
     public float delayGravity = 2f;
@@ -43,6 +47,12 @@ public class ArrowController : MonoBehaviour
             Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 6f, transform.position.z);
             Instantiate(arrowDmgArea, spawnPos, Quaternion.identity);
             Destroy(gameObject);
+            // Gọi rung camera
+            if (CameraShaker.Instance != null && shakeData != null)
+            {
+                CameraShaker.Instance.Shake(shakeData);
+            }
         }
     }
+
 }

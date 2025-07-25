@@ -2,58 +2,70 @@
 
 public class PlayerAttack : MonoBehaviour
 {
-	[Header("Attack Settings")]
-	[SerializeField] private Transform firePoint;
-	[SerializeField] private float spellSpeed = 12f;
-	[SerializeField] private float attackAngle = 120f;
-	[SerializeField] private float attackCooldown = 0.8f;
+    [Header("Attack Settings")]
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float spellSpeed = 12f;
+    [SerializeField] private float attackAngle = 120f;
+    [SerializeField] private float attackCooldown = 0.8f;
 
-	public SpellData currentSpell;
+    public SpellData currentSpell;
 
-	private float lastAttackTime = -Mathf.Infinity;
+    private float lastAttackTime = -Mathf.Infinity;
+    private SpriteRenderer spriteRenderer;
 
-	public bool IsValidAttackAngle()
-	{
-		if (currentSpell == null) return false;
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector3 direction = (mousePos - firePoint.position);
-		direction.z = 0f;
-		Vector2 dirNormalized = direction.normalized;
+    public bool IsValidAttackAngle()
+    {
+        if (currentSpell == null) return false;
 
-		bool facingRight = transform.localScale.x > 0;
-		Vector2 facing = facingRight ? Vector2.right : Vector2.left;
-		float angle = Vector2.Angle(facing, dirNormalized);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = (mousePos - firePoint.position);
+        direction.z = 0f;
+        Vector2 dirNormalized = direction.normalized;
 
-		//Debug.Log($"[Attack] Facing: {(facingRight ? "Right" : "Left")} | Angle to mouse: {angle}");
+        // Dựa trên flipX để xác định hướng nhìn
+        bool facingRight = !spriteRenderer.flipX;
+        Vector2 facing = facingRight ? Vector2.right : Vector2.left;
 
-		return angle <= attackAngle / 2f;
-	}
+        // Góc giữa hướng nhìn và hướng chuột
+        float angle = Vector2.Angle(facing, dirNormalized);
 
-	public void PerformAttack()
-	{
-		if (Time.time - lastAttackTime < attackCooldown) return;
-		if (currentSpell == null) return;
+        //Debug.Log($"[Attack] Facing: {(facingRight ? "Right" : "Left")} | Angle to mouse: {angle}");
 
-		lastAttackTime = Time.time;
+        return angle <= attackAngle / 2f;
+    }
 
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector3 direction = (mousePos - firePoint.position);
-		direction.z = 0f;
-		Vector2 dirNormalized = direction.normalized;
+    public void PerformAttack()
+    {
+        if (Time.time - lastAttackTime < attackCooldown) return;
+        if (currentSpell == null) return;
+        if (!IsValidAttackAngle()) return;
 
-		float zRotation = Mathf.Atan2(dirNormalized.y, dirNormalized.x) * Mathf.Rad2Deg;
+        lastAttackTime = Time.time;
 
-		GameObject spell = Instantiate(currentSpell.spellPrefab, firePoint.position, Quaternion.Euler(0, 0, zRotation));
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = (mousePos - firePoint.position);
+        direction.z = 0f;
+        Vector2 dirNormalized = direction.normalized;
 
-		Rigidbody2D rb = spell.GetComponent<Rigidbody2D>();
-		if (rb != null)
-			rb.velocity = dirNormalized * spellSpeed;
+        // Tính góc để quay hướng phép về phía chuột
+        float zRotation = Mathf.Atan2(dirNormalized.y, dirNormalized.x) * Mathf.Rad2Deg;
 
-		// Truyền hướng cho phép gió
-		var wind = spell.GetComponent<PlayerWindSpell>();
-		if (wind != null)
-			wind.SetDirection(dirNormalized);
-	}
+        // Tạo spell ở vị trí bắn, xoay đúng hướng
+        GameObject spell = Instantiate(currentSpell.spellPrefab, firePoint.position, Quaternion.Euler(0, 0, zRotation));
 
+        // Đẩy spell theo hướng chuột
+        Rigidbody2D rb = spell.GetComponent<Rigidbody2D>();
+        if (rb != null)
+            rb.velocity = dirNormalized * spellSpeed;
+
+        // Gửi hướng cho phép nếu có hiệu ứng gió
+        var wind = spell.GetComponent<PlayerWindSpell>();
+        if (wind != null)
+            wind.SetDirection(dirNormalized);
+    }
 }

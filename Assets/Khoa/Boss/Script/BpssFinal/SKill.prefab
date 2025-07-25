@@ -121,11 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6f5e2d9b336cd439554a51c14270e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeData: {fileID: 11400000, guid: f8c9ba438b1aa0544b30afc23c67ce63, type: 2}
   gravityInitial: 0.2
   gravityAfter: 30
   delayGravity: 2
   arrowDmgArea: {fileID: 9127873876130180646, guid: b5e66c0612445d54fa42d6ee2736a5f2, type: 3}
-  arrowdmgArea: {x: 0, y: 0, z: 0}
 --- !u!50 &36059805966001214
 Rigidbody2D:
   serializedVersion: 4
