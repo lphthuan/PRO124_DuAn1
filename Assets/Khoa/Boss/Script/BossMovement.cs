@@ -193,7 +193,7 @@ public class BossMovement : MonoBehaviour
         // Khi shield đã hết, mọi đòn tấn công đều gây damage
         if (collision.CompareTag("WindSpell") || collision.CompareTag("PlayerBullet"))
         {
-            bossHealth.TakeDamage(5f);
+            bossHealth.TakeDamage(20f);
 
             if (bossHealth.currentHealth <= 0)
             {

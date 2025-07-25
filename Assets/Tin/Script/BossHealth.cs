@@ -61,16 +61,16 @@ public class BossHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateUI();
 
-        if (currentHealth <= 0)
-        {
-            OnBossDead?.Invoke();
+            if (currentHealth <= 0)
+            {
+                OnBossDead?.Invoke();
 
-            if (healthSlider != null)
-                Destroy(healthSlider.gameObject);
+                if (healthSlider != null)
+                    Destroy(healthSlider.gameObject);
 
-            if (healthText != null)
-                Destroy(healthText.gameObject);
-        }
+                if (healthText != null)
+                    Destroy(healthText.gameObject);
+            }
     }
 
     private void UpdateUI()

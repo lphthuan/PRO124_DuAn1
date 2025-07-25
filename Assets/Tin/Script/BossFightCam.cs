@@ -11,7 +11,8 @@ public class BossFightCam : MonoBehaviour
     public GameObject wall1;
     public GameObject wall2;
 
-    public GameObject BossHealth;
+    public GameObject HealthBoss;
+    public GameObject ShieldBoss;
 
     private BossHealth boss;
 
@@ -19,7 +20,8 @@ public class BossFightCam : MonoBehaviour
     {
         wall1.SetActive(false);
         wall2.SetActive(false);
-        BossHealth.SetActive(false);
+        HealthBoss.SetActive(false);
+        ShieldBoss.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -65,7 +67,7 @@ public class BossFightCam : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        BossHealth.SetActive(true);
+        ShieldBoss.SetActive(true);
 
         //Kích hoạt wall
         wall1.SetActive(true);
