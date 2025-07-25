@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -177,19 +177,33 @@ public class BossMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (deadCheck > 0)
+            return;
+
+        // Nếu còn khiên
+        if (bossHealth.currentShield > 0)
         {
+            if (collision.CompareTag("WindSpell"))
+            {
+                bossHealth.TakeShield(10f);
+            }
+            // Các loại khác không gây damage khi còn khiên
             return;
         }
-        if (collision.CompareTag("PlayerBullet") && bossHealth.currentHealth > 0)
+
+        // Khi shield đã hết, mọi đòn tấn công đều gây damage
+        if (collision.CompareTag("WindSpell") || collision.CompareTag("PlayerBullet"))
         {
             bossHealth.TakeDamage(5f);
-        }
-        if (bossHealth.currentHealth <= 0)
-        {
-            StartCoroutine(isDead());
-            deadCheck++;
+
+            if (bossHealth.currentHealth <= 0)
+            {
+                StartCoroutine(isDead());
+                deadCheck++;
+            }
         }
     }
+
+
     private int normalAtkCount = 0;
     private void SpawnColliderMagicCheck()
     {
