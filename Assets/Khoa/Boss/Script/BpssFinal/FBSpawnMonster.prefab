@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d237cdb1edbfc47a2f268483696120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnMonster: {fileID: 3287946523677286595, guid: 79188d9c367610d488a909c1f3daf77f, type: 3}
+  SpawnMonster: {fileID: 3917225594547168572, guid: aa0e58d3cd2d8ad45bba5a25efe3ea6f, type: 3}
