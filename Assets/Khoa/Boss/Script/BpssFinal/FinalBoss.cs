@@ -6,6 +6,8 @@ public class FinalBoss : MonoBehaviour
 {
     public Animator animator;
     public int phaseFinalBoss = 0;
+    public float transformSpawnMonster1 = 15f;
+    public float transformSpawnMonster2 = -15f;
     [SerializeField] GameObject castSkill;
     [SerializeField] GameObject spawnAreaMonster;
     // Start is called before the first frame update
@@ -31,20 +33,20 @@ public class FinalBoss : MonoBehaviour
     }
     public void CastSkillSummonMagic2()
     {
-        Vector3 spawnPos = new Vector3(transform.position.x + 7.5f, transform.position.y + 4f, transform.position.z);
+        Vector3 spawnPos = new Vector3(transform.position.x + 8f, transform.position.y + 4f, transform.position.z);
         GameObject SkillSummonMagic2 = Instantiate(castSkill, spawnPos, Quaternion.identity);
         Destroy(SkillSummonMagic2, 1.7f);
     }
     public void spawnMonsterArea1()
     {
-        Vector3 spawnPos = new Vector3(transform.position.x - 15f, transform.position.y - 5.5f, transform.position.z);
+        Vector3 spawnPos = new Vector3(transform.position.x + transformSpawnMonster1, transform.position.y - 5.5f, transform.position.z);
         GameObject spawnMonsterArea1 = Instantiate(spawnAreaMonster, spawnPos, Quaternion.identity);
         Destroy(spawnMonsterArea1, 5f);
     }
 
     public void spawnMonsterArea2()
     {
-        Vector3 spawnPos = new Vector3(transform.position.x + 15f, transform.position.y - 5.5f, transform.position.z);
+        Vector3 spawnPos = new Vector3(transform.position.x + transformSpawnMonster2, transform.position.y - 5.5f, transform.position.z);
         GameObject spawnMonsterArea2 = Instantiate(spawnAreaMonster, spawnPos, Quaternion.identity);
         Destroy(spawnMonsterArea2, 5f);
     }
@@ -62,5 +64,7 @@ public class FinalBoss : MonoBehaviour
         spawnMonsterArea1();
         yield return new WaitForSeconds(2f);
         spawnMonsterArea2();
+        transformSpawnMonster1 += 1f;
+        transformSpawnMonster2 -= 1f;
     }
 }
