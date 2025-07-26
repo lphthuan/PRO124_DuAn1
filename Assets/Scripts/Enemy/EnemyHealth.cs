@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IDamageable
 {
-    public float health = 3f;
+    public float health = 100f;
     private Animator anim;
     private bool isDead = false;
     [SerializeField] private Rigidbody2D enemyRigidbody;
@@ -14,21 +14,11 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = health;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("PlayerBullet"))
-        {
-            TakeDamage(1f);
-            Destroy(other.gameObject);
-        }
-    }
-
-    public void TakeDamage(float amount) 
+    public void TakeDamage(float damage, GameObject source)
     {
         if (isDead) return;
 
-        health -= amount;
-        currentHealth = health;
+        health -= damage;
 
         if (health > 0)
         {
@@ -39,6 +29,7 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
+
 
     void Die()
     {
