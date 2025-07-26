@@ -12,13 +12,21 @@ public class PlayerLightningSpell : MonoBehaviour
 		Destroy(gameObject, lifetime); // Tự huỷ sau 2s
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("Enemy"))
-		{
-			// Gây sát thương nếu enemy có health
-			//other.GetComponent<EnemyHealth>()?.TakeDamage(damage);
-			Destroy(gameObject);
-		}
-	}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Gây sát thương nếu đối tượng có IDamageable
+        IDamageable target = other.GetComponent<IDamageable>();
+        if (target != null)
+        {
+            float damage = PlayerAttack.Instance.GetDamage(); // Lấy damage từ Player
+            target.TakeDamage(damage, gameObject); // Truyền damage và source
+        }
+
+        // Huỷ gameObject (spell) nếu trúng enemy
+        if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
