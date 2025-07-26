@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour
@@ -49,12 +50,17 @@ public class PlayerController : MonoBehaviour
 	private bool attackPressed;
 	private bool switchSpellPressed;
 
-	private void Start()
+    private float defaultMoveSpeed;
+    private float defaultJumpForce;
+
+    private void Start()
 	{
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerAttack.currentSpell = availableSpells[currentSpellIndex];
-		SetAnimatorIdleState(); // chuyển idle ban đầu
+        defaultMoveSpeed = moveSpeed;
+        defaultJumpForce = jumpForce;
+        SetAnimatorIdleState(); // chuyển idle ban đầu
 	}
 
 	private void Update()
@@ -86,7 +92,17 @@ public class PlayerController : MonoBehaviour
 		switchSpellPressed = false;
 	}
 
-	private void HandleInput()
+    public void SetMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
+    public void SetJumpForce(float newJumpForce)
+    {
+        jumpForce = newJumpForce;
+    }
+
+    private void HandleInput()
 	{
 		horizontalInput = Input.GetAxisRaw("Horizontal");
 		jumpPressed = Input.GetKeyDown(KeyCode.Space);
@@ -212,11 +228,11 @@ public class PlayerController : MonoBehaviour
 	{
 		CancelSpellIdle();
 		if (isAttacking || isRolling || !IsGrounded()) return;
-		if (!playerAttack.IsValidAttackAngle())
+		/*if (!playerAttack.IsValidAttackAngle())
 		{
 			Debug.Log("[Attack] Chuột không nằm trong vùng bắn hợp lệ!");
 			return;
-		}
+		}*/
 
 		if (attackRoutine != null) StopCoroutine(attackRoutine);
 		attackRoutine = StartCoroutine(AttackRoutine());
@@ -332,7 +348,63 @@ public class PlayerController : MonoBehaviour
 		canMove = value;
 	}
 
-	void HandleKnockbackState()
+    public IEnumerator ApplySpeedBoost(float boostSpeed, float duration, TextMeshProUGUI boostText)
+    {
+        float originalSpeed = moveSpeed;
+        SetMoveSpeed(boostSpeed);
+
+        Debug.Log($"🔼 Đã tăng tốc độ lên {boostSpeed} trong {duration} giây");
+
+        if (boostText != null)
+            boostText.gameObject.SetActive(true);
+
+        float timeLeft = duration;
+        while (timeLeft > 0)
+        {
+            if (boostText != null)
+                boostText.text = $"Speed Boost: {timeLeft:F1}s";
+
+            timeLeft -= Time.deltaTime;
+            yield return null;
+        }
+
+        SetMoveSpeed(originalSpeed);
+
+        Debug.Log($"🔽 Hết thời gian tăng tốc, tốc độ trở lại: {originalSpeed}");
+
+        if (boostText != null)
+            boostText.gameObject.SetActive(false);
+    }
+
+    public IEnumerator ApplyJumpBoost(float boostedJump, float duration, TextMeshProUGUI boostText)
+    {
+        float originalJump = jumpForce;
+        SetJumpForce(boostedJump);
+
+        Debug.Log($"🟢 Tăng Jump Force lên {boostedJump} trong {duration} giây");
+
+        if (boostText != null)
+            boostText.gameObject.SetActive(true);
+
+        float timeLeft = duration;
+        while (timeLeft > 0)
+        {
+            if (boostText != null)
+                boostText.text = $"Jump Boost: {timeLeft:F1}s";
+
+            timeLeft -= Time.deltaTime;
+            yield return null;
+        }
+
+        SetJumpForce(originalJump);
+
+        Debug.Log($"🔴 Hết boost jump, trả về Jump Force: {originalJump}");
+
+        if (boostText != null)
+            boostText.gameObject.SetActive(false);
+    }
+
+    void HandleKnockbackState()
 	{
 		if (isKnockedBack)
 		{

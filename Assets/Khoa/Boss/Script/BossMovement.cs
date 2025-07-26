@@ -193,7 +193,8 @@ public class BossMovement : MonoBehaviour
         // Khi shield đã hết, mọi đòn tấn công đều gây damage
         if (collision.CompareTag("WindSpell") || collision.CompareTag("PlayerBullet"))
         {
-            bossHealth.TakeDamage(20f);
+            float damage = PlayerAttack.Instance.GetDamage(); // hoặc 1 giá trị cố định nếu không boost được
+            bossHealth.TakeDamage(damage, collision.gameObject); // truyền cả damage và source
 
             if (bossHealth.currentHealth <= 0)
             {
@@ -201,6 +202,7 @@ public class BossMovement : MonoBehaviour
                 deadCheck++;
             }
         }
+
     }
 
 

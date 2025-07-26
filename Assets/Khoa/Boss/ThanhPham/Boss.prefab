@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 298186992340423373}
   - component: {fileID: 3206228117227160079}
   - component: {fileID: 5539184502870588847}
+  - component: {fileID: 7305694817912235392}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -217,14 +218,14 @@ MonoBehaviour:
   MagicAreaCheck: {fileID: 7544987314489317460}
   Magic: {fileID: 8892079453164663205, guid: 2fd19f2574a3f4441b2f2f43030e6c4e, type: 3}
   SummonMagic: {fileID: 3823779093632041647, guid: 8010c2f1058f0e741af3e98dcb5a4ae6, type: 3}
+  SummonArenaFinalBoss: {fileID: 6201814064031554713, guid: 254d79b378ac5734390d0f47d4a81904, type: 3}
   playerTransform: {fileID: 0}
   BossTransform: {fileID: 1892602981268834945}
   Player: {fileID: 0}
   speed: 2.5
-  PlayerCheckRange: 20
+  PlayerCheckRange: 0
   animator: {fileID: 3573835943337136043}
   visualTransform: {fileID: 0}
-  HPBoss: 100
   castSkil: 0
   phase: 1
   deadCheck: 0
@@ -300,6 +301,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6969886, y: 3.6327434}
   m_EdgeRadius: 0
+--- !u!114 &7305694817912235392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3005361609584440805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d70fe1937accb49905a4f5668f5278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
+  currentHealth: 0
+  maxShield: 1000
+  currentShield: 0
+  healthSlider: {fileID: 0}
+  healthFillImage: {fileID: 0}
+  ShieldSlider: {fileID: 0}
+  ShieldFillImage: {fileID: 0}
+  healthText: {fileID: 0}
+  shieldText: {fileID: 0}
+  shieldRegenDelay: 1
 --- !u!1 &7544987314489317460
 GameObject:
   m_ObjectHideFlags: 0
