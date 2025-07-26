@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FBSpawnMonster
+  serializedVersion: 7
+  m_Legacy: 0
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_EulerCurves: []
+  m_PositionCurves: []
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves:
+  - serializedVersion: 2
+    curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 7e830e692c66e474db60f319edd92f05, type: 2}
+    - time: 0.1
+      value: {fileID: 21300000, guid: 4b6b266bf34d40940897f99aadaacd74, type: 2}
+    - time: 0.2
+      value: {fileID: 21300000, guid: 7bbc50703c9f9fc41b8948ac94b8ebab, type: 2}
+    - time: 0.3
+      value: {fileID: 21300000, guid: 2a81e3fffb3452541b33f6631ca32049, type: 2}
+    - time: 0.4
+      value: {fileID: 21300000, guid: eeccc563ce334634cba79fbf7ef14cba, type: 2}
+    - time: 0.5
+      value: {fileID: 21300000, guid: eb6bd3d6c704ce547b02d371961e6d9a, type: 2}
+    - time: 0.6
+      value: {fileID: 21300000, guid: 29aeb2a07f18f5549bd0a4aed98a762c, type: 2}
+    - time: 0.7
+      value: {fileID: 21300000, guid: 52c7dcdcfbee35f45a5e1d3bbbfcb9b6, type: 2}
+    - time: 0.8
+      value: {fileID: 21300000, guid: ed29c03f5df11c34685a204f2dca3ab6, type: 2}
+    - time: 0.9
+      value: {fileID: 21300000, guid: 48eeea636289ad948a6d4514f9d6f934, type: 2}
+    - time: 1
+      value: {fileID: 21300000, guid: f75a003965549824ca17891e5a7b3c0e, type: 2}
+    - time: 1.1
+      value: {fileID: 21300000, guid: e2c4dc73ad62d1348979774a6d01d5e8, type: 2}
+    - time: 1.2
+      value: {fileID: 21300000, guid: b8426d14e27c55d47a189918693a50f1, type: 2}
+    - time: 1.3
+      value: {fileID: 21300000, guid: bc3de0f829938c048a1450c3fd826f61, type: 2}
+    - time: 1.4
+      value: {fileID: 21300000, guid: 6dae8524f3255f34ebeb8f1076cc5894, type: 2}
+    - time: 1.5
+      value: {fileID: 21300000, guid: a681943bac1067c4c9507589b0963442, type: 2}
+    attribute: m_Sprite
+    path: 
+    classID: 212
+    script: {fileID: 0}
+    flags: 2
+  m_SampleRate: 10
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_ClipBindingConstant:
+    genericBindings:
+    - serializedVersion: 2
+      path: 0
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+      isIntCurve: 0
+      isSerializeReferenceCurve: 0
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: 7e830e692c66e474db60f319edd92f05, type: 2}
+    - {fileID: 21300000, guid: 4b6b266bf34d40940897f99aadaacd74, type: 2}
+    - {fileID: 21300000, guid: 7bbc50703c9f9fc41b8948ac94b8ebab, type: 2}
+    - {fileID: 21300000, guid: 2a81e3fffb3452541b33f6631ca32049, type: 2}
+    - {fileID: 21300000, guid: eeccc563ce334634cba79fbf7ef14cba, type: 2}
+    - {fileID: 21300000, guid: eb6bd3d6c704ce547b02d371961e6d9a, type: 2}
+    - {fileID: 21300000, guid: 29aeb2a07f18f5549bd0a4aed98a762c, type: 2}
+    - {fileID: 21300000, guid: 52c7dcdcfbee35f45a5e1d3bbbfcb9b6, type: 2}
+    - {fileID: 21300000, guid: ed29c03f5df11c34685a204f2dca3ab6, type: 2}
+    - {fileID: 21300000, guid: 48eeea636289ad948a6d4514f9d6f934, type: 2}
+    - {fileID: 21300000, guid: f75a003965549824ca17891e5a7b3c0e, type: 2}
+    - {fileID: 21300000, guid: e2c4dc73ad62d1348979774a6d01d5e8, type: 2}
+    - {fileID: 21300000, guid: b8426d14e27c55d47a189918693a50f1, type: 2}
+    - {fileID: 21300000, guid: bc3de0f829938c048a1450c3fd826f61, type: 2}
+    - {fileID: 21300000, guid: 6dae8524f3255f34ebeb8f1076cc5894, type: 2}
+    - {fileID: 21300000, guid: a681943bac1067c4c9507589b0963442, type: 2}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_AdditiveReferencePoseClip: {fileID: 0}
+    m_AdditiveReferencePoseTime: 0
+    m_StartTime: 0
+    m_StopTime: 1.6
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_HasAdditiveReferencePose: 0
+    m_LoopTime: 1
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+  m_HasGenericRootTransform: 0
+  m_HasMotionFloatCurves: 0
+  m_Events:
+  - time: 0.7
+    functionName: SpawnModCollider
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.5
+    functionName: Destroy
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
