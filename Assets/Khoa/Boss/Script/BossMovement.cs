@@ -23,11 +23,11 @@ public class BossMovement : MonoBehaviour
 
     public bool castSkil = false;
 
-    private BossHealth bossHealth;
+    private MiniBossHealth bossHealth;
     private void Start()
     {
         MagicAreaCheck.SetActive(false);
-        bossHealth = GetComponent<BossHealth>();
+        bossHealth = GetComponent<MiniBossHealth>();
         bossHealth.OnBossDead += HandleBossDeath;
     }
 
