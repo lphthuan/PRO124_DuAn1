@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 
 public class BossHealth : MonoBehaviour, IDamageable
 {
     [Header("Health")]
-    public float maxHealth = 1000f;
+    public float maxHealth = 3000f;
     public float currentHealth;
     public float maxShield = 100f;
     public float currentShield;
@@ -22,9 +21,9 @@ public class BossHealth : MonoBehaviour, IDamageable
     [SerializeField] private TMP_Text shieldText;
 
     [Header("Shield Regen Settings")]
-    [SerializeField] private float shieldRegenDelay = 5f;
+    [SerializeField] private float healthLostThresholdToRegenShield = 1000f;
 
-    private bool hasStartedRegen = false;
+    private float healthLostSinceShieldBreak = 0f;
 
     public delegate void BossDeathEvent();
     public event BossDeathEvent OnBossDead;
@@ -50,8 +49,10 @@ public class BossHealth : MonoBehaviour, IDamageable
 
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
         UpdateUI();
 
+        // Boss chết thì không làm gì thêm
         if (currentHealth <= 0)
         {
             OnBossDead?.Invoke();
@@ -61,21 +62,25 @@ public class BossHealth : MonoBehaviour, IDamageable
 
             if (healthText != null)
                 Destroy(healthText.gameObject);
+
+            return; // ⛔ Dừng lại luôn
+        }
+
+        // Boss chưa chết → cộng dồn máu mất
+        healthLostSinceShieldBreak += damage;
+
+        if (healthLostSinceShieldBreak >= healthLostThresholdToRegenShield)
+        {
+            RegenShieldFromHealthLoss();
         }
     }
+
 
     public void TakeShield(float amount)
     {
         currentShield -= amount;
         currentShield = Mathf.Clamp(currentShield, 0, maxShield);
         UpdateUI();
-
-        // Khi giáp bằng 0 và chưa đếm hồi lại → bắt đầu đếm
-        if (Mathf.Approximately(currentShield, 0f) && !hasStartedRegen)
-        {
-            hasStartedRegen = true;
-            StartCoroutine(RegenShieldAfterDelay());
-        }
 
         if (currentShield <= 0f)
         {
@@ -89,22 +94,19 @@ public class BossHealth : MonoBehaviour, IDamageable
         }
     }
 
-    private IEnumerator RegenShieldAfterDelay()
+    private void RegenShieldFromHealthLoss()
     {
-        yield return new WaitForSeconds(shieldRegenDelay);
-
         currentShield = maxShield;
-        hasStartedRegen = false;
+        healthLostSinceShieldBreak = 0f;
+
         UpdateUI();
 
-        // Hiện shield
         if (ShieldSlider != null)
             ShieldSlider.gameObject.SetActive(true);
 
         if (shieldText != null)
             shieldText.gameObject.SetActive(true);
 
-        // Ẩn health
         if (healthSlider != null)
             healthSlider.gameObject.SetActive(false);
 
@@ -114,30 +116,24 @@ public class BossHealth : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Nếu còn khiên
         if (currentShield > 0)
         {
             if (collision.CompareTag("WindSpell"))
             {
-                TakeShield(50f); // Có thể chỉnh theo từng spell
+                TakeShield(50f);
                 Destroy(collision.gameObject);
             }
-
-            // Không gây damage máu khi còn shield
             return;
         }
 
-        // Nếu hết khiên → nhận damage từ spell
         if (collision.CompareTag("WindSpell") || collision.CompareTag("PlayerBullet"))
         {
-            IDamageable self = this;
-            float damage = PlayerAttack.Instance.GetDamage(); // hoặc gán từ spell
-            self.TakeDamage(damage, collision.gameObject);
+            float damage = PlayerAttack.Instance.GetDamage();
+            TakeDamage(damage, collision.gameObject);
 
             Destroy(collision.gameObject);
         }
     }
-
 
     private void UpdateUI()
     {
@@ -173,6 +169,5 @@ public class BossHealth : MonoBehaviour, IDamageable
             if (healthText != null)
                 healthText.gameObject.SetActive(false);
         }
-
     }
 }
