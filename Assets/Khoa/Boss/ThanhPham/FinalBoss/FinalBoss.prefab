@@ -146,7 +146,7 @@ MonoBehaviour:
   spawnAreaMonster: {fileID: 2025756937363952144, guid: 2b96b8a3506f4ab4cb5b5e4aaaf01d2b, type: 3}
   effectSkill01: {fileID: 8683000099678169625, guid: d54d8d535b6ef664dbb5c0e3a21cdaa9, type: 3}
   effectSkill02: {fileID: 4747964055998030020, guid: 2d38c50ee34358e48993d2bf6cf34a1f, type: 3}
-  effectSkill03: {fileID: 0}
-  effectSkill04: {fileID: 0}
+  effectSkill03: {fileID: 5089731620499030919, guid: f37de9472591e4d4e8f38c04c79b0e1f, type: 3}
+  effectSkill04: {fileID: 5262686154725292225, guid: 6d836b9b4b1fe524a8c6c4470fb00cbc, type: 3}
   BigEffectCastSkill: {fileID: 5811165583612966878, guid: 23082f028c53df342bf40fcbd6a16b8c, type: 3}
   arrowSpawn: {fileID: 6668319742867861901, guid: 04cd831fa82221340935bc46ca779542, type: 3}
