@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3715659428381827816}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 47.6, y: 6.1, z: 8.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -140,6 +140,8 @@ MonoBehaviour:
   transformSpawnMonster1: 15
   transformSpawnMonster2: -15
   countSummon: 0
+  countHardSkill: 0
+  hardSkill: 0
   castSkill: {fileID: 5309444838327610751, guid: a0f60c05eaa3bba44a4c865b56a0f608, type: 3}
   spawnAreaMonster: {fileID: 2025756937363952144, guid: 2b96b8a3506f4ab4cb5b5e4aaaf01d2b, type: 3}
   effectSkill01: {fileID: 8683000099678169625, guid: d54d8d535b6ef664dbb5c0e3a21cdaa9, type: 3}
@@ -147,3 +149,4 @@ MonoBehaviour:
   effectSkill03: {fileID: 0}
   effectSkill04: {fileID: 0}
   BigEffectCastSkill: {fileID: 5811165583612966878, guid: 23082f028c53df342bf40fcbd6a16b8c, type: 3}
+  arrowSpawn: {fileID: 6668319742867861901, guid: 04cd831fa82221340935bc46ca779542, type: 3}
