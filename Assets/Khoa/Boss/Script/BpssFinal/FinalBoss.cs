@@ -9,6 +9,8 @@ public class FinalBoss : MonoBehaviour
     public float transformSpawnMonster1 = 15f;
     public float transformSpawnMonster2 = -15f;
     public int countSummon = 0;
+    public int countHardSkill = 0;
+    public bool hardSkill = false;
     [SerializeField] GameObject castSkill;
     [SerializeField] GameObject spawnAreaMonster;
     [SerializeField] GameObject effectSkill01;
@@ -16,6 +18,7 @@ public class FinalBoss : MonoBehaviour
     [SerializeField] GameObject effectSkill03;
     [SerializeField] GameObject effectSkill04;
     [SerializeField] GameObject BigEffectCastSkill;
+    [SerializeField] GameObject arrowSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +39,13 @@ public class FinalBoss : MonoBehaviour
         animator.SetBool("IsPhase1", false);
         animator.SetBool("IsPhase2", true);
         StartCoroutine(EffectcastSkillPhase2());
-
+    }
+    public void phase3BossFinal()
+    {
+        animator.SetBool("IsPhase1", false);
+        animator.SetBool("IsPhase2", false);
+        animator.SetBool("IsPhase3", true);
+        StartCoroutine(castSkillPhase3());
     }
     public void CastSkillSummonMagic1()
     {
@@ -103,10 +112,149 @@ public class FinalBoss : MonoBehaviour
     }
     private IEnumerator castSkillPhase2()
     {
-        spawnMonsterArea1();
-        yield return new WaitForSeconds(2f);
-        spawnMonsterArea2();
-        transformSpawnMonster1 -= 3f;
-        transformSpawnMonster2 += 3f;
+        if (countSummon > 2)
+        {
+            transformSpawnMonster1 = 15f;
+            transformSpawnMonster2 = -15f;
+            countSummon = 0;
+        }
+        else
+        {
+            spawnMonsterArea1();
+            yield return new WaitForSeconds(2f);
+            spawnMonsterArea2();
+            transformSpawnMonster1 -= 3f;
+            transformSpawnMonster2 += 3f;
+            countSummon += 1;
+        }
+    }
+
+
+    private IEnumerator castSkillPhase3()
+    {
+        Vector3 spawnPos1 = new Vector3(transform.position.x - 17.5f, transform.position.y + 9f, transform.position.z);        
+        Vector3 spawnPos2 = new Vector3(transform.position.x - 11.67f, transform.position.y + 9f, transform.position.z);        
+        Vector3 spawnPos3 = new Vector3(transform.position.x - 5.83f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos4 = new Vector3(transform.position.x, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos5 = new Vector3(transform.position.x + 5.83f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos6 = new Vector3(transform.position.x + 11.67f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos7 = new Vector3(transform.position.x + 17.5f, transform.position.y + 9f, transform.position.z);
+        GameObject SummonArrow1 = Instantiate(arrowSpawn, spawnPos1, Quaternion.identity);
+        Destroy(SummonArrow1, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow2 = Instantiate(arrowSpawn, spawnPos2, Quaternion.identity);
+        Destroy(SummonArrow2, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow3 = Instantiate(arrowSpawn, spawnPos3, Quaternion.identity);
+        Destroy(SummonArrow3, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow4 = Instantiate(arrowSpawn, spawnPos4, Quaternion.identity);
+        Destroy(SummonArrow4, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow5 = Instantiate(arrowSpawn, spawnPos5, Quaternion.identity);
+        Destroy(SummonArrow5, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow6 = Instantiate(arrowSpawn, spawnPos6, Quaternion.identity);
+        Destroy(SummonArrow6, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow7 = Instantiate(arrowSpawn, spawnPos7, Quaternion.identity);
+        Destroy(SummonArrow7, 3f);
+
+
+
+        yield return new WaitForSeconds(3.5f);
+        GameObject SummonArrow8 = Instantiate(arrowSpawn, spawnPos7, Quaternion.identity);
+        Destroy(SummonArrow8, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow9 = Instantiate(arrowSpawn, spawnPos6, Quaternion.identity);
+        Destroy(SummonArrow9, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow10 = Instantiate(arrowSpawn, spawnPos5, Quaternion.identity);
+        Destroy(SummonArrow10, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow11 = Instantiate(arrowSpawn, spawnPos4, Quaternion.identity);
+        Destroy(SummonArrow11, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow12 = Instantiate(arrowSpawn, spawnPos3, Quaternion.identity);
+        Destroy(SummonArrow12, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow13 = Instantiate(arrowSpawn, spawnPos2, Quaternion.identity);
+        Destroy(SummonArrow13, 3f);
+        yield return new WaitForSeconds(0.3f);
+        GameObject SummonArrow14 = Instantiate(arrowSpawn, spawnPos1, Quaternion.identity);
+        Destroy(SummonArrow14, 3f);
+        yield return new WaitForSeconds(3.5f);
+        animator.SetBool("IsHardSkill", true);
+    }
+
+
+        public void countHardSkillCheck()
+    {
+        if (countHardSkill > 1)
+        {
+            animator.SetBool("IsHardSkill", false);
+            countHardSkill = 0;
+        }
+        else
+        {
+            countHardSkill++;
+        } 
+            
+    }
+
+
+
+
+
+
+
+
+    private void castSkillPhase3hard1()
+    {
+        Vector3 spawnPos1 = new Vector3(transform.position.x - 17.5f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos2 = new Vector3(transform.position.x - 11.67f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos3 = new Vector3(transform.position.x - 5.83f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos4 = new Vector3(transform.position.x, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos5 = new Vector3(transform.position.x + 5.83f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos6 = new Vector3(transform.position.x + 11.67f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos7 = new Vector3(transform.position.x + 17.5f, transform.position.y + 9f, transform.position.z);
+        GameObject SummonArrow15 = Instantiate(arrowSpawn, spawnPos1, Quaternion.identity);
+        Destroy(SummonArrow15, 3f);
+        GameObject SummonArrow16 = Instantiate(arrowSpawn, spawnPos2, Quaternion.identity);
+        Destroy(SummonArrow16, 3f);
+        GameObject SummonArrow17 = Instantiate(arrowSpawn, spawnPos3, Quaternion.identity);
+        Destroy(SummonArrow17, 3f);
+        GameObject SummonArrow18 = Instantiate(arrowSpawn, spawnPos4, Quaternion.identity);
+        Destroy(SummonArrow18, 3f);
+        GameObject SummonArrow19 = Instantiate(arrowSpawn, spawnPos5, Quaternion.identity);
+        Destroy(SummonArrow19, 3f);
+        GameObject SummonArrow20 = Instantiate(arrowSpawn, spawnPos6, Quaternion.identity);
+        Destroy(SummonArrow20, 3f);
+        GameObject SummonArrow21 = Instantiate(arrowSpawn, spawnPos7, Quaternion.identity);
+        Destroy(SummonArrow21, 3f);
+        
+    }
+
+    private void castSkillPhase3hard2()
+    {
+        Vector3 spawnPos1 = new Vector3(transform.position.x - 16.0f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos2 = new Vector3(transform.position.x - 9.6f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos3 = new Vector3(transform.position.x - 3.2f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos5 = new Vector3(transform.position.x + 3.2f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos6 = new Vector3(transform.position.x + 9.6f, transform.position.y + 9f, transform.position.z);
+        Vector3 spawnPos7 = new Vector3(transform.position.x + 16.0f, transform.position.y + 9f, transform.position.z);
+        GameObject SummonArrow1 = Instantiate(arrowSpawn, spawnPos1, Quaternion.identity);
+        Destroy(SummonArrow1, 3f);
+        GameObject SummonArrow2 = Instantiate(arrowSpawn, spawnPos2, Quaternion.identity);
+        Destroy(SummonArrow2, 3f);
+        GameObject SummonArrow3 = Instantiate(arrowSpawn, spawnPos3, Quaternion.identity);
+        Destroy(SummonArrow3, 3f);
+        GameObject SummonArrow4 = Instantiate(arrowSpawn, spawnPos5, Quaternion.identity);
+        Destroy(SummonArrow4, 3f);
+        GameObject SummonArrow5 = Instantiate(arrowSpawn, spawnPos6, Quaternion.identity);
+        Destroy(SummonArrow5, 3f);
+        GameObject SummonArrow6 = Instantiate(arrowSpawn, spawnPos7, Quaternion.identity);
+        Destroy(SummonArrow6, 3f);
+        countHardSkillCheck();
     }
 }

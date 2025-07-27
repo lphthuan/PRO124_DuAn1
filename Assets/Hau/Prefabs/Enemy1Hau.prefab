@@ -285,8 +285,8 @@ MonoBehaviour:
   maxHealth: 5
   currentHealth: 5
   player: {fileID: 0}
-  detectionRange: 6
-  attackRange: 6
+  detectionRange: 20
+  attackRange: 20
   fireCooldown: 2
   bulletPrefab: {fileID: 2887096101538335485, guid: 5af2d174e66af7f44a3d27f62d24d5cf, type: 3}
   firePoint: {fileID: 3283525824192177546}
