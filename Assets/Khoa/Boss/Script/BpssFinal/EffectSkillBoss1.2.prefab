@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6319304423244120042}
   m_Layer: 0
   m_Name: EffectSkillBoss1.2
-  m_TagString: Untagged
+  m_TagString: SkillSummonMagic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
