@@ -46,15 +46,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     public void TakeDamage(float damage, GameObject source)
     {
         if (currentShield > 0)
-        {
-            if (source.CompareTag("WindSpell"))
-            {
-                TakeShield(50f);
-                return;
-            }
             return;
-        }
-
 
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -118,6 +110,32 @@ public class BossHealth : MonoBehaviour, IDamageable
 
         if (healthText != null)
             healthText.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Nếu còn khiên
+        if (currentShield > 0)
+        {
+            if (collision.CompareTag("WindSpell"))
+            {
+                TakeShield(50f); // Có thể chỉnh theo từng spell
+                Destroy(collision.gameObject);
+            }
+
+            // Không gây damage máu khi còn shield
+            return;
+        }
+
+        // Nếu hết khiên → nhận damage từ spell
+        if (collision.CompareTag("WindSpell") || collision.CompareTag("PlayerBullet"))
+        {
+            IDamageable self = this;
+            float damage = PlayerAttack.Instance.GetDamage(); // hoặc gán từ spell
+            self.TakeDamage(damage, collision.gameObject);
+
+            Destroy(collision.gameObject);
+        }
     }
 
 

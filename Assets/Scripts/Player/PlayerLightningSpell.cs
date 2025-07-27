@@ -1,19 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 
 public class PlayerLightningSpell : MonoBehaviour
 {
 	[SerializeField] private float lifetime = 2f;
-	//[SerializeField] private int damage = 1;
+    //[SerializeField] private int damage = 1;
 
-	void Start()
+    private bool hasHit = false;
+
+    void Start()
 	{
 		Destroy(gameObject, lifetime); // Tự huỷ sau 2s
 	}
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (hasHit) return; // ⛔ Nếu đã va chạm, bỏ qua
+
         // Gây sát thương nếu đối tượng có IDamageable
         IDamageable target = other.GetComponent<IDamageable>();
         if (target != null)
@@ -22,10 +27,11 @@ public class PlayerLightningSpell : MonoBehaviour
             target.TakeDamage(damage, gameObject); // Truyền damage và source
         }
 
-        // Huỷ gameObject (spell) nếu trúng enemy
+        // Nếu trúng Enemy hoặc Boss → hủy spell
         if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
         {
-            Destroy(gameObject);
+            hasHit = true; // ✅ Đánh dấu đã trúng
+            Destroy(gameObject); // ✅ Huỷ spell sau 1 hit
         }
     }
 
