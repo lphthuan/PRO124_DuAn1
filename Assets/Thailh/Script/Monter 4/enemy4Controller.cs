@@ -60,6 +60,15 @@ public class enemy4Controller : MonoBehaviour
 
         if (rb == null)
             Debug.LogWarning("Bạn cần thêm Rigidbody2D vào enemy4!");
+
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+        }
     }
 
     void Update()
@@ -204,8 +213,8 @@ public class enemy4Controller : MonoBehaviour
             fireballs.Add(fireball);
         }
 
-        // Đợi 0.5 giây trước khi bắn
-        yield return new WaitForSeconds(0.5f);
+        // Đợi x giây trước khi bắn
+        yield return new WaitForSeconds(1f);
 
         // Bắn từng quả về phía Player
         foreach (GameObject fireball in fireballs)

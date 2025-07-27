@@ -40,6 +40,14 @@ public class enemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         currentTarget = pointB;
 
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer.transform;
+            }
+        }
     }
 
     void Update()
