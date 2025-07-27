@@ -10,6 +10,7 @@ TagManager:
   - CauLuaQuai2
   - Ground
   - WindSpell
+  - Boss
   layers:
   - Default
   - TransparentFX
