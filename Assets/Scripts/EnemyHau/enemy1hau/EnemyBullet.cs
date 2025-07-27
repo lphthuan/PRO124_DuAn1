@@ -38,7 +38,7 @@ public class BeeBullet : MonoBehaviour
         }
         else if (collision.CompareTag("PlayerBullet"))
         {
-            Destroy(collision.gameObject);  
+            
             Destroy(gameObject);         
         }
         else if (!collision.CompareTag("Enemy") && !collision.isTrigger)

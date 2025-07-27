@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5262686154725292225
+--- !u!1 &8829155988700120752
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1641580821831440197}
-  - component: {fileID: 6076882789195842696}
-  - component: {fileID: 6999204154581362950}
+  - component: {fileID: 6068603358416556955}
+  - component: {fileID: 4925722376451075610}
+  - component: {fileID: 5347984440457821397}
+  - component: {fileID: 8172445569957595611}
   m_Layer: 0
-  m_Name: CastSkillEffect2.2
-  m_TagString: SkillSummonMagic
+  m_Name: DeadEffectBoss
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1641580821831440197
+--- !u!4 &6068603358416556955
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5262686154725292225}
+  m_GameObject: {fileID: 8829155988700120752}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.2840153, w: 0.95881975}
-  m_LocalPosition: {x: 3.42, y: 12.59, z: 0.024445444}
-  m_LocalScale: {x: 2, y: 3, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.47, y: 4.66, z: 0.08572863}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 33}
---- !u!95 &6076882789195842696
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &4925722376451075610
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5262686154725292225}
+  m_GameObject: {fileID: 8829155988700120752}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c715d153a992f0943b8657fd98c8d834, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9a01e7629100cea46965f941257bef3a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -54,13 +55,13 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!212 &6999204154581362950
+--- !u!212 &5347984440457821397
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5262686154725292225}
+  m_GameObject: {fileID: 8829155988700120752}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -94,15 +95,27 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 97c903b25f5e4a14c900a6ebcc4d7b8e, type: 2}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 196f53e36cc4a1c41af649f666164ea9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 8.75, y: 5.8125}
+  m_Size: {x: 10.24, y: 7.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8172445569957595611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829155988700120752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d46f4006de0dfc4c950d2a83f6b34be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

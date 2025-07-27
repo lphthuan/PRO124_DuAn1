@@ -282,8 +282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdcadf98cf656314ba43ae9a06bfd85f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  currentHealth: 5
+  maxHealth: 2
+  currentHealth: 0
   player: {fileID: 0}
   detectionRange: 20
   attackRange: 20

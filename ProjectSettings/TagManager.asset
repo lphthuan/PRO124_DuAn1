@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - WindSpell
   - Boss
+  - SkillSummonMagic
   layers:
   - Default
   - TransparentFX

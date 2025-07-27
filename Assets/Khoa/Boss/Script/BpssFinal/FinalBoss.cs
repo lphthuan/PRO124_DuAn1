@@ -11,6 +11,12 @@ public class FinalBoss : MonoBehaviour
     public int countSummon = 0;
     public int countHardSkill = 0;
     public bool hardSkill = false;
+    private BossHealth bossHealth;
+    GameObject skill1;
+    GameObject skill2;
+    GameObject skill3;
+    GameObject skill4;
+    GameObject skill5;
     [SerializeField] GameObject castSkill;
     [SerializeField] GameObject spawnAreaMonster;
     [SerializeField] GameObject effectSkill01;
@@ -19,10 +25,11 @@ public class FinalBoss : MonoBehaviour
     [SerializeField] GameObject effectSkill04;
     [SerializeField] GameObject BigEffectCastSkill;
     [SerializeField] GameObject arrowSpawn;
+    [SerializeField] GameObject DeadEffectBoss;
     // Start is called before the first frame update
     void Start()
     {
-
+        bossHealth = GetComponent<BossHealth>();
     }
 
     // Update is called once per frame
@@ -75,19 +82,19 @@ public class FinalBoss : MonoBehaviour
     }
 
 
-
+    //bossHealt.currentHealth <= 0
 
     private IEnumerator EffectcastSkillPhase2()
     {
         Vector3 spawnPos = new Vector3(transform.position.x +0.7f, transform.position.y + 8f, transform.position.z);
-        GameObject BigEffectCastSkill1 = Instantiate(BigEffectCastSkill, spawnPos, Quaternion.identity);
+        skill5 = Instantiate(BigEffectCastSkill, spawnPos, Quaternion.identity);
         yield return new WaitForSeconds(2f);
         Vector3 spawnPos1 = new Vector3(transform.position.x + 4.5f, transform.position.y + 8f, transform.position.z);
         Quaternion rotation1 = Quaternion.Euler(0f, 0f, 40.379f);
         Vector3 spawnPos2 = new Vector3(transform.position.x - 4.3f, transform.position.y + 8f, transform.position.z);
         Quaternion rotation2 = Quaternion.Euler(0f, 0f, -28.83f);
-        GameObject SkillSummonMagic1 = Instantiate(effectSkill01, spawnPos1, rotation1);
-        GameObject SkillSummonMagic2 = Instantiate(effectSkill02, spawnPos2, rotation2);
+        skill1 = Instantiate(effectSkill01, spawnPos1, rotation1);
+        skill2 = Instantiate(effectSkill02, spawnPos2, rotation2);
     }
 
 
@@ -97,8 +104,8 @@ public class FinalBoss : MonoBehaviour
         Quaternion rotation1 = Quaternion.Euler(0f, 0f, 26f);
         Vector3 spawnPos2 = new Vector3(transform.position.x - 3.7f, transform.position.y + 8.2f, transform.position.z);
         Quaternion rotation2 = Quaternion.Euler(0f, 0f, -22f);
-        GameObject SkillSummonMagic1 = Instantiate(effectSkill03, spawnPos1, rotation1);
-        GameObject SkillSummonMagic2 = Instantiate(effectSkill04, spawnPos2, rotation2);
+        skill3 = Instantiate(effectSkill03, spawnPos1, rotation1);
+        skill4 = Instantiate(effectSkill04, spawnPos2, rotation2);
     }
     private IEnumerator castSkillPhase1()
     {
@@ -268,5 +275,37 @@ public class FinalBoss : MonoBehaviour
         GameObject SummonArrow6 = Instantiate(arrowSpawn, spawnPos7, Quaternion.identity);
         Destroy(SummonArrow6, 3f);
         countHardSkillCheck();
+    }
+
+
+    public void isDead()
+    {
+        
+        Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Instantiate(DeadEffectBoss, spawnPos, Quaternion.identity);
+
+        StartCoroutine(destroy());
+        animator.SetBool("IsDead", true);
+    }
+
+    public IEnumerator destroy()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(skill1);
+        Destroy(skill2);
+        Destroy(skill3);
+        Destroy(skill4);
+        Destroy(skill5);
+        Destroy(gameObject);
+    }
+
+
+
+
+
+
+    public void phaseBossController()
+    {
+
     }
 }
