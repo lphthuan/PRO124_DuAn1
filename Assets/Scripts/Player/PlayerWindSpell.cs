@@ -30,7 +30,7 @@ public class PlayerWindSpell : MonoBehaviour
         }
 
         // Gây damage nếu có IDamageable
-        IDamageable target = other.GetComponent<IDamageable>();
+        /*IDamageable target = other.GetComponent<IDamageable>();
         if (target != null)
         {
             float damage = PlayerAttack.Instance.GetDamage(); // Lấy damage từ Player
@@ -38,7 +38,7 @@ public class PlayerWindSpell : MonoBehaviour
 
             hasHit = true; // ✅ đánh dấu đã trúng
             Destroy(gameObject); // ✅ hủy sau khi trúng
-        }
+        }*/
 
         // Hủy luồng gió nếu chạm Enemy hoặc Boss nhưng KHÔNG gây damage
         if (!hasHit && (other.CompareTag("Enemy") || other.CompareTag("Boss")))

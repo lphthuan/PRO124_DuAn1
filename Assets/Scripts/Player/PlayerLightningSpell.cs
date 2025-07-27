@@ -20,12 +20,12 @@ public class PlayerLightningSpell : MonoBehaviour
         if (hasHit) return; // ⛔ Nếu đã va chạm, bỏ qua
 
         // Gây sát thương nếu đối tượng có IDamageable
-        IDamageable target = other.GetComponent<IDamageable>();
+        /*IDamageable target = other.GetComponent<IDamageable>();
         if (target != null)
         {
             float damage = PlayerAttack.Instance.GetDamage(); // Lấy damage từ Player
             target.TakeDamage(damage, gameObject); // Truyền damage và source
-        }
+        }*/
 
         // Nếu trúng Enemy hoặc Boss → hủy spell
         if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
