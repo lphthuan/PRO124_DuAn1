@@ -126,7 +126,7 @@ public class BossHealth : MonoBehaviour, IDamageable
             return;
         }
 
-        if (collision.CompareTag("WindSpell") || collision.CompareTag("PlayerBullet"))
+        if (collision.CompareTag("PlayerBullet"))
         {
             float damage = PlayerAttack.Instance.GetDamage();
             TakeDamage(damage, collision.gameObject);

@@ -35,7 +35,7 @@ public class FinalBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        phaseBossController();
     }
     public void phase1BossFinal()
     {
@@ -82,7 +82,7 @@ public class FinalBoss : MonoBehaviour
     }
 
 
-    //bossHealt.currentHealth <= 0
+    //bossHealt.currentHealth <= 0 máu boss là 3k
 
     private IEnumerator EffectcastSkillPhase2()
     {
@@ -151,6 +151,7 @@ public class FinalBoss : MonoBehaviour
 
     private IEnumerator castSkillPhase3()
     {
+        yield return new WaitForSeconds(3f);
         Vector3 spawnPos1 = new Vector3(transform.position.x - 17.5f, transform.position.y + 9f, transform.position.z);        
         Vector3 spawnPos2 = new Vector3(transform.position.x - 11.67f, transform.position.y + 9f, transform.position.z);        
         Vector3 spawnPos3 = new Vector3(transform.position.x - 5.83f, transform.position.y + 9f, transform.position.z);
@@ -302,10 +303,44 @@ public class FinalBoss : MonoBehaviour
 
 
 
-
+    private IEnumerator castPhase2()
+    {
+        animator.SetBool("IsPhase1", false);
+        yield return new WaitForSeconds(3f);
+        phase2BossFinal();
+    }
+    private IEnumerator castPhase3()
+    {
+        animator.SetBool("IsPhase2", false);
+        yield return new WaitForSeconds(3f);
+        phase3BossFinal();
+    }
+    private IEnumerator castPhaseDead()
+    {
+        animator.SetBool("IsPhase3", false);
+        yield return new WaitForSeconds(3f);
+        isDead();
+    }
 
     public void phaseBossController()
     {
+        if (bossHealth.currentHealth <= 0 && phaseFinalBoss < 4)
+        {
+            phaseFinalBoss = 4;
+            StartCoroutine(castPhaseDead());
+        }
+        else if (bossHealth.currentHealth <= 1000 && phaseFinalBoss < 3)
+        {
+            phaseFinalBoss = 3;
+            StartCoroutine(castPhase3());
 
+        }
+        else if (bossHealth.currentHealth <= 2000 && phaseFinalBoss < 2)
+        {
+            phaseFinalBoss = 2;
+            StartCoroutine(castPhase2());
+        }
     }
+
+
 }

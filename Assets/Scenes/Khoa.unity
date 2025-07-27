@@ -257,11 +257,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88120728}
   m_CullTransparentMesh: 1
---- !u!1 &122935168 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3715659428381827816, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
-  m_PrefabInstance: {fileID: 1092525677447655955}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &316039881
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,74 +445,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 799422703817713644, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
   m_PrefabInstance: {fileID: 1092525677447655955}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &484542463
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122935168}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.068716764, y: -0.96203536}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 18.703197, y: 20}
-    newSize: {x: 14.027397, y: 15}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.7072215, y: 5.523644}
-  m_EdgeRadius: 0
---- !u!114 &484542468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122935168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d70fe1937accb49905a4f5668f5278, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3000
-  currentHealth: 0
-  maxShield: 100
-  currentShield: 0
-  healthSlider: {fileID: 1207305115}
-  healthFillImage: {fileID: 404052534}
-  ShieldSlider: {fileID: 521625830}
-  ShieldFillImage: {fileID: 891214915}
-  healthText: {fileID: 88120730}
-  shieldText: {fileID: 1039681632}
-  shieldRegenDelay: 5
 --- !u!1 &521625828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,7 +1663,7 @@ Transform:
   m_GameObject: {fileID: 1090670796}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.906693, y: -6.3352594, z: -1.6080761}
+  m_LocalPosition: {x: 46.996693, y: -3.1252596, z: -1.6080761}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2334,15 +2261,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 327263498191021367, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.306692
+      value: -31.396692
       objectReference: {fileID: 0}
     - target: {fileID: 327263498191021367, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.6352596
+      value: 4.4252596
       objectReference: {fileID: 0}
     - target: {fileID: 327263498191021367, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.z
       value: -26.536345
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986965450488817420, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9915252
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986965450488817420, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0012176037
       objectReference: {fileID: 0}
     - target: {fileID: 5157670242468574159, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: orthographic size
@@ -2358,11 +2293,11 @@ PrefabInstance:
       objectReference: {fileID: 847983418}
     - target: {fileID: 8572418809735927629, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.9
+      value: 29.99
       objectReference: {fileID: 0}
     - target: {fileID: 8572418809735927629, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.7
+      value: -0.49
       objectReference: {fileID: 0}
     - target: {fileID: 8572418809735927629, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2679,14 +2614,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinalBoss
       objectReference: {fileID: 0}
-    - target: {fileID: 8668852383933226530, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
-      propertyPath: effectSkill03
+    - target: {fileID: 5120377389786870402, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: healthText
       value: 
-      objectReference: {fileID: 5089731620499030919, guid: f37de9472591e4d4e8f38c04c79b0e1f, type: 3}
-    - target: {fileID: 8668852383933226530, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
-      propertyPath: effectSkill04
+      objectReference: {fileID: 88120730}
+    - target: {fileID: 5120377389786870402, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: shieldText
       value: 
-      objectReference: {fileID: 5262686154725292225, guid: 6d836b9b4b1fe524a8c6c4470fb00cbc, type: 3}
+      objectReference: {fileID: 1039681632}
+    - target: {fileID: 5120377389786870402, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: ShieldSlider
+      value: 
+      objectReference: {fileID: 521625830}
+    - target: {fileID: 5120377389786870402, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1207305115}
+    - target: {fileID: 5120377389786870402, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: ShieldFillImage
+      value: 
+      objectReference: {fileID: 891214915}
+    - target: {fileID: 5120377389786870402, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: healthFillImage
+      value: 
+      objectReference: {fileID: 404052534}
     - target: {fileID: 8668852383933226530, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
       propertyPath: DeadEffectBoss
       value: 
@@ -2694,13 +2645,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3715659428381827816, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 484542463}
-    - targetCorrespondingSourceObject: {fileID: 3715659428381827816, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 484542468}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
 --- !u!1001 &4042907898212202699
 PrefabInstance:
