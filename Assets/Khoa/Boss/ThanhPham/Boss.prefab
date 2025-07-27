@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 298186992340423373}
   - component: {fileID: 3206228117227160079}
   - component: {fileID: 5539184502870588847}
-  - component: {fileID: 7305694817912235392}
+  - component: {fileID: 1834228860281620032}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -301,7 +301,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6969886, y: 3.6327434}
   m_EdgeRadius: 0
---- !u!114 &7305694817912235392
+--- !u!114 &1834228860281620032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,20 +310,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3005361609584440805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d70fe1937accb49905a4f5668f5278, type: 3}
+  m_Script: {fileID: 11500000, guid: 351fdb30f0b6b034eb46d67195d2c940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 500
   currentHealth: 0
-  maxShield: 1000
-  currentShield: 0
   healthSlider: {fileID: 0}
   healthFillImage: {fileID: 0}
-  ShieldSlider: {fileID: 0}
-  ShieldFillImage: {fileID: 0}
   healthText: {fileID: 0}
-  shieldText: {fileID: 0}
-  shieldRegenDelay: 1
 --- !u!1 &7544987314489317460
 GameObject:
   m_ObjectHideFlags: 0
