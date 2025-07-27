@@ -45,6 +45,7 @@ public class FinalBoss : MonoBehaviour
         animator.SetBool("IsPhase1", false);
         animator.SetBool("IsPhase2", false);
         animator.SetBool("IsPhase3", true);
+        EffectcastSkillPhase3();
         StartCoroutine(castSkillPhase3());
     }
     public void CastSkillSummonMagic1()
@@ -87,6 +88,17 @@ public class FinalBoss : MonoBehaviour
         Quaternion rotation2 = Quaternion.Euler(0f, 0f, -28.83f);
         GameObject SkillSummonMagic1 = Instantiate(effectSkill01, spawnPos1, rotation1);
         GameObject SkillSummonMagic2 = Instantiate(effectSkill02, spawnPos2, rotation2);
+    }
+
+
+    private void EffectcastSkillPhase3()
+    {
+        Vector3 spawnPos1 = new Vector3(transform.position.x + 5f, transform.position.y + 8.4f, transform.position.z);
+        Quaternion rotation1 = Quaternion.Euler(0f, 0f, 26f);
+        Vector3 spawnPos2 = new Vector3(transform.position.x - 3.7f, transform.position.y + 8.2f, transform.position.z);
+        Quaternion rotation2 = Quaternion.Euler(0f, 0f, -22f);
+        GameObject SkillSummonMagic1 = Instantiate(effectSkill03, spawnPos1, rotation1);
+        GameObject SkillSummonMagic2 = Instantiate(effectSkill04, spawnPos2, rotation2);
     }
     private IEnumerator castSkillPhase1()
     {

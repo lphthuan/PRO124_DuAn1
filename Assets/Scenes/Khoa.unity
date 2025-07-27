@@ -1863,9 +1863,13 @@ PrefabInstance:
       value: FinalBoss
       objectReference: {fileID: 0}
     - target: {fileID: 8668852383933226530, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
-      propertyPath: arrowSpawn
+      propertyPath: effectSkill03
       value: 
-      objectReference: {fileID: 6668319742867861901, guid: 04cd831fa82221340935bc46ca779542, type: 3}
+      objectReference: {fileID: 5089731620499030919, guid: f37de9472591e4d4e8f38c04c79b0e1f, type: 3}
+    - target: {fileID: 8668852383933226530, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: effectSkill04
+      value: 
+      objectReference: {fileID: 5262686154725292225, guid: 6d836b9b4b1fe524a8c6c4470fb00cbc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
