@@ -182,7 +182,7 @@ public class enemyController : MonoBehaviour
 
             StartCoroutine(RestoreMovement());
         }
-}
+    }
 
     IEnumerator RestoreMovement()
     {
