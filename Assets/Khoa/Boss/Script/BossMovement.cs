@@ -174,7 +174,7 @@ public class BossMovement : MonoBehaviour
     }
 
     public int deadCheck = 0;
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (deadCheck > 0)
             return;
@@ -184,7 +184,8 @@ public class BossMovement : MonoBehaviour
         {
             if (collision.CompareTag("WindSpell"))
             {
-                bossHealth.TakeShield(10f);
+                bossHealth.TakeShield(50f);
+                return;
             }
             // Các loại khác không gây damage khi còn khiên
             return;
@@ -203,7 +204,7 @@ public class BossMovement : MonoBehaviour
             }
         }
 
-    }
+    }*/
 
 
     private int normalAtkCount = 0;
