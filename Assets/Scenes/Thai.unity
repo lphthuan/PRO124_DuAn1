@@ -596,12 +596,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 913263714}
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: canMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: attackRadius
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: fireballSpeed
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: attackCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: detectionRange
-      value: 2.13
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: fireballPrefab
@@ -609,11 +621,15 @@ PrefabInstance:
       objectReference: {fileID: 199165253297979706, guid: b1a2826676bdcc54baf94cff1b3cc701, type: 3}
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: fireAttackRange
-      value: 5.45
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: fireAttackCooldown
-      value: 2
+      value: 2.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
