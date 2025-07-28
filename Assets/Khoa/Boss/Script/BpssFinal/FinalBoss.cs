@@ -17,6 +17,8 @@ public class FinalBoss : MonoBehaviour
     GameObject skill3;
     GameObject skill4;
     GameObject skill5;
+    GameObject skill6;
+    GameObject skill7;
     [SerializeField] GameObject castSkill;
     [SerializeField] GameObject spawnAreaMonster;
     [SerializeField] GameObject effectSkill01;
@@ -24,8 +26,10 @@ public class FinalBoss : MonoBehaviour
     [SerializeField] GameObject effectSkill03;
     [SerializeField] GameObject effectSkill04;
     [SerializeField] GameObject BigEffectCastSkill;
+    [SerializeField] GameObject BigEffectSummon;
     [SerializeField] GameObject arrowSpawn;
     [SerializeField] GameObject DeadEffectBoss;
+    [SerializeField] GameObject miniBoss;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +57,7 @@ public class FinalBoss : MonoBehaviour
         animator.SetBool("IsPhase2", false);
         animator.SetBool("IsPhase3", true);
         EffectcastSkillPhase3();
+        StartCoroutine(summonMiniBoss());
         StartCoroutine(castSkillPhase3());
     }
     public void CastSkillSummonMagic1()
@@ -341,6 +346,13 @@ public class FinalBoss : MonoBehaviour
             StartCoroutine(castPhase2());
         }
     }
-
+    private IEnumerator summonMiniBoss()
+    {
+        Vector3 spawnPos = new Vector3(transform.position.x -7f, transform.position.y, transform.position.z);
+        skill6 = Instantiate(BigEffectSummon, spawnPos, Quaternion.identity);
+        yield return new WaitForSeconds(0.2f);
+        Vector3 spawnPos1 = new Vector3(transform.position.x - 7f, transform.position.y - 6.4f, transform.position.z);
+        skill7 = Instantiate(miniBoss, spawnPos1, Quaternion.identity);
+    }
 
 }

@@ -2279,6 +2279,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.0012176037
       objectReference: {fileID: 0}
+    - target: {fileID: 2328794411827431868, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5157670242468574159, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: orthographic size
       value: 11
@@ -2639,9 +2643,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 404052534}
     - target: {fileID: 8668852383933226530, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: miniBoss
+      value: 
+      objectReference: {fileID: 3005361609584440805, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
+    - target: {fileID: 8668852383933226530, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
       propertyPath: DeadEffectBoss
       value: 
       objectReference: {fileID: 8829155988700120752, guid: 86ea3c943885c934588f40f57865e436, type: 3}
+    - target: {fileID: 8668852383933226530, guid: 2796188e693440546ae2cb7d29ddbe96, type: 3}
+      propertyPath: BigEffectSummon
+      value: 
+      objectReference: {fileID: 3613178195077227243, guid: 019704383d811d04d93ee91bb79cf397, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2656,25 +2668,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 1433728695}
     m_Modifications:
     - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: speed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: HPBoss
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 871721931}
     - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: SummonMagic
-      value: 
-      objectReference: {fileID: 3823779093632041647, guid: 8010c2f1058f0e741af3e98dcb5a4ae6, type: 3}
-    - target: {fileID: 298186992340423373, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: SummonArenaFinalBoss
-      value: 
-      objectReference: {fileID: 6201814064031554713, guid: 254d79b378ac5734390d0f47d4a81904, type: 3}
+      propertyPath: PlayerCheckRange
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1892602981268834945, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.8
@@ -2718,10 +2718,6 @@ PrefabInstance:
     - target: {fileID: 3005361609584440805, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
       propertyPath: m_Name
       value: Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 3005361609584440805, guid: 9081c380eef6fc146ac17b78d6248eb1, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -29,7 +29,7 @@ public class CastSkillArcher : MonoBehaviour
             }
 
             Debug.Log("Skill triệu hồi vùng cảnh báo!");
-            Destroy(magicArea, 5f);
+            Destroy(magicArea, 3f);
         }
     }
 }

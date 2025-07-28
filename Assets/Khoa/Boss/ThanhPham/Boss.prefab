@@ -223,7 +223,7 @@ MonoBehaviour:
   BossTransform: {fileID: 1892602981268834945}
   Player: {fileID: 0}
   speed: 2.5
-  PlayerCheckRange: 0
+  PlayerCheckRange: 20
   animator: {fileID: 3573835943337136043}
   visualTransform: {fileID: 0}
   castSkil: 0

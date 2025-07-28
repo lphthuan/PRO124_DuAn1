@@ -26,6 +26,14 @@ public class BossMovement : MonoBehaviour
     private MiniBossHealth bossHealth;
     private void Start()
     {
+        if (Player == null)
+        {
+            GameObject foundPlayer = GameObject.FindWithTag("Player");
+            if (foundPlayer != null)
+            {
+                Player = foundPlayer.transform;
+            }
+        }
         MagicAreaCheck.SetActive(false);
         bossHealth = GetComponent<MiniBossHealth>();
         bossHealth.OnBossDead += HandleBossDeath;
