@@ -77,20 +77,17 @@ public class enemy4Controller : MonoBehaviour
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        // Kiểm tra tấn công cận chiến trước tiên
         if (distanceToPlayer <= attackRange)
         {
             isChasing = true;
             AttackPlayer();
         }
-        // Nếu không trong tầm cận chiến, nhưng vừa mới trong tầm cận chiến, đặt lại hoạt ảnh tấn công
+
         else
         {
-            // Đặt lại kích hoạt tấn công nếu người chơi đã ra khỏi tầm tấn công cận chiến
-            // Điều này đảm bảo hoạt ảnh tấn công cận chiến dừng ngay lập tức
+           
             animator.ResetTrigger("IsAttack");
 
-            // Sau đó kiểm tra các hành vi khác
             if (distanceToPlayer <= fireAttackRange)
             {
                 isChasing = true;
@@ -103,11 +100,10 @@ public class enemy4Controller : MonoBehaviour
             }
             else
             {
-                // Nếu không đuổi theo và không trong bất kỳ tầm tấn công nào, tuần tra
-                if (isChasing) // Chỉ đặt lại "IsRun" nếu chúng ta vừa đuổi theo
+              
+                if (isChasing) 
                 {
-                    animator.SetBool("IsRun", true); // Đảm bảo hoạt ảnh chạy đang bật để tuần tra
-                    // Không cần đặt patrolTarget ở đây, Patrol() sẽ xử lý nó
+                    animator.SetBool("IsRun", true); 
                     isChasing = false;
                 }
                 Patrol();
@@ -150,7 +146,7 @@ public class enemy4Controller : MonoBehaviour
 
     void AttackPlayer()
     {
-        animator.SetBool("IsRun", false); // Dừng hoạt ảnh chạy khi tấn công
+        animator.SetBool("IsRun", false); 
 
         if (player.position.x < transform.position.x)
             transform.localScale = new Vector3(-1, 1, 1);
@@ -161,9 +157,9 @@ public class enemy4Controller : MonoBehaviour
 
         if (attackTimer <= 0f)
         {
-            animator.SetTrigger("IsAttack"); // Kích hoạt hoạt ảnh tấn công cận chiến
+            animator.SetTrigger("IsAttack"); 
 
-            // Thực hiện tính toán sát thương
+           
             Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);
             if (hit != null)
             {
@@ -180,9 +176,7 @@ public class enemy4Controller : MonoBehaviour
 
     void FireAttack()
     {
-        animator.SetBool("IsRun", false); // Dừng hoạt ảnh chạy khi tấn công tầm xa
-        // Nên đảm bảo "IsAttack" không hoạt động ở đây, mặc dù Update sẽ xử lý nó.
-        // animator.ResetTrigger("IsAttack"); // Có thể thêm vào đây để an toàn hơn nếu cần
+        animator.SetBool("IsRun", false); 
 
         if (player.position.x < transform.position.x)
             transform.localScale = new Vector3(-1, 1, 1);
@@ -213,10 +207,10 @@ public class enemy4Controller : MonoBehaviour
             fireballs.Add(fireball);
         }
 
-        // Đợi x giây trước khi bắn
+        
         yield return new WaitForSeconds(1f);
 
-        // Bắn từng quả về phía Player
+        
         foreach (GameObject fireball in fireballs)
         {
             if (fireball != null)
