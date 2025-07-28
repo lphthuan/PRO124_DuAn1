@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1509656806419800673}
   m_Layer: 0
   m_Name: SKill
-  m_TagString: EnemyBullet
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

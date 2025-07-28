@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6604456002487326783}
   m_Layer: 0
   m_Name: ArrowDmgArea
-  m_TagString: EnemyBullet
+  m_TagString: Explotion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
