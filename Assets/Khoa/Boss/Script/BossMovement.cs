@@ -11,6 +11,7 @@ public class BossMovement : MonoBehaviour
     [SerializeField] GameObject SummonArenaFinalBoss;
     [HideInInspector] public Transform playerTransform;
     [SerializeField] public Transform BossTransform;
+    [SerializeField] GameObject TeleZone;
     public Transform Player;
     public float speed = 2.5f;
     public float PlayerCheckRange = 10f;
@@ -20,6 +21,7 @@ public class BossMovement : MonoBehaviour
     private bool lastIsRunState = false;
     private bool isAttacking = false; //Boss đang Attack
     private bool isWaiting = false;   //Boss đang cooldown
+
 
     public bool castSkil = false;
 
@@ -386,6 +388,4 @@ public class BossMovement : MonoBehaviour
         
         normalAtkCount = 0;
     }
-
-
 }
