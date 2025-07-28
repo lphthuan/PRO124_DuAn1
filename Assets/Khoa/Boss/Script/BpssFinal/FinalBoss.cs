@@ -349,10 +349,10 @@ public class FinalBoss : MonoBehaviour
     private IEnumerator summonMiniBoss()
     {
         yield return new WaitForSeconds(1.5f);
-        Vector3 spawnPos = new Vector3(transform.position.x -7f, transform.position.y, transform.position.z);
+        Vector3 spawnPos = new Vector3(transform.position.x -7f, transform.position.y -3f, transform.position.z);
         skill6 = Instantiate(BigEffectSummon, spawnPos, Quaternion.identity);
         yield return new WaitForSeconds(0.2f);
-        Vector3 spawnPos1 = new Vector3(transform.position.x - 7f, transform.position.y - 6.4f, transform.position.z);
+        Vector3 spawnPos1 = new Vector3(transform.position.x - 7f, transform.position.y - 7.8f, transform.position.z);
         skill7 = Instantiate(miniBoss, spawnPos1, Quaternion.identity);
     }
 
