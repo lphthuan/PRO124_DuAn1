@@ -12,6 +12,8 @@ TagManager:
   - WindSpell
   - Boss
   - SkillSummonMagic
+  - Arrow
+  - Explotion
   layers:
   - Default
   - TransparentFX

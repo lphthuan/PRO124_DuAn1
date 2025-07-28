@@ -54,6 +54,12 @@ public class PlayerHealth : MonoBehaviour
 			case "Trap":
 				damage = 100;
 				break;
+			case "Arrow":
+				damage = 50;
+				break;
+			case "Explotion":
+				damage = 150;
+				break;
 			default:
 				return;
 		}
