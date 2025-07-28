@@ -63,3 +63,6 @@ TagManager:
   - name: Midground
     uniqueID: 1356557549
     locked: 0
+  - name: Boss
+    uniqueID: 2198608601
+    locked: 0

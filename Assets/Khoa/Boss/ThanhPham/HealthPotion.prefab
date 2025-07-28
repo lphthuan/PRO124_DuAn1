@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296c13f9da889424988bb9c7dfd909c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusMaxHealth: 5000
+  bonusMaxHealth: 1000
