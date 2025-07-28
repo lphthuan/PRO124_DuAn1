@@ -19,12 +19,16 @@ public class MiniBossHealth : MonoBehaviour, IDamageable
     public delegate void BossDeathEvent();
     public event BossDeathEvent OnBossDead;
 
+    public GameObject telezone;
+
     private void Awake()
     {
         currentHealth = maxHealth;
 
         if (healthSlider != null)
             healthSlider.maxValue = maxHealth;
+
+        telezone.SetActive(false);
 
         UpdateUI();
     }
@@ -44,6 +48,8 @@ public class MiniBossHealth : MonoBehaviour, IDamageable
 
             if (healthText != null)
                 Destroy(healthText.gameObject);
+
+            telezone.SetActive(true);
         }
     }
 
