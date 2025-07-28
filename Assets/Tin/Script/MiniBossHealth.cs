@@ -47,6 +47,17 @@ public class MiniBossHealth : MonoBehaviour, IDamageable
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("PlayerBullet") || collision.CompareTag("WindSpell"))
+        {
+            float damage = PlayerAttack.Instance.GetDamage();
+            TakeDamage(damage, collision.gameObject);
+
+            Destroy(collision.gameObject);
+        }
+    }    
+
     private void UpdateUI()
     {
         if (healthSlider != null)
