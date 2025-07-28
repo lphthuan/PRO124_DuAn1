@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6853fce72fe8ae4894fe442dc4982ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonusDamage: 500
+  bonusDamage: 80
   boostDuration: 100
 --- !u!95 &518582737080031185
 Animator:
