@@ -348,6 +348,7 @@ public class FinalBoss : MonoBehaviour
     }
     private IEnumerator summonMiniBoss()
     {
+        yield return new WaitForSeconds(1.5f);
         Vector3 spawnPos = new Vector3(transform.position.x -7f, transform.position.y, transform.position.z);
         skill6 = Instantiate(BigEffectSummon, spawnPos, Quaternion.identity);
         yield return new WaitForSeconds(0.2f);
