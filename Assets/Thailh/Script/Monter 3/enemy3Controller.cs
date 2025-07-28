@@ -161,7 +161,7 @@ public class enemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    // gió khống chế
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("WindSpell"))
@@ -170,12 +170,12 @@ public class enemyController : MonoBehaviour
 
             canMove = false;
 
-            // Hướng hất ngược lại WindSpell
+           
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
 
             if (rb != null)
             {
-                rb.velocity = Vector2.zero; // Ngắt chuyển động
+                rb.velocity = Vector2.zero; 
                 float knockbackForce = 5f;
                 rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
             }
