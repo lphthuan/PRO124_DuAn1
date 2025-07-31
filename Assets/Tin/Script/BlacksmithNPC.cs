@@ -151,8 +151,6 @@ public class BlacksmithDialogue : MonoBehaviour
     private void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("PlayerDamage"); // Xoá khi game tắt
-
-        Debug.Log("Đã xóa Key: PlayerDamage");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
