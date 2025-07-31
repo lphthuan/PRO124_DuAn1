@@ -10,6 +10,20 @@ public class SoundBoss : MonoBehaviour
 
     private bool hasPlayed = false;
 
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        // Gắn AudioSource sẵn hoặc tự thêm 1 lần duy nhất
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.clip = soundClip;
+        audioSource.volume = volume;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (hasPlayed) return;
@@ -17,19 +31,14 @@ public class SoundBoss : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasPlayed = true;
-
-            // Tạo một GameObject tạm thời chỉ để phát nhạc
-            GameObject soundObject = new GameObject("OneShotAudio");
-            AudioSource audioSource = soundObject.AddComponent<AudioSource>();
-            audioSource.clip = soundClip;
-            audioSource.volume = volume;
             audioSource.Play();
 
-            // Xoá object sau khi nhạc kết thúc
-            Destroy(soundObject, soundClip.length);
+            // Tắt collider nhưng không destroy ngay lập tức
+            GetComponent<Collider2D>().enabled = false;
 
-            // Xoá collider này (object hiện tại)
-            Destroy(gameObject);
+            // Xoá object sau khi nhạc phát xong
+            Destroy(gameObject, soundClip.length);
         }
     }
 }
+
