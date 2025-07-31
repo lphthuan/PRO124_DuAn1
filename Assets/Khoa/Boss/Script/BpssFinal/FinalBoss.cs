@@ -12,6 +12,7 @@ public class FinalBoss : MonoBehaviour
     public int countHardSkill = 0;
     public bool hardSkill = false;
     private BossHealth bossHealth;
+    public GameObject objectToActivate;
     GameObject skill1;
     GameObject skill2;
     GameObject skill3;
@@ -287,7 +288,7 @@ public class FinalBoss : MonoBehaviour
     public void isDead()
     {
         
-        Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y - 2F, transform.position.z);
         Instantiate(DeadEffectBoss, spawnPos, Quaternion.identity);
 
         StartCoroutine(destroy());

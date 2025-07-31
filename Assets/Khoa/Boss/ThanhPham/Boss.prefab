@@ -221,6 +221,7 @@ MonoBehaviour:
   SummonArenaFinalBoss: {fileID: 6201814064031554713, guid: 254d79b378ac5734390d0f47d4a81904, type: 3}
   playerTransform: {fileID: 0}
   BossTransform: {fileID: 1892602981268834945}
+  TeleZone: {fileID: 0}
   Player: {fileID: 0}
   speed: 2.5
   PlayerCheckRange: 20
@@ -318,6 +319,7 @@ MonoBehaviour:
   healthSlider: {fileID: 0}
   healthFillImage: {fileID: 0}
   healthText: {fileID: 0}
+  telezone: {fileID: 6895605471390395540, guid: 99240345f1731e94ca43d2b8dea6e151, type: 3}
 --- !u!1 &7544987314489317460
 GameObject:
   m_ObjectHideFlags: 0
