@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float spellSpeed = 12f;
     [SerializeField] private float attackAngle = 120f;
     [SerializeField] private float attackCooldown = 0.8f;
-    [SerializeField] private float baseDamage = 10f;
+    public float baseDamage = 10f;
     private float currentDamage;
 
     public SpellData currentSpell;
@@ -24,6 +24,15 @@ public class PlayerAttack : MonoBehaviour
         currentDamage = baseDamage;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("PlayerDamage"))
+        {
+            baseDamage = PlayerPrefs.GetFloat("PlayerDamage");
+        }
+    }
+
 
     public float GetDamage()
     {
