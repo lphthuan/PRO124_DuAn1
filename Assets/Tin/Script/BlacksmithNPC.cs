@@ -24,21 +24,29 @@ public class BlacksmithDialogue : MonoBehaviour
     public Button upgradeDamageButton;
     public AudioSource backgroundMusic;
 
+    [Header("Floating Text")]
+    public GameObject floatingTextPrefab; // Gán prefab trong Inspector
+
     private int currentLine = 0;
     private bool playerInRange = false;
     private bool isTalking = false;
     private bool isTyping = false;
+
+    private int upgradeCount;
+    private const int maxUpgradeCount = 5;
 
     private GameObject player;
     private MonoBehaviour[] playerScriptsToDisable;
 
     private void Start()
     {
+        npcText.SetActive(false);
         dialoguePanel.SetActive(false);
         choicePanel.SetActive(false);
         shopPanel.SetActive(false);
 
         upgradeDamageButton.onClick.AddListener(UpgradePlayerDamage);
+        upgradeCount = PlayerPrefs.GetInt("UpgradeCount", 0);
 
         buyButton.onClick.AddListener(OpenShop);
         exitButton.onClick.AddListener(CloseDialogue);
@@ -110,9 +118,69 @@ public class BlacksmithDialogue : MonoBehaviour
     {
         shopPanel.SetActive(true);
         choicePanel.SetActive(false);
-        dialoguePanel.SetActive(true); 
+        dialoguePanel.SetActive(false);
     }
 
+    private void UpgradePlayerDamage()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            PlayerAttack playerAttack = player.GetComponent<PlayerAttack>();
+            if (playerAttack != null)
+            {
+                // Nếu đã đạt giới hạn nâng cấp
+                if (upgradeCount >= maxUpgradeCount)
+                {
+                    Debug.Log("Đã đạt giới hạn nâng cấp sát thương.");
+
+                    if (floatingTextPrefab != null)
+                    {
+                        Vector3 spawnPos = player.transform.position + new Vector3(0, 1.5f, 0);
+                        GameObject textObj = Instantiate(floatingTextPrefab, spawnPos, Quaternion.identity);
+
+                        FloatingTextController ft = textObj.GetComponent<FloatingTextController>();
+                        if (ft != null)
+                        {
+                            ft.ShowText("Đã đạt giới hạn nâng cấp!");
+                        }
+
+                        // Hủy object sau lifetime
+                        Destroy(textObj, 1f);
+                    }
+
+                    return; // Ngăn không cho nâng cấp nữa
+                }
+
+                // Thực hiện nâng cấp
+                playerAttack.baseDamage += 20f;
+                upgradeCount++;
+
+                // Lưu lại
+                PlayerPrefs.SetFloat("PlayerDamage", playerAttack.baseDamage);
+                PlayerPrefs.SetInt("UpgradeCount", upgradeCount);
+                PlayerPrefs.Save();
+
+                Debug.Log("Đã tăng sát thương lên: " + playerAttack.baseDamage + " (Lần: " + upgradeCount + ")");
+
+                // Hiển thị FloatingText
+                if (floatingTextPrefab != null)
+                {
+                    Vector3 spawnPos = player.transform.position + new Vector3(0, 1.5f, 0);
+                    GameObject textObj = Instantiate(floatingTextPrefab, spawnPos, Quaternion.identity);
+
+                    FloatingTextController ft = textObj.GetComponent<FloatingTextController>();
+                    if (ft != null)
+                    {
+                        ft.ShowText($"Damage +10 ({upgradeCount}/{maxUpgradeCount})");
+                    }
+
+                    // Hủy object sau lifetime
+                    Destroy(textObj, 2f);
+                }
+            }
+        }
+    }
 
     private void CloseDialogue()
     {
@@ -129,38 +197,14 @@ public class BlacksmithDialogue : MonoBehaviour
         EnablePlayerControl(); // bật lại các script
     }
 
-    private void UpgradePlayerDamage()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            PlayerAttack playerAttack = player.GetComponent<PlayerAttack>();
-            if (playerAttack != null)
-            {
-                playerAttack.baseDamage += 10f; // tăng 10 damage
-
-                // Lưu lại vĩnh viễn
-                PlayerPrefs.SetFloat("PlayerDamage", playerAttack.baseDamage);
-                PlayerPrefs.Save();
-
-                Debug.Log("Đã tăng sát thương lên: " + playerAttack.baseDamage);
-            }
-        }
-    }
-
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.DeleteKey("PlayerDamage"); // Xoá khi game tắt
-
-        Debug.Log("Đã xóa Key: PlayerDamage");
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
             player = other.gameObject;
+
+            npcText.SetActive(true);
 
             // Lưu các script cần disable
             playerScriptsToDisable = player.GetComponents<MonoBehaviour>();
@@ -174,13 +218,13 @@ public class BlacksmithDialogue : MonoBehaviour
             playerInRange = false;
         }
     }
+
     private void CloseShopToChoices()
     {
         shopPanel.SetActive(false);       // Tắt panel shop
         choicePanel.SetActive(true);      // Hiện lại panel lựa chọn
         dialoguePanel.SetActive(true);    // Nếu bạn muốn vẫn hiển thị hội thoại ở dưới
     }
-
 
     private void DisablePlayerControl()
     {
@@ -208,5 +252,12 @@ public class BlacksmithDialogue : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteKey("PlayerDamage"); // Xoá khi game tắt
+        PlayerPrefs.DeleteKey("UpgradeCount");
+        Debug.Log("Đã xóa toàn bộ dữ liệu nâng cấp sát thương.");
     }
 }
