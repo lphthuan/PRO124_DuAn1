@@ -262,8 +262,17 @@ MonoBehaviour:
   dialogueText: {fileID: 1271219521}
   nameText: {fileID: 677811913}
   dialogueLines:
-  - mmmmmmmmmmmmmm
-  - lolkhoangu
+  - "Ta c\u1EA3m nh\u1EADn \u0111\u01B0\u1EE3c kh\xE1t v\u1ECDng c\u1EE7a ng\u01B0\u01A1i
+    t\u1EEB khi tr\u01B0\u1EDBc nh\xE0. Nh\u01B0ng \u0111i\u1EC1u khi\u1EBFn ta t\xF2
+    m\xF2 v\u1EC1 n\u1ED5i s\u1EE3 c\u1EE7a ng\u01B0\u01A1i \u0111ang gi\u1EA5u \u0111\u1EA5y
+    ph\xE1p s\u01B0 tr\u1EBB \xE0!"
+  - "Ta bi\u1EBFt t\u1EA5t c\u1EA3 nh\u1EEFng k\u1EBB d\xE1m b\u01B0\u1EDBc v\xE0o
+    r\u1EEBng n\u1EA3y \u0111\u1EC1u t\xECm ki\u1EBFm nh\u1EEFng \u0111i\u1EC1u k\xEC
+    b\xED. Nh\u01B0ng c\xF3 v\u1EBB ng\u01B0\u01A1i \u0111ang mu\u1ED1n bi\u1EBFt
+    nh\u1EEFng s\u1EF1 th\u1EADt \u1EDF n\u01A1i \u0111\xE2y nh\u1EC9!"
+  - "V\u1EADy th\xEC ng\u01B0\u01A1i h\xE3y nh\u1EADn l\u1EA5y s\u1EE9c m\u1EA1nh
+    n\xE0y v\xE0 h\xE3y t\xECm ra \u0111\u01B0\u1EE3c s\u1EF1 th\u1EADt m\xE0 ng\u01B0\u01A1i
+    mong mu\u1ED1n!"
   typingSpeed: 0.001
   choicePanel: {fileID: 463839374}
   buyButton: {fileID: 2101973413}
@@ -541,7 +550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ph\xF9 th\u1EE7y th\u1EA7n b\xED"
+  m_text: "Ph\xF9 th\u1EE7y b\xED \u1EA9n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -711,7 +720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1022406852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1067,7 +1076,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 
 --- !u!222 &1299078982
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1113,7 +1122,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370146483
 MonoBehaviour:
@@ -1172,7 +1181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.44705883}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1331,7 +1340,7 @@ GameObject:
   - component: {fileID: 1388069506}
   - component: {fileID: 1388069505}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasWitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1492,7 +1501,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "R\u1EDDi \u0111i"
 --- !u!222 &1445054783
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2075,7 +2084,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "Mua \u0111\u1ED3\n\n"
 --- !u!222 &1855114039
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2134,7 +2143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2143,10 +2152,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2154,7 +2163,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "Thu\u1ED1c h\u1ED3i trinh"
 --- !u!222 &2035373753
 CanvasRenderer:
   m_ObjectHideFlags: 0
