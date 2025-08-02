@@ -22,9 +22,6 @@ public class enemy4Controller : MonoBehaviour
     public float fireballSpeed = 7f;
     public float fireAttackCooldown = 5f;
 
-    [Header("Máu")]
-    public int maxHealth = 20;
-
     public Transform player;
 
     [Header("Cận chiến")]
@@ -48,7 +45,6 @@ public class enemy4Controller : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         patrolTarget = pointB.position;
-        currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         fireAttackTimer = 0f;
 
@@ -221,7 +217,7 @@ public class enemy4Controller : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    /*public void TakeDamage(int damage)
     {
         if (isDead) return;
 
@@ -231,7 +227,7 @@ public class enemy4Controller : MonoBehaviour
         {
             Die();
         }
-    }
+    }*/
 
     void Die()
     {

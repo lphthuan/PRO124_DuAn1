@@ -3,10 +3,10 @@
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
     public float health = 100f;
+    public float currentHealth;
     private Animator anim;
     private bool isDead = false;
     [SerializeField] private Rigidbody2D enemyRigidbody;
-    public float currentHealth { get; private set; }
 
     void Start()
     {
@@ -18,15 +18,22 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     {
         if (isDead) return;
 
-        health -= damage;
+        currentHealth -= damage;
 
-        if (health > 0)
-        {
-            anim?.SetTrigger("IsHit");
-        }
-        else
-        {
+        if (currentHealth <= 0)
+        { 
             Die();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    { 
+        if (collision.CompareTag("WindSpell") || collision.CompareTag("PlayerBullet"))
+        {
+            float damage = PlayerAttack.Instance.GetDamage();
+            TakeDamage(damage, collision.gameObject);
+
+            Destroy(collision.gameObject);
         }
     }
 
