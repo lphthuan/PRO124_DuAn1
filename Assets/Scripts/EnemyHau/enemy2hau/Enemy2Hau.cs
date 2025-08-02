@@ -36,6 +36,10 @@ public class EnemyController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 2f;
 
+    [Header("Drops")]
+    public GameObject soulPrefab;
+    public Transform[] soulDropPoints;
+
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip shootClip;
@@ -45,6 +49,7 @@ public class EnemyController : MonoBehaviour
     public AudioClip meleeAttackClip;
 
     private bool hasDiedOnce = false;
+    private bool isDead = false;
     private EnemyState currentState = EnemyState.Idle;
 
     private Animator animator;
@@ -67,7 +72,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (currentState is EnemyState.DyingFirst or EnemyState.DyingFinal or EnemyState.Respawning or EnemyState.Hit)
+        if (isDead || currentState is EnemyState.DyingFirst or EnemyState.DyingFinal or EnemyState.Respawning or EnemyState.Hit)
             return;
 
         float distance = Vector2.Distance(transform.position, player.position);
@@ -77,19 +82,14 @@ public class EnemyController : MonoBehaviour
             case EnemyState.Idle:
                 animator.SetBool("Walk", false);
                 if (distance <= detectionRange && !hasDiedOnce)
-                {
                     currentState = EnemyState.Shooting;
-                }
                 else if (hasDiedOnce && distance <= detectionRange)
-                {
                     currentState = EnemyState.Chasing;
-                }
                 break;
 
             case EnemyState.Shooting:
                 animator.SetBool("Walk", false);
                 FacePlayer();
-
                 if (distance > detectionRange + 1f)
                 {
                     currentState = EnemyState.Idle;
@@ -104,7 +104,6 @@ public class EnemyController : MonoBehaviour
             case EnemyState.Chasing:
                 animator.SetBool("Walk", true);
                 FacePlayer();
-
                 if (distance <= attackRange)
                 {
                     currentState = EnemyState.Attacking;
@@ -123,12 +122,10 @@ public class EnemyController : MonoBehaviour
 
             case EnemyState.Attacking:
                 FacePlayer();
-
                 if (meleeAttackRoutine == null)
                 {
                     meleeAttackRoutine = StartCoroutine(PerformMeleeAttack());
                 }
-
                 break;
         }
     }
@@ -147,20 +144,15 @@ public class EnemyController : MonoBehaviour
     IEnumerator PerformMeleeAttack()
     {
         animator.SetTrigger("Attack");
-
         yield return new WaitForSeconds(1.5f);
-
         if (currentState == EnemyState.Attacking)
         {
             SpawnMeleeHitbox();
             PlaySound(meleeAttackClip);
         }
-
         yield return new WaitForSeconds(fireCooldown);
-
         float dist = Vector2.Distance(transform.position, player.position);
         currentState = (dist <= attackRange) ? EnemyState.Attacking : EnemyState.Chasing;
-
         meleeAttackRoutine = null;
     }
 
@@ -194,7 +186,6 @@ public class EnemyController : MonoBehaviour
     void FacePlayer()
     {
         if (!player) return;
-
         Vector3 dir = player.position - transform.position;
         transform.localScale = new Vector3(dir.x > 0 ? 1 : -1, 1, 1);
     }
@@ -217,6 +208,21 @@ public class EnemyController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            isDead = true;
+
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.velocity = Vector2.zero;
+                rb.isKinematic = true;
+            }
+
+            Collider2D col = GetComponent<Collider2D>();
+            if (col != null)
+            {
+                col.enabled = false;
+            }
+
             if (!hasDiedOnce)
             {
                 currentState = EnemyState.DyingFirst;
@@ -232,6 +238,7 @@ public class EnemyController : MonoBehaviour
                 animator.SetTrigger("Die");
                 PlaySound(dieClip);
                 StopAttackRoutine();
+                StartCoroutine(SpawnSoulsAfterDelay(0.5f));
                 Destroy(gameObject, 2f);
             }
         }
@@ -255,12 +262,36 @@ public class EnemyController : MonoBehaviour
         currentState = EnemyState.Respawning;
         animator.SetTrigger("TeleportSpawn");
         PlaySound(teleportClip);
-
         yield return new WaitForSeconds(1f);
         currentHealth = maxHealth;
 
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+        }
+
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+        {
+            col.enabled = true;
+        }
+
+        isDead = false;
         yield return new WaitForSeconds(3f);
         currentState = EnemyState.Idle;
+    }
+
+    IEnumerator SpawnSoulsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        for (int i = 0; i < soulDropPoints.Length && i < 2; i++)
+        {
+            if (soulPrefab != null && soulDropPoints[i] != null)
+            {
+                Instantiate(soulPrefab, soulDropPoints[i].position, Quaternion.identity);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

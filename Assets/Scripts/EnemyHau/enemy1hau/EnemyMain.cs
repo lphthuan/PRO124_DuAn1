@@ -17,6 +17,15 @@ public class EnemyMain : MonoBehaviour
     public Transform firePoint;
     public GameObject miniEnemyPrefab;
 
+    [Header("Drop Settings")]
+    public GameObject soulPrefab;
+    public GameObject healthDropPrefab;
+    [Range(0f, 1f)] public float healthDropChance = 0.3f;
+
+    [Header("Drop Positions")]
+    public Transform soulDropPoint;
+    public Transform healthDropPoint;
+
     [Header("Sound Effects")]
     public AudioClip hitClip;
     public AudioClip dieClip;
@@ -35,7 +44,6 @@ public class EnemyMain : MonoBehaviour
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
-        
         if (player == null)
         {
             GameObject foundPlayer = GameObject.FindWithTag("Player");
@@ -48,7 +56,6 @@ public class EnemyMain : MonoBehaviour
 
     void Update()
     {
-        
         if (player == null)
         {
             GameObject foundPlayer = GameObject.FindWithTag("Player");
@@ -56,7 +63,7 @@ public class EnemyMain : MonoBehaviour
             {
                 player = foundPlayer.transform;
             }
-            return; 
+            return;
         }
 
         if (isDead) return;
@@ -69,12 +76,9 @@ public class EnemyMain : MonoBehaviour
             scale.x = (player.position.x < transform.position.x) ? -1 : 1;
             transform.localScale = scale;
 
-            if (distance <= attackRange)
+            if (distance <= attackRange && !isAttacking)
             {
-                if (!isAttacking)
-                {
-                    StartCoroutine(AttackRoutine());
-                }
+                StartCoroutine(AttackRoutine());
             }
         }
     }
@@ -134,14 +138,30 @@ public class EnemyMain : MonoBehaviour
         isDead = true;
         animator.SetTrigger("Die");
         PlaySound(dieClip);
+        StartCoroutine(SpawnDropsAfterDelay(0.5f));
         Destroy(gameObject, 1.2f);
+    }
+
+    private IEnumerator SpawnDropsAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (soulPrefab != null && soulDropPoint != null)
+        {
+            Instantiate(soulPrefab, soulDropPoint.position, Quaternion.identity);
+        }
+
+        if (healthDropPrefab != null && healthDropPoint != null && Random.value < healthDropChance)
+        {
+            Instantiate(healthDropPrefab, healthDropPoint.position, Quaternion.identity);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("PlayerBullet"))
         {
-            TakeDamage(1);
+            TakeDamage(2);
             Destroy(other.gameObject);
         }
     }
