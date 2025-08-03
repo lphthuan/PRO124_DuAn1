@@ -95,12 +95,22 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
 	{
 		if (isDead) return;
+		//khoa đụng nè hjhj
+		if (playerController.shieldHave == true)
+		{
+			Debug.Log("Player is shielded! No damage taken.");
+			return;
+		}
+        
 
-		currentHealth -= damage;
-		currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-		UpdateHealthBar();
-
-		if (playerAnimator != null && currentHealth > 0 && damage > 20)
+        if (playerController.shieldHave == false)
+        {
+			currentHealth -= damage;
+			currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+			UpdateHealthBar();
+		}
+        //ở trên thôi nha => bất tử khi có khiên
+        if (playerAnimator != null && currentHealth > 0 && damage > 20)
 		{
 			playerAnimator.SetTrigger("IsHurt");
 		}

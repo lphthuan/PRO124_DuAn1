@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] public float moveSpeed = 7f;
 	[SerializeField] public float jumpForce = 8f;
 
-	[Header("Roll Settings")]
+    [Header("Roll Settings")]
 	[SerializeField] private float rollSpeed = 8f;
 	[SerializeField] private float rollDuration = 0.3f;
 	[SerializeField] private int maxRolls = 2;
@@ -28,6 +28,18 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private SpellData[] availableSpells;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+
+    //chỗ này Khoa đụng nè
+    [SerializeField] private KeyCode shieldKey = KeyCode.F;
+    private GameObject activeShield;
+    public int shieldSpellLevel = 0;
+	public bool shieldCheck = false;
+    public bool shieldHave = false;
+    [SerializeField] GameObject shieldSpell;
+
+
+
+
 
     private int currentSpellIndex = 0;
 	private bool canMove = true;
@@ -90,7 +102,14 @@ public class PlayerController : MonoBehaviour
 
 		attackPressed = false;
 		switchSpellPressed = false;
-	}
+
+        //chỗ này khoa đụng nè hjhj
+        if (Input.GetKeyDown(shieldKey))
+        {
+            TryCastShield();
+        }
+
+    }
 
     public void SetMoveSpeed(float newSpeed)
     {
@@ -424,4 +443,40 @@ public class PlayerController : MonoBehaviour
 		playerRigidbody.velocity = Vector2.zero;
 		playerRigidbody.AddForce(direction * force, ForceMode2D.Impulse);
 	}
+
+
+
+	//dưới này Khoa đụng nè hjhj
+    private void TryCastShield()
+    {
+        if (shieldSpellLevel == 0)
+        {
+            Debug.Log("[Shield] Chưa mở khóa khiên!");
+            return;
+        }
+
+        if (shieldSpellLevel == 1 && shieldCheck == false)
+        {
+            if (activeShield != null)
+            {
+                Destroy(activeShield); 
+            }
+
+            Vector3 shieldOffset = new Vector3(0, 0, 0); 
+            activeShield = Instantiate(shieldSpell, transform.position + shieldOffset, Quaternion.identity, transform);
+			shieldCheck = true;
+			shieldHave = true;
+        }
+    }
+
+    //tạo courtine để bắt đầu đếm thời gian sau 5 giây set shieldCheck về false
+    public IEnumerator StartShieldCountdown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        shieldHave = false;
+        yield return new WaitForSeconds(5f);
+        shieldCheck = false;
+    }
+
+
 }
