@@ -29,6 +29,10 @@ public class enemyController : MonoBehaviour
     [Header("Trạng thái chịu tác động")]
     public bool canMove = true;
 
+    [Header("Trạng thái chết")]
+    public GameObject soulPrefab;
+    private bool isDead = false;
+
     private enum State { Walk, Run, Attack }
     private State currentState = State.Walk;
     private Transform currentTarget;
@@ -52,9 +56,9 @@ public class enemyController : MonoBehaviour
 
     void Update()
     {
-        if (player == null || pointA == null || pointB == null || firePoint == null || fireballPrefab == null)
+        if (player == null || pointA == null || pointB == null || firePoint == null || fireballPrefab == null || isDead)
         {
-            Debug.LogWarning("Thiếu tham chiếu trong Inspector!");
+            if (!isDead) Debug.LogWarning("Thiếu tham chiếu hoặc kẻ địch đã chết!");
             return;
         }
 
@@ -161,21 +165,26 @@ public class enemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Ví dụ: Nếu va chạm với vật thể có tag "DeathSpell", kẻ địch sẽ chết
+        if (collision.CompareTag("DeathSpell"))
+        {
+            Die();
+            return; // Dừng các xử lý khác
+        }
+
         if (collision.CompareTag("WindSpell"))
         {
-            if (!canMove) return;
+            if (!canMove || isDead) return;
 
             canMove = false;
 
-           
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
 
             if (rb != null)
             {
-                rb.velocity = Vector2.zero; 
+                rb.velocity = Vector2.zero;
                 float knockbackForce = 5f;
                 rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
             }
@@ -188,5 +197,29 @@ public class enemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         canMove = true;
+    }
+
+    public void Die()
+    {
+        if (isDead) return;
+
+        isDead = true;
+
+        // Tắt va chạm và các chuyển động
+        GetComponent<Collider2D>().enabled = false;
+        rb.velocity = Vector2.zero;
+        canMove = false;
+
+        // Kích hoạt animation chết (nếu có)
+        // animator.SetTrigger("Die"); 
+
+        // Tạo Prefab Linh hồn
+        if (soulPrefab != null)
+        {
+            Instantiate(soulPrefab, transform.position, Quaternion.identity);
+        }
+
+        // Hủy đối tượng kẻ địch sau 2 giây
+        Destroy(gameObject, 2f);
     }
 }
