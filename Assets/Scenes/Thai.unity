@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 239562691}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 43.15, y: 0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -241,7 +241,7 @@ Transform:
   m_GameObject: {fileID: 478411753}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.43, y: 0.05, z: -10}
+  m_LocalPosition: {x: 42.42, y: 0.89, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -376,8 +376,8 @@ Transform:
   m_GameObject: {fileID: 859086200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.755, y: -4.43, z: 0}
-  m_LocalScale: {x: 38.153492, y: 0.8553, z: 1}
+  m_LocalPosition: {x: 25.3041, y: -4.43, z: 0}
+  m_LocalScale: {x: 71.25559, y: 0.8553, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 983506406}
   - component: {fileID: 983506405}
   - component: {fileID: 983506404}
+  - component: {fileID: 983506408}
   m_Layer: 0
   m_Name: Shadow
   m_TagString: Untagged
@@ -416,7 +417,7 @@ Transform:
   m_GameObject: {fileID: 983506402}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.99, y: -1.52, z: -0.062274385}
+  m_LocalPosition: {x: 9.17, y: -1.06, z: -0.062274385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -567,6 +568,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &983506408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983506402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15bc281cc7b59b742a2bbf7dd3ed227c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 20
+  attackDamage: 5
+  moveSpeed: 3
+  dashSpeed: 10
+  dashDuration: 1
+  attackRange: 1
+  detectionRange: 7
+  attackCooldown: 2
 --- !u!4 &1076122863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 283439882248656046, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
@@ -620,11 +641,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4786090331154756468, guid: be86accee532f1449ba4094ae60e2865, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.95
+      value: 43.1
       objectReference: {fileID: 0}
     - target: {fileID: 4786090331154756468, guid: be86accee532f1449ba4094ae60e2865, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3
+      value: -1.84
       objectReference: {fileID: 0}
     - target: {fileID: 4786090331154756468, guid: be86accee532f1449ba4094ae60e2865, type: 3}
       propertyPath: m_LocalPosition.z
