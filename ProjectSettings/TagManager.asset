@@ -15,6 +15,7 @@ TagManager:
   - Arrow
   - Explotion
   - TeleZone
+  - DeadZone
   layers:
   - Default
   - TransparentFX
