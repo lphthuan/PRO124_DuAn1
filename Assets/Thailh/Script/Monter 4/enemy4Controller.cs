@@ -32,6 +32,9 @@ public class enemy4Controller : MonoBehaviour
     [Header("Trạng thái đặc biệt")]
     public bool canMove = true;
 
+    [Header("Trạng thái chết")]
+    public GameObject soulPrefab;
+
     private Vector3 patrolTarget;
     private Animator animator;
     private float attackTimer;
@@ -81,7 +84,6 @@ public class enemy4Controller : MonoBehaviour
 
         else
         {
-           
             animator.ResetTrigger("IsAttack");
 
             if (distanceToPlayer <= fireAttackRange)
@@ -96,10 +98,9 @@ public class enemy4Controller : MonoBehaviour
             }
             else
             {
-              
-                if (isChasing) 
+                if (isChasing)
                 {
-                    animator.SetBool("IsRun", true); 
+                    animator.SetBool("IsRun", true);
                     isChasing = false;
                 }
                 Patrol();
@@ -142,7 +143,7 @@ public class enemy4Controller : MonoBehaviour
 
     void AttackPlayer()
     {
-        animator.SetBool("IsRun", false); 
+        animator.SetBool("IsRun", false);
 
         if (player.position.x < transform.position.x)
             transform.localScale = new Vector3(-1, 1, 1);
@@ -153,9 +154,8 @@ public class enemy4Controller : MonoBehaviour
 
         if (attackTimer <= 0f)
         {
-            animator.SetTrigger("IsAttack"); 
+            animator.SetTrigger("IsAttack");
 
-           
             Collider2D hit = Physics2D.OverlapCircle(attackPoint.position, attackRadius, playerLayer);
             if (hit != null)
             {
@@ -172,7 +172,7 @@ public class enemy4Controller : MonoBehaviour
 
     void FireAttack()
     {
-        animator.SetBool("IsRun", false); 
+        animator.SetBool("IsRun", false);
 
         if (player.position.x < transform.position.x)
             transform.localScale = new Vector3(-1, 1, 1);
@@ -203,10 +203,8 @@ public class enemy4Controller : MonoBehaviour
             fireballs.Add(fireball);
         }
 
-        
         yield return new WaitForSeconds(1f);
 
-        
         foreach (GameObject fireball in fireballs)
         {
             if (fireball != null)
@@ -231,9 +229,18 @@ public class enemy4Controller : MonoBehaviour
 
     void Die()
     {
+        if (isDead) return;
+
         isDead = true;
         animator.SetTrigger("IsDeath");
+
         GetComponent<Collider2D>().enabled = false;
+
+        if (soulPrefab != null)
+        {
+            Instantiate(soulPrefab, transform.position, Quaternion.identity);
+        }
+
         this.enabled = false;
         Destroy(gameObject, 2f);
     }
