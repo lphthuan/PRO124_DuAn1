@@ -22,36 +22,59 @@ public class BlacksmithDialogue : MonoBehaviour
     public GameObject shopPanel;
     public Button shopExitButton;
     public Button upgradeDamageButton;
+    public Button upgradeHealthButton;
+    public Button upgradeSpeedButton;
     public AudioSource backgroundMusic;
 
     [Header("Floating Text")]
-    public GameObject floatingTextPrefab; // Gán prefab trong Inspector
+    public GameObject floatingTextPrefab;
 
     private int currentLine = 0;
     private bool playerInRange = false;
     private bool isTalking = false;
     private bool isTyping = false;
 
-    private int upgradeCount;
-    private const int maxUpgradeCount = 5;
+    private int damageUpgradeCount;
+    private int healthUpgradeCount;
+    private int speedUpgradeCount;
+
+    private const int maxDamageUpgradeCount = 5;
+    private const int maxHealthUpgradeCount = 10;
+    private const int maxSpeedUpgradeCount = 5;
 
     private GameObject player;
     private MonoBehaviour[] playerScriptsToDisable;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         npcText.SetActive(false);
         dialoguePanel.SetActive(false);
         choicePanel.SetActive(false);
         shopPanel.SetActive(false);
 
-        upgradeDamageButton.onClick.AddListener(UpgradePlayerDamage);
-        upgradeCount = PlayerPrefs.GetInt("UpgradeCount", 0);
+        // Gỡ mọi listener trước khi gán
+        upgradeDamageButton.onClick.RemoveAllListeners();
+        upgradeHealthButton.onClick.RemoveAllListeners();
+        upgradeSpeedButton.onClick.RemoveAllListeners();
+        buyButton.onClick.RemoveAllListeners();
+        exitButton.onClick.RemoveAllListeners();
+        shopExitButton.onClick.RemoveAllListeners();
 
+        // Gán mới
+        upgradeDamageButton.onClick.AddListener(UpgradePlayerDamage);
+        upgradeHealthButton.onClick.AddListener(UpgradePlayerHealth);
+        upgradeSpeedButton.onClick.AddListener(UpgradePlayerSpeed);
         buyButton.onClick.AddListener(OpenShop);
         exitButton.onClick.AddListener(CloseDialogue);
         shopExitButton.onClick.AddListener(CloseShopToChoices);
+
+        damageUpgradeCount = PlayerPrefs.GetInt("UpgradeDamageCount", 0);
+        healthUpgradeCount = PlayerPrefs.GetInt("UpgradeHealthCount", 0);
+        speedUpgradeCount = PlayerPrefs.GetInt("UpgradeSpeedCount", 0);
     }
+
 
     private void Update()
     {
@@ -78,7 +101,7 @@ public class BlacksmithDialogue : MonoBehaviour
             backgroundMusic.Pause();
         }
 
-        DisablePlayerControl(); // không dùng Time.timeScale = 0
+        DisablePlayerControl();
         ShowNextLine();
     }
 
@@ -102,7 +125,7 @@ public class BlacksmithDialogue : MonoBehaviour
         foreach (char c in line.ToCharArray())
         {
             dialogueText.text += c;
-            yield return new WaitForSecondsRealtime(typingSpeed); // dùng Realtime để không bị Time.timeScale ảnh hưởng
+            yield return new WaitForSecondsRealtime(typingSpeed);
         }
         isTyping = false;
         currentLine++;
@@ -111,7 +134,6 @@ public class BlacksmithDialogue : MonoBehaviour
     private void EndDialogue()
     {
         choicePanel.SetActive(true);
-        // dialoguePanel vẫn giữ nguyên
     }
 
     private void OpenShop()
@@ -123,62 +145,78 @@ public class BlacksmithDialogue : MonoBehaviour
 
     private void UpgradePlayerDamage()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        if (damageUpgradeCount >= maxDamageUpgradeCount)
         {
-            PlayerAttack playerAttack = player.GetComponent<PlayerAttack>();
-            if (playerAttack != null)
+            ShowFloatingText("Đã đạt giới hạn nâng cấp!");
+            return;
+        }
+
+        PlayerAttack playerAttack = player.GetComponent<PlayerAttack>();
+        if (playerAttack != null)
+        {
+            playerAttack.baseDamage += 20f;
+            damageUpgradeCount++;
+            PlayerPrefs.SetFloat("PlayerDamage", playerAttack.baseDamage);
+            PlayerPrefs.SetInt("UpgradeDamageCount", damageUpgradeCount);
+            PlayerPrefs.Save();
+            ShowFloatingText($"Damage +20 ({damageUpgradeCount}/{maxDamageUpgradeCount})");
+        }
+    }
+
+    private void UpgradePlayerHealth()
+    {
+        if (healthUpgradeCount >= maxHealthUpgradeCount)
+        {
+            ShowFloatingText("Đã đạt giới hạn nâng cấp!");
+            return;
+        }
+
+        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.maxHealth += 100;
+            healthUpgradeCount++;
+            PlayerPrefs.SetInt("PlayerHealth", playerHealth.maxHealth);
+            PlayerPrefs.SetInt("UpgradeHealthCount", healthUpgradeCount);
+            PlayerPrefs.Save();
+            ShowFloatingText($"Health +100 ({healthUpgradeCount}/{maxHealthUpgradeCount})");
+        }
+    }
+
+    private void UpgradePlayerSpeed()
+    {
+        if (speedUpgradeCount >= maxSpeedUpgradeCount)
+        {
+            ShowFloatingText("Đã đạt giới hạn nâng cấp!");
+            return;
+        }
+
+        PlayerController move = player.GetComponent<PlayerController>();
+        if (move != null)
+        {
+            move.moveSpeed += 1;
+            speedUpgradeCount++;
+            PlayerPrefs.SetFloat("PlayerSpeed", move.moveSpeed);
+            PlayerPrefs.SetInt("UpgradeSpeedCount", speedUpgradeCount);
+            PlayerPrefs.Save();
+            ShowFloatingText($"Speed +1 ({speedUpgradeCount}/{maxSpeedUpgradeCount})");
+        }
+    }
+
+    private void ShowFloatingText(string message)
+    {
+        if (floatingTextPrefab != null && player != null)
+        {
+            Vector3 spawnPos = player.transform.position + new Vector3(0, 1.5f, 0);
+            GameObject textObj = Instantiate(floatingTextPrefab, spawnPos, Quaternion.identity);
+
+            FloatingTextController ft = textObj.GetComponent<FloatingTextController>();
+            if (ft != null)
             {
-                // Nếu đã đạt giới hạn nâng cấp
-                if (upgradeCount >= maxUpgradeCount)
-                {
-                    Debug.Log("Đã đạt giới hạn nâng cấp sát thương.");
-
-                    if (floatingTextPrefab != null)
-                    {
-                        Vector3 spawnPos = player.transform.position + new Vector3(0, 1.5f, 0);
-                        GameObject textObj = Instantiate(floatingTextPrefab, spawnPos, Quaternion.identity);
-
-                        FloatingTextController ft = textObj.GetComponent<FloatingTextController>();
-                        if (ft != null)
-                        {
-                            ft.ShowText("Đã đạt giới hạn nâng cấp!");
-                        }
-
-                        // Hủy object sau lifetime
-                        Destroy(textObj, 1f);
-                    }
-
-                    return; // Ngăn không cho nâng cấp nữa
-                }
-
-                // Thực hiện nâng cấp
-                playerAttack.baseDamage += 20f;
-                upgradeCount++;
-
-                // Lưu lại
-                PlayerPrefs.SetFloat("PlayerDamage", playerAttack.baseDamage);
-                PlayerPrefs.SetInt("UpgradeCount", upgradeCount);
-                PlayerPrefs.Save();
-
-                Debug.Log("Đã tăng sát thương lên: " + playerAttack.baseDamage + " (Lần: " + upgradeCount + ")");
-
-                // Hiển thị FloatingText
-                if (floatingTextPrefab != null)
-                {
-                    Vector3 spawnPos = player.transform.position + new Vector3(0, 1.5f, 0);
-                    GameObject textObj = Instantiate(floatingTextPrefab, spawnPos, Quaternion.identity);
-
-                    FloatingTextController ft = textObj.GetComponent<FloatingTextController>();
-                    if (ft != null)
-                    {
-                        ft.ShowText($"Damage +10 ({upgradeCount}/{maxUpgradeCount})");
-                    }
-
-                    // Hủy object sau lifetime
-                    Destroy(textObj, 2f);
-                }
+                ft.ShowText(message);
             }
+
+            Destroy(textObj, 2f);
         }
     }
 
@@ -194,7 +232,7 @@ public class BlacksmithDialogue : MonoBehaviour
             backgroundMusic.UnPause();
         }
 
-        EnablePlayerControl(); // bật lại các script
+        EnablePlayerControl();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -202,11 +240,7 @@ public class BlacksmithDialogue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            player = other.gameObject;
-
             npcText.SetActive(true);
-
-            // Lưu các script cần disable
             playerScriptsToDisable = player.GetComponents<MonoBehaviour>();
         }
     }
@@ -221,9 +255,9 @@ public class BlacksmithDialogue : MonoBehaviour
 
     private void CloseShopToChoices()
     {
-        shopPanel.SetActive(false);       // Tắt panel shop
-        choicePanel.SetActive(true);      // Hiện lại panel lựa chọn
-        dialoguePanel.SetActive(true);    // Nếu bạn muốn vẫn hiển thị hội thoại ở dưới
+        shopPanel.SetActive(false);
+        choicePanel.SetActive(true);
+        dialoguePanel.SetActive(true);
     }
 
     private void DisablePlayerControl()
@@ -256,8 +290,13 @@ public class BlacksmithDialogue : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        PlayerPrefs.DeleteKey("PlayerDamage"); // Xoá khi game tắt
-        PlayerPrefs.DeleteKey("UpgradeCount");
-        Debug.Log("Đã xóa toàn bộ dữ liệu nâng cấp sát thương.");
+        PlayerPrefs.DeleteKey("PlayerDamage");
+        PlayerPrefs.DeleteKey("UpgradeDamageCount");
+        PlayerPrefs.DeleteKey("PlayerHealth");
+        PlayerPrefs.DeleteKey("UpgradeHealthCount");
+        PlayerPrefs.DeleteKey("PlayerSpeed");
+        PlayerPrefs.DeleteKey("UpgradeSpeedCount");
+
+        Debug.Log("Đã xóa toàn bộ dữ liệu nâng cấp.");
     }
 }
