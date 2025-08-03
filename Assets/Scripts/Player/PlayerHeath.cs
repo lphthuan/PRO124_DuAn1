@@ -61,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
 				damage = 150;
 				break;
 			case "DeadZone":
-				damage = 10000;
+				damage = 1000;
 				break;
 			default:
 				return;
@@ -142,6 +142,10 @@ public class PlayerHealth : MonoBehaviour
 		if (CheckpointManager.Instance != null && CheckpointManager.Instance.HasCheckpoint())
 		{
 			transform.position = CheckpointManager.Instance.GetRespawnPosition();
+		}
+		else
+		{
+			Debug.LogWarning("[Respawn] Không tìm thấy checkpoint, respawn tại vị trí hiện tại.");
 		}
 
 		if (playerController != null) playerController.enabled = true;

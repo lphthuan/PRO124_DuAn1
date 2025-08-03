@@ -334,6 +334,7 @@ MonoBehaviour:
   firePoint: {fileID: 5505517707337764430}
   attackCooldown: 0
   canMove: 1
+  soulPrefab: {fileID: 6334112857032349684, guid: 1911cce2f3faabc4fb04d0a2fbdf681f, type: 3}
 --- !u!114 &5567327463300054562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
+  currentHealth: 0
   enemyRigidbody: {fileID: 2197807200888115815}
 --- !u!114 &1410314691001183148
 MonoBehaviour:

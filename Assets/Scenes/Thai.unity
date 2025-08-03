@@ -799,10 +799,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monter 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2197807200888115815, guid: 4aa0d1b399b21bd419b7ed98cf35b9a4, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3424920889546927305, guid: 4aa0d1b399b21bd419b7ed98cf35b9a4, type: 3}
       propertyPath: player
       value: 
@@ -811,14 +807,6 @@ PrefabInstance:
       propertyPath: soulPrefab
       value: 
       objectReference: {fileID: 6334112857032349684, guid: 1911cce2f3faabc4fb04d0a2fbdf681f, type: 3}
-    - target: {fileID: 3424920889546927305, guid: 4aa0d1b399b21bd419b7ed98cf35b9a4, type: 3}
-      propertyPath: attackCooldown
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3424920889546927305, guid: 4aa0d1b399b21bd419b7ed98cf35b9a4, type: 3}
-      propertyPath: detectionRange
-      value: 3.67
-      objectReference: {fileID: 0}
     - target: {fileID: 5118328363814609103, guid: 4aa0d1b399b21bd419b7ed98cf35b9a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -916,10 +904,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4153281659032619746, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4780920162675803473, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.5
@@ -932,10 +916,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 913263714}
-    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
-      propertyPath: canMove
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: soulPrefab
       value: 
@@ -967,10 +947,6 @@ PrefabInstance:
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: fireAttackCooldown
       value: 2.06
-      objectReference: {fileID: 0}
-    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
-      propertyPath: playerLayer.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

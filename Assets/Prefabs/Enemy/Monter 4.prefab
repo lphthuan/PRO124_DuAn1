@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 502525631931707536}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.36, y: -2.16, z: -0.009205975}
+  m_LocalPosition: {x: 27.5, y: -1.79, z: -0.009205975}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -193,17 +193,22 @@ MonoBehaviour:
   pointB: {fileID: 2515306952618672793}
   patrolSpeed: 3
   chaseSpeed: 6
-  detectionRange: 1
+  detectionRange: 2.3
   attackRange: 1.5
-  attackCooldown: 0.6
+  attackCooldown: 1
   damage: 15
-  maxHealth: 3
+  fireAttackRange: 9.5
+  fireballPrefab: {fileID: 199165253297979706, guid: b1a2826676bdcc54baf94cff1b3cc701, type: 3}
+  fireballSpeed: 5
+  fireAttackCooldown: 2.06
   player: {fileID: 0}
   attackPoint: {fileID: 8528753900675097487}
-  attackRadius: 1
+  attackRadius: 1.02
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  canMove: 1
+  soulPrefab: {fileID: 6334112857032349684, guid: 1911cce2f3faabc4fb04d0a2fbdf681f, type: 3}
 --- !u!61 &7906918818729834921
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -289,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  currentHealth: 0
   enemyRigidbody: {fileID: 4153281659032619746}
 --- !u!114 &4660693954250460988
 MonoBehaviour:
@@ -302,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3416214d062e94ca7cc49c2c9b22e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultForce: 8
+  knockbackForce: 8
   kinematicPushDistance: 1
   stunDuration: 0.5
 --- !u!1 &5179250975747141494
