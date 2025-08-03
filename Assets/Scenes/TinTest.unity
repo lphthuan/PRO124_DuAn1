@@ -5506,6 +5506,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1495423785}
     - target: {fileID: 367128951748504587, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 367128951748504587, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
       propertyPath: shopPanel
       value: 
       objectReference: {fileID: 107948365}

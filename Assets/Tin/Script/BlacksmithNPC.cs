@@ -36,7 +36,7 @@ public class BlacksmithDialogue : MonoBehaviour
 
     [Header("Upgrade Soul Texts")]
     public TMP_Text damageSoulText;
-    public TMP_Text healthSoulText;
+    public TMP_Text healthSoulText; 
     public TMP_Text speedSoulText;
 
     private int currentLine = 0;
