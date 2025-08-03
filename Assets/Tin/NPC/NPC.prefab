@@ -78,10 +78,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: 870863241, guid: d01412e3933cfa74c978d32517ef40b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 2}
@@ -118,7 +118,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2839454554200956696}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9d881155a79ae8349a38331cd7a94b1f, type: 3}
@@ -282,21 +282,25 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   nameText: {fileID: 0}
   dialogueLines:
-  - "L\xE2u r\u1ED3i ta kh\xF4ng th\u1EA5y \xE1nh m\u1EAFt nh\u01B0 ng\u01B0\u01A1i
-    \u2013 ch\xE1y b\u1ECFng v\xE0 \u0111\u1EA7y nghi ng\u1EDD... gi\u1ED1ng h\u1EC7t
-    s\u01B0 ph\u1EE5 ng\u01B0\u01A1i n\u0103m x\u01B0a."
-  - "\xD4ng ta t\u1EEBng n\xF3i v\u1EC1 nh\u1EEFng vong h\u1ED3n v\xF9ng \u0110\u1ED3i
-    \u0110en \u2013 n\u01A1i ch\u1EC9 nh\u1EEFng k\u1EBB tuy\u1EC7t v\u1ECDng m\u1EDBi
-    \u0111\u1EB7t ch\xE2n \u0111\u1EBFn."
-  - "M\u1ED9t \u0111\xEAm n\u1ECD, s\u01B0 ph\u1EE5 ng\u01B0\u01A1i \u0111\u1EBFn
-    nh\u1EDD ta r\xE8n m\u1ED9t thanh ki\u1EBFm... kh\xF4ng ph\u1EA3i \u0111\u1EC3
-    ch\xE9m, m\xE0 \u0111\u1EC3 phong \u1EA5n."
-  - "Sau \u0111\xF3, \xF4ng \u1EA5y bi\u1EBFn m\u1EA5t. C\u0169ng t\u1EEB \u0111\xF3,
-    ta nghe nh\u1EEFng ti\u1EBFng th\xEC th\u1EA7m t\u1EEB r\xECa r\u1EEBng \u2013
-    nh\u01B0 th\u1EC3 \xF4ng \u1EA5y v\u1EABn \u0111ang chi\u1EBFn \u0111\u1EA5u,
-    m\u1ED9t m\xECnh."
-  - "Ng\u01B0\u01A1i mu\u1ED1n \u0111i ti\u1EBFp? V\u1EADy th\xEC chu\u1EA9n b\u1ECB
-    k\u1EF9 c\xE0ng... ho\u1EB7c quay \u0111\u1EA7u tr\u01B0\u1EDBc khi qu\xE1 mu\u1ED9n."
+  - "S\u1EAFt \u0111\xE1 th\xEC ai c\u0169ng r\xE8n \u0111\u01B0\u1EE3c... nh\u01B0ng
+    th\u1EE9 ng\u01B0\u01A1i c\u1EA7n l\xE0 th\xE9p \u0111\xE3 t\xF4i b\u1EB1ng m\xE1u.
+    N\u1EBFu ng\u01B0\u01A1i th\u1EF1c s\u1EF1 s\u1EB5n s\xE0ng, ta c\xF3 th\u1EC3
+    l\xE0m th\u1EE9 \u0111\xF3\u2026 ch\u1EC9 m\u1ED9t l\u1EA7n."
+  - "S\u01B0 ph\u1EE5 ng\u01B0\u01A1i t\u1EEBng \u0111\u1EC3 l\u1EA1i m\u1EA3nh l\u01B0\u1EE1i
+    ki\u1EBFm g\xE3y \u1EDF \u0111\xE2y. Ta gi\u1EEF n\xF3 v\xEC ch\u01B0a t\u1EEBng
+    g\u1EB7p ai \u0111\u1EE7 gan \u0111\u1EC3 ho\xE0n thi\u1EC7n n\xF3\u2026 cho
+    \u0111\u1EBFn gi\u1EDD."
+  - "Vong h\u1ED3n trong \u0111\u1EC1n c\u1ED5\u2026 \u0111\xE2u c\xF3 da th\u1ECBt
+    \u0111\u1EC3 ch\xE9m? Ng\u01B0\u01A1i ngh\u0129 th\u1EBF. Nh\u01B0ng n\u1EBFu
+    l\u01B0\u1EE1i r\xECu ta r\xE8n xuy\xEAn qua \u0111\u01B0\u1EE3c c\u1EA3 ph\xF9
+    ch\xFA, ng\u01B0\u01A1i s\u1EBD ngh\u0129 kh\xE1c."
+  - "Tay ng\u01B0\u01A1i run, \xE1nh m\u1EAFt c\xF2n l\u01B0\u1EE1ng l\u1EF1. Th\xE9p
+    c\u1EE7a ta kh\xF4ng d\xE0nh cho k\u1EBB ch\u01B0a quy\u1EBFt t\xE2m. Khi n\xE0o
+    tim ng\u01B0\u01A1i c\u1EE9ng nh\u01B0 b\xFAa ta\u2026 h\xE3y quay l\u1EA1i."
+  - "Ta ch\u1EC9 \u0111\u1EADp m\u1ED9t nh\xE1t. N\u1EBFu ng\u01B0\u01A1i mu\u1ED1n
+    truy\u1EC1n h\u1ED3n m\xECnh v\xE0o v\u0169 kh\xED\u2026 b\u01B0\u1EDBc t\u1EDBi.
+    Sau \u0111\xF3, ho\u1EB7c l\xE0 ng\u01B0\u01A1i s\u1EBD m\u1EA1nh l\xEAn\u2026
+    ho\u1EB7c v\u1EE1 tan."
   typingSpeed: 0.001
   choicePanel: {fileID: 0}
   buyButton: {fileID: 0}
@@ -304,6 +308,8 @@ MonoBehaviour:
   shopPanel: {fileID: 0}
   shopExitButton: {fileID: 0}
   upgradeDamageButton: {fileID: 0}
+  upgradeHealthButton: {fileID: 0}
+  upgradeSpeedButton: {fileID: 0}
   backgroundMusic: {fileID: 2387652457842246842}
   floatingTextPrefab: {fileID: 6820456874638325130, guid: df4bb0e517409ea459273eeb502dcc6d, type: 3}
 --- !u!1 &3191184947308335356
@@ -502,7 +508,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &1200460383313941050
 MonoBehaviour:
