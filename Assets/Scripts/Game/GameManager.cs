@@ -29,7 +29,5 @@ public class GameManager : MonoBehaviour
 
 		materialWorld.SetActive(!isInSpiritWorld);
 		spiritWorld.SetActive(isInSpiritWorld);
-
-		Debug.Log($"[World Switch] Chuyển sang {(isInSpiritWorld ? "THẾ GIỚI LINH HỒN 👻" : "THẾ GIỚI VẬT CHẤT 🏔️")}");
 	}
 }
