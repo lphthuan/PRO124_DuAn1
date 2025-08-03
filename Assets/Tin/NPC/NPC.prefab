@@ -121,8 +121,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9d881155a79ae8349a38331cd7a94b1f, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 116ac11c21212f746972371c69e02001, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textObject: {fileID: 3191184947308335356}
+  audioSource: {fileID: 2387652457842246842}
 --- !u!61 &1953872336530585604
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -312,6 +313,12 @@ MonoBehaviour:
   upgradeSpeedButton: {fileID: 0}
   backgroundMusic: {fileID: 2387652457842246842}
   floatingTextPrefab: {fileID: 6820456874638325130, guid: df4bb0e517409ea459273eeb502dcc6d, type: 3}
+  damageUpgradeSoul: 3
+  healthUpgradeSoul: 3
+  speedUpgradeSoul: 2
+  damageSoulText: {fileID: 0}
+  healthSoulText: {fileID: 0}
+  speedSoulText: {fileID: 0}
 --- !u!1 &3191184947308335356
 GameObject:
   m_ObjectHideFlags: 0

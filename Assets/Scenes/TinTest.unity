@@ -4809,6 +4809,11 @@ RectTransform:
   m_AnchoredPosition: {x: 600, y: -25}
   m_SizeDelta: {x: 1200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!82 &1950272421 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2387652457842246842, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
+  m_PrefabInstance: {fileID: 7100110940100644380}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1952348666
 GameObject:
   m_ObjectHideFlags: 0
@@ -5533,6 +5538,14 @@ PrefabInstance:
       propertyPath: upgradeDamageButton
       value: 
       objectReference: {fileID: 1946292909}
+    - target: {fileID: 2387652457842246842, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 116ac11c21212f746972371c69e02001, type: 3}
+    - target: {fileID: 2387652457842246842, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2839454554200956696, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
       propertyPath: m_Name
       value: NPC
@@ -5577,6 +5590,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8280292477523539098, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1950272421}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
