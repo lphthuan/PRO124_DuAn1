@@ -49,11 +49,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: SpiritWorld
-    uniqueID: 175685219
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: SpiritWorld
+    uniqueID: 175685219
     locked: 0
   - name: MaterialWorld
     uniqueID: 2223872247
