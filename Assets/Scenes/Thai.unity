@@ -453,7 +453,8 @@ Transform:
   m_LocalPosition: {x: 13.65, y: -2.05, z: -0.062274385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1696772227}
   m_Father: {fileID: 239562692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &983506404
@@ -617,8 +618,13 @@ MonoBehaviour:
   attackDamage: 5
   moveSpeed: 3
   attackRange: 1.5
-  detectionRange: 7
+  detectionRange: 20
   attackCooldown: 2
+  attackPoint: {fileID: 1696772227}
+  attackRadius: 0.28
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &1076122863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 283439882248656046, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
@@ -688,6 +694,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 239562692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1696772226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1696772227}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1696772227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696772226}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.61, y: -0.07, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 983506403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2100441298
 PrefabInstance:
@@ -770,6 +807,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 913263714}
+    - target: {fileID: 3424920889546927305, guid: 4aa0d1b399b21bd419b7ed98cf35b9a4, type: 3}
+      propertyPath: soulPrefab
+      value: 
+      objectReference: {fileID: 6334112857032349684, guid: 1911cce2f3faabc4fb04d0a2fbdf681f, type: 3}
     - target: {fileID: 3424920889546927305, guid: 4aa0d1b399b21bd419b7ed98cf35b9a4, type: 3}
       propertyPath: attackCooldown
       value: 0
@@ -895,6 +936,10 @@ PrefabInstance:
       propertyPath: canMove
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
+      propertyPath: soulPrefab
+      value: 
+      objectReference: {fileID: 6334112857032349684, guid: 1911cce2f3faabc4fb04d0a2fbdf681f, type: 3}
     - target: {fileID: 6647577825972313833, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
       propertyPath: attackRadius
       value: 1.02

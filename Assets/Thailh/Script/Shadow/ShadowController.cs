@@ -21,6 +21,11 @@ public class ShadowController : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
 
+    [Header("Attack Settings")]
+    public Transform attackPoint; // Điểm tấn công, gán từ Unity Editor
+    public float attackRadius = 0.5f; // Bán kính vùng tấn công
+    public LayerMask playerLayer; // Layer của người chơi
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -60,6 +65,21 @@ public class ShadowController : MonoBehaviour
         animator.SetBool("IsRun", isRun);
     }
 
+    // Đảm bảo Shadow luôn hướng mặt về người chơi
+    void FlipToPlayer()
+    {
+        if (playerTransform == null) return;
+        Vector2 direction = (playerTransform.position - transform.position).normalized;
+        if (direction.x > 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
     void IdleState()
     {
         rb.velocity = Vector2.zero; // Đảm bảo quái vật đứng yên
@@ -84,6 +104,8 @@ public class ShadowController : MonoBehaviour
             return;
         }
 
+        // Luôn hướng mặt về người chơi trong trạng thái đuổi theo
+        FlipToPlayer();
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
         if (distanceToPlayer > detectionRange)
@@ -93,7 +115,6 @@ public class ShadowController : MonoBehaviour
         }
         else if (distanceToPlayer <= attackRange && canAttack)
         {
-            // Chuyển trạng thái sang tấn công và bắt đầu Coroutine
             currentState = EnemyState.Attack;
             rb.velocity = Vector2.zero;
             StartCoroutine(PerformAttackAndCooldown());
@@ -103,22 +124,11 @@ public class ShadowController : MonoBehaviour
             SetRunningState(true);
             Vector2 direction = (playerTransform.position - transform.position).normalized;
             rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
-
-            if (direction.x > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-            else if (direction.x < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
         }
     }
 
     void AttackState()
     {
-        // Trạng thái này không cần làm gì nhiều, vì Coroutine đã xử lý
-        // Đảm bảo quái vật không chạy khi đang tấn công
         SetRunningState(false);
         rb.velocity = Vector2.zero;
     }
@@ -130,14 +140,14 @@ public class ShadowController : MonoBehaviour
         // Bắt đầu animation tấn công
         animator.SetBool("IsAttack", true);
 
-        // Chờ một khoảng thời gian ngắn để animation tấn công diễn ra
+        // Chờ một khoảng thời gian ngắn để khớp với animation
         yield return new WaitForSeconds(0.5f);
 
-        // Tắt animation tấn công sau khi nó đã chạy được một phần
-        animator.SetBool("IsAttack", false);
+        // Gây sát thương cho người chơi
+        MeleeAttack();
 
-        // Gây sát thương ở đây
-        // VD: playerTransform.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+        // Tắt animation tấn công
+        animator.SetBool("IsAttack", false);
 
         // Chờ hết thời gian hồi chiêu
         yield return new WaitForSeconds(attackCooldown);
@@ -145,6 +155,22 @@ public class ShadowController : MonoBehaviour
         // Cho phép tấn công lại và quay lại trạng thái đuổi theo
         canAttack = true;
         currentState = EnemyState.Chase;
+    }
+
+    void MeleeAttack()
+    {
+        // Kiểm tra tất cả collider trong một hình tròn tại attackPoint
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, playerLayer);
+
+        foreach (Collider2D playerCollider in hitPlayers)
+        {
+            // Tìm và gọi hàm TakeDamage trên script PlayerHealth
+            PlayerHealth playerHealth = playerCollider.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(attackDamage);
+            }
+        }
     }
 
     public void TakeDamage(int damage)
@@ -169,10 +195,18 @@ public class ShadowController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
+        // Vẽ Gizmo cho tầm phát hiện và tấn công
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        // Vẽ Gizmo cho điểm tấn công
+        if (attackPoint != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+        }
     }
 }
