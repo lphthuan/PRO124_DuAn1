@@ -168,11 +168,11 @@ public class enemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Ví dụ: Nếu va chạm với vật thể có tag "DeathSpell", kẻ địch sẽ chết
-        if (collision.CompareTag("DeathSpell"))
+        /*if (collision.CompareTag("DeathSpell"))
         {
             Die();
             return; // Dừng các xử lý khác
-        }
+        }*/
 
         if (collision.CompareTag("WindSpell"))
         {
