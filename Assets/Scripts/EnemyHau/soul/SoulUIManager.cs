@@ -1,12 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro;  
+using TMPro;
 
 public class SoulUIManager : MonoBehaviour
 {
     public static SoulUIManager instance;
 
-    public TextMeshProUGUI soulText;  
+    public TextMeshProUGUI soulText;
     public Image soulIcon;
 
     private int soulCount = 0;
@@ -20,6 +20,31 @@ public class SoulUIManager : MonoBehaviour
     public void AddSoul(int amount)
     {
         soulCount += amount;
+        UpdateSoulUI();
+    }
+
+    public bool SpendSoul(int cost)
+    {
+        if (soulCount >= cost)
+        {
+            soulCount -= cost;
+            UpdateSoulUI();
+            return true; // Mua thành công
+        }
+        else
+        {
+            Debug.Log("Not enough souls!");
+            return false;
+        }
+    }
+
+    private void UpdateSoulUI()
+    {
         soulText.text = soulCount.ToString();
+    }
+
+    public int GetCurrentSoul()
+    {
+        return soulCount;
     }
 }

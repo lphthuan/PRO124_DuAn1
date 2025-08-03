@@ -29,6 +29,16 @@ public class BlacksmithDialogue : MonoBehaviour
     [Header("Floating Text")]
     public GameObject floatingTextPrefab;
 
+    [Header("Upgrade Souls")]
+    public int damageUpgradeSoul = 3;
+    public int healthUpgradeSoul = 3;
+    public int speedUpgradeSoul = 2;
+
+    [Header("Upgrade Soul Texts")]
+    public TMP_Text damageSoulText;
+    public TMP_Text healthSoulText;
+    public TMP_Text speedSoulText;
+
     private int currentLine = 0;
     private bool playerInRange = false;
     private bool isTalking = false;
@@ -69,6 +79,11 @@ public class BlacksmithDialogue : MonoBehaviour
         buyButton.onClick.AddListener(OpenShop);
         exitButton.onClick.AddListener(CloseDialogue);
         shopExitButton.onClick.AddListener(CloseShopToChoices);
+
+        // Gán hiển thị giá
+        damageSoulText.text = $"Soul: {damageUpgradeSoul}";
+        healthSoulText.text = $"Soul: {healthUpgradeSoul}";
+        speedSoulText.text = $"Soul: {speedUpgradeSoul}";
 
         damageUpgradeCount = PlayerPrefs.GetInt("UpgradeDamageCount", 0);
         healthUpgradeCount = PlayerPrefs.GetInt("UpgradeHealthCount", 0);
@@ -141,6 +156,8 @@ public class BlacksmithDialogue : MonoBehaviour
         shopPanel.SetActive(true);
         choicePanel.SetActive(false);
         dialoguePanel.SetActive(false);
+
+        UpdateShopCostColors();
     }
 
     private void UpgradePlayerDamage()
@@ -148,6 +165,12 @@ public class BlacksmithDialogue : MonoBehaviour
         if (damageUpgradeCount >= maxDamageUpgradeCount)
         {
             ShowFloatingText("Đã đạt giới hạn nâng cấp!");
+            return;
+        }
+
+        if (!SoulUIManager.instance.SpendSoul(damageUpgradeSoul))
+        {
+            ShowFloatingText("Không đủ Soul!");
             return;
         }
 
@@ -171,6 +194,12 @@ public class BlacksmithDialogue : MonoBehaviour
             return;
         }
 
+        if (!SoulUIManager.instance.SpendSoul(healthUpgradeSoul))
+        {
+            ShowFloatingText("Không đủ Soul!");
+            return;
+        }
+
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
@@ -183,11 +212,18 @@ public class BlacksmithDialogue : MonoBehaviour
         }
     }
 
+
     private void UpgradePlayerSpeed()
     {
         if (speedUpgradeCount >= maxSpeedUpgradeCount)
         {
             ShowFloatingText("Đã đạt giới hạn nâng cấp!");
+            return;
+        }
+
+        if (!SoulUIManager.instance.SpendSoul(speedUpgradeSoul))
+        {
+            ShowFloatingText("Không đủ Soul!");
             return;
         }
 
@@ -202,6 +238,15 @@ public class BlacksmithDialogue : MonoBehaviour
             ShowFloatingText($"Speed +1 ({speedUpgradeCount}/{maxSpeedUpgradeCount})");
         }
     }
+    private void UpdateShopCostColors()
+    {
+        int currentSoul = SoulUIManager.instance.GetCurrentSoul();
+
+        damageSoulText.color = (currentSoul >= damageUpgradeSoul) ? Color.white : Color.red;
+        healthSoulText.color = (currentSoul >= healthUpgradeSoul) ? Color.white : Color.red;
+        speedSoulText.color = (currentSoul >= speedUpgradeSoul  ) ? Color.white : Color.red;
+    }
+
 
     private void ShowFloatingText(string message)
     {

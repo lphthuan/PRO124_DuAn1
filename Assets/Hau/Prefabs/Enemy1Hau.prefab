@@ -295,7 +295,7 @@ MonoBehaviour:
   miniEnemyPrefab: {fileID: 7831614661084414568, guid: 6f5b567c646f0a247acca5865dfe21fe, type: 3}
   soulPrefab: {fileID: 6334112857032349684, guid: 1911cce2f3faabc4fb04d0a2fbdf681f, type: 3}
   healthDropPrefab: {fileID: 576428375497558865, guid: 8c49b0cbd372ffe479249f92ee711c57, type: 3}
-  healthDropChance: 0.511
+  healthDropChance: 0.1
   soulDropPoint: {fileID: 209690831242995559}
   healthDropPoint: {fileID: 1876320572217611687}
   hitClip: {fileID: 8300000, guid: 69dd9bee966469d4ca666cdf755090c1, type: 3}
