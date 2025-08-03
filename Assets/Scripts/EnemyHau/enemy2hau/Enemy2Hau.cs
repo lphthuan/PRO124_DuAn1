@@ -285,7 +285,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator SpawnSoulsAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        for (int i = 0; i < soulDropPoints.Length && i < 2; i++)
+        for (int i = 0; i < soulDropPoints.Length && i < 3; i++)
         {
             if (soulPrefab != null && soulDropPoints[i] != null)
             {
