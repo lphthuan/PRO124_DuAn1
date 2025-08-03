@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 4767775781740723164}
   - component: {fileID: 749162299200358406}
   - component: {fileID: 6257477025734606766}
+  - component: {fileID: 6526364584582766696}
   m_Layer: 0
   m_Name: physician
   m_TagString: Untagged
@@ -302,11 +303,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 0}
-  npcText: {fileID: 0}
+  npcText: {fileID: 179999848428659549}
   dialogueText: {fileID: 0}
   nameText: {fileID: 0}
-  dialogueLines: []
-  typingSpeed: 0.05
+  dialogueLines:
+  - "Kh\xED huy\u1EBFt ng\u01B0\u01A1i m\u1ECFng nh\u01B0 t\u01A1 nh\u1EC7n trong
+    gi\xF3. M\u1ED9t khi b\u01B0\u1EDBc v\xE0o \u0111\u1EC1n c\u1ED5, ch\u1EC9 c\u1EA7n
+    m\u1ED9t l\u1EDDi nguy\u1EC1n l\xE0 \u0111\u1EE7 x\xE9 x\xE1c ng\u01B0\u01A1i
+    ra. Ta c\xF3 th\u1EC3 gia c\u1ED1 sinh m\u1EC7nh cho ng\u01B0\u01A1i\u2026 n\u1EBFu
+    ng\u01B0\u01A1i ch\u1ECBu \u0111\u1EF1ng \u0111\u01B0\u1EE3c th\u1EE9 thu\u1ED1c
+    n\xE0y."
+  - "Th\u1EA7y ng\u01B0\u01A1i t\u1EEBng d\xF9ng b\xE0i thu\u1ED1c n\xE0y \u0111\u1EC3
+    s\u1ED1ng s\xF3t qua ba ng\xE0y ba \u0111\xEAm b\u1ECB phong \u1EA5n trong huy\u1EBFt
+    tr\u1EADn. N\u1EBFu ng\u01B0\u01A1i th\u1EADt s\u1EF1 l\xE0 ng\u01B0\u1EDDi k\u1EBF
+    th\u1EEBa\u2026 th\xEC th\u1EC3 ch\u1EA5t ng\u01B0\u01A1i c\u0169ng ph\u1EA3i
+    \u0111\u01B0\u1EE3c t\xF4i luy\u1EC7n nh\u01B0 \xF4ng \u1EA5y."
+  - "Th\xE2n th\u1EC3 l\xE0 c\xE1i b\xECnh ch\u1EE9a linh h\u1ED3n. B\xECnh n\u1EE9t
+    th\xEC ph\xE9p g\xEC c\u0169ng r\xF2 r\u1EC9. Ta c\xF3 th\u1EC3 h\xE0n l\u1EA1i
+    b\xECnh \u1EA5y cho ng\u01B0\u01A1i \u2014 nh\u01B0ng ch\u1EC9 m\u1ED9t l\u1EA7n."
+  - "Ta th\u1EA5y qu\u1EA7ng t\u1ED1i d\u01B0\u1EDBi m\u1EAFt ng\u01B0\u01A1i, tay
+    ng\u01B0\u01A1i l\u1EA1nh nh\u01B0 x\xE1c ch\u1EBFt. Tr\u01B0\u1EDBc khi v\xE0o
+    \u0111\u1EC1n, h\xE3y \u0111\u1EC3 ta k\xE9o sinh kh\xED ng\u01B0\u01A1i v\u1EC1\u2026
+    k\u1EBBo \u0111i m\xE0 kh\xF4ng c\xF2n \u0111\u01B0\u1EDDng v\u1EC1."
+  - "Lo\u1EA1i thu\u1ED1c n\xE0y kh\xF4ng c\u1EE9u ng\u01B0\u1EDDi\u2026 n\xF3 l\xE0m
+    k\u1EBB y\u1EBFu tr\u1EDF n\xEAn l\xEC \u0111\xF2n h\u01A1n, s\u1ED1ng dai h\u01A1n,
+    ch\u1ECBu \u0111\u1EF1ng \u0111\u01B0\u1EE3c nhi\u1EC1u h\u01A1n. Nh\u01B0ng
+    \u0111\u1ED5i l\u1EA1i, ng\u01B0\u01A1i s\u1EBD kh\xF4ng bao gi\u1EDD th\u1EA5y
+    d\u1EC5 th\u1EDF n\u1EEFa."
+  typingSpeed: 0.001
   choicePanel: {fileID: 0}
   buyButton: {fileID: 0}
   exitButton: {fileID: 0}
@@ -315,8 +339,14 @@ MonoBehaviour:
   upgradeDamageButton: {fileID: 0}
   upgradeHealthButton: {fileID: 0}
   upgradeSpeedButton: {fileID: 0}
-  backgroundMusic: {fileID: 0}
-  floatingTextPrefab: {fileID: 0}
+  backgroundMusic: {fileID: 6526364584582766696}
+  floatingTextPrefab: {fileID: 6820456874638325130, guid: df4bb0e517409ea459273eeb502dcc6d, type: 3}
+  damageUpgradeSoul: 3
+  healthUpgradeSoul: 3
+  speedUpgradeSoul: 2
+  damageSoulText: {fileID: 0}
+  healthSoulText: {fileID: 0}
+  speedSoulText: {fileID: 0}
 --- !u!114 &6257477025734606766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +360,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textObject: {fileID: 179999848428659549}
+  audioSource: {fileID: 0}
+--- !u!82 &6526364584582766696
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146430053694852824}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5870015146848328533
 GameObject:
   m_ObjectHideFlags: 0

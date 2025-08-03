@@ -4750,7 +4750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 220}
   m_SizeDelta: {x: 1200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &231679057
@@ -5428,10 +5428,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: npcText
-      value: 
-      objectReference: {fileID: 305196397}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
       propertyPath: nameText
       value: 
       objectReference: {fileID: 973359416}
@@ -5439,10 +5435,6 @@ PrefabInstance:
       propertyPath: buyButton
       value: 
       objectReference: {fileID: 2074093069}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
       propertyPath: shopPanel
       value: 
@@ -5455,10 +5447,6 @@ PrefabInstance:
       propertyPath: choicePanel
       value: 
       objectReference: {fileID: 1453782090}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: typingSpeed
-      value: 0.001
-      objectReference: {fileID: 0}
     - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
       propertyPath: dialogueText
       value: 
@@ -5484,14 +5472,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 80373922}
     - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: backgroundMusic
-      value: 
-      objectReference: {fileID: 319701395}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: floatingTextPrefab
-      value: 
-      objectReference: {fileID: 6820456874638325130, guid: df4bb0e517409ea459273eeb502dcc6d, type: 3}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
       propertyPath: upgradeSpeedButton
       value: 
       objectReference: {fileID: 528363434}
@@ -5503,51 +5483,6 @@ PrefabInstance:
       propertyPath: upgradeHealthButton
       value: 
       objectReference: {fileID: 378025251}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: dialogueLines.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: dialogueLines.Array.data[0]
-      value: "Kh\xED huy\u1EBFt ng\u01B0\u01A1i m\u1ECFng nh\u01B0 t\u01A1 nh\u1EC7n
-        trong gi\xF3. M\u1ED9t khi b\u01B0\u1EDBc v\xE0o \u0111\u1EC1n c\u1ED5, ch\u1EC9
-        c\u1EA7n m\u1ED9t l\u1EDDi nguy\u1EC1n l\xE0 \u0111\u1EE7 x\xE9 x\xE1c ng\u01B0\u01A1i
-        ra. Ta c\xF3 th\u1EC3 gia c\u1ED1 sinh m\u1EC7nh cho ng\u01B0\u01A1i\u2026
-        n\u1EBFu ng\u01B0\u01A1i ch\u1ECBu \u0111\u1EF1ng \u0111\u01B0\u1EE3c th\u1EE9
-        thu\u1ED1c n\xE0y."
-      objectReference: {fileID: 0}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: dialogueLines.Array.data[1]
-      value: "Th\u1EA7y ng\u01B0\u01A1i t\u1EEBng d\xF9ng b\xE0i thu\u1ED1c n\xE0y
-        \u0111\u1EC3 s\u1ED1ng s\xF3t qua ba ng\xE0y ba \u0111\xEAm b\u1ECB phong
-        \u1EA5n trong huy\u1EBFt tr\u1EADn. N\u1EBFu ng\u01B0\u01A1i th\u1EADt s\u1EF1
-        l\xE0 ng\u01B0\u1EDDi k\u1EBF th\u1EEBa\u2026 th\xEC th\u1EC3 ch\u1EA5t ng\u01B0\u01A1i
-        c\u0169ng ph\u1EA3i \u0111\u01B0\u1EE3c t\xF4i luy\u1EC7n nh\u01B0 \xF4ng
-        \u1EA5y."
-      objectReference: {fileID: 0}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: dialogueLines.Array.data[2]
-      value: "Th\xE2n th\u1EC3 l\xE0 c\xE1i b\xECnh ch\u1EE9a linh h\u1ED3n. B\xECnh
-        n\u1EE9t th\xEC ph\xE9p g\xEC c\u0169ng r\xF2 r\u1EC9. Ta c\xF3 th\u1EC3
-        h\xE0n l\u1EA1i b\xECnh \u1EA5y cho ng\u01B0\u01A1i \u2014 nh\u01B0ng ch\u1EC9
-        m\u1ED9t l\u1EA7n."
-      objectReference: {fileID: 0}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: dialogueLines.Array.data[3]
-      value: "Ta th\u1EA5y qu\u1EA7ng t\u1ED1i d\u01B0\u1EDBi m\u1EAFt ng\u01B0\u01A1i,
-        tay ng\u01B0\u01A1i l\u1EA1nh nh\u01B0 x\xE1c ch\u1EBFt. Tr\u01B0\u1EDBc
-        khi v\xE0o \u0111\u1EC1n, h\xE3y \u0111\u1EC3 ta k\xE9o sinh kh\xED ng\u01B0\u01A1i
-        v\u1EC1\u2026 k\u1EBBo \u0111i m\xE0 kh\xF4ng c\xF2n \u0111\u01B0\u1EDDng
-        v\u1EC1."
-      objectReference: {fileID: 0}
-    - target: {fileID: 749162299200358406, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      propertyPath: dialogueLines.Array.data[4]
-      value: "Lo\u1EA1i thu\u1ED1c n\xE0y kh\xF4ng c\u1EE9u ng\u01B0\u1EDDi\u2026
-        n\xF3 l\xE0m k\u1EBB y\u1EBFu tr\u1EDF n\xEAn l\xEC \u0111\xF2n h\u01A1n,
-        s\u1ED1ng dai h\u01A1n, ch\u1ECBu \u0111\u1EF1ng \u0111\u01B0\u1EE3c nhi\u1EC1u
-        h\u01A1n. Nh\u01B0ng \u0111\u1ED5i l\u1EA1i, ng\u01B0\u01A1i s\u1EBD kh\xF4ng
-        bao gi\u1EDD th\u1EA5y d\u1EC5 th\u1EDF n\u1EEFa."
-      objectReference: {fileID: 0}
     - target: {fileID: 2146430053694852824, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
       propertyPath: m_Name
       value: physician
@@ -5595,117 +5530,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2146430053694852824, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 319701395}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
---- !u!1 &305196397 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 179999848428659549, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-  m_PrefabInstance: {fileID: 305196395}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &319701388 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2146430053694852824, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
-  m_PrefabInstance: {fileID: 305196395}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &319701395
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 319701388}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &322175341
 GameObject:
   m_ObjectHideFlags: 0
@@ -230514,7 +230340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 220}
   m_SizeDelta: {x: 1200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &672160322
@@ -230555,107 +230381,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672160320}
   m_CullTransparentMesh: 1
---- !u!1 &675759405 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6151691477033962098, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
-  m_PrefabInstance: {fileID: 3055274777760849753}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &675759412
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675759405}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &682854187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233449,7 +233174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 220}
   m_SizeDelta: {x: 1200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708015327
@@ -538014,10 +537739,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2052532874}
     - target: {fileID: 3337447948988613617, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3337447948988613617, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
       propertyPath: shopPanel
       value: 
       objectReference: {fileID: 1821309834}
@@ -538054,10 +537775,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1810045979}
     - target: {fileID: 3337447948988613617, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
-      propertyPath: backgroundMusic
-      value: 
-      objectReference: {fileID: 675759412}
-    - target: {fileID: 3337447948988613617, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
       propertyPath: upgradeSpeedButton
       value: 
       objectReference: {fileID: 528363434}
@@ -538076,10 +537793,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6151691477033962098, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 675759412}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
 --- !u!1001 &5317030017837752089
 PrefabInstance:
@@ -538089,26 +537803,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3202116120259338721, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3202116120259338721, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_fontSize
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3202116120259338721, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3202116120259338721, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 3202116120259338721, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7170993864128184719, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -538189,62 +537883,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7273481637250965957, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7273481637250965957, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7273481637250965957, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7273481637250965957, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7273481637250965957, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7273481637250965957, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 7273481637250965957, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 488.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7273481637250965957, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -130
-      objectReference: {fileID: 0}
-    - target: {fileID: 8126793374725816904, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8126793374725816904, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8126793374725816904, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8126793374725816904, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8126793374725816904, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 507.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8126793374725816904, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -137.1
-      objectReference: {fileID: 0}
     - target: {fileID: 8794673795183082464, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
       propertyPath: m_Name
       value: SoulManager
@@ -538285,10 +537923,6 @@ PrefabInstance:
       propertyPath: buyButton
       value: 
       objectReference: {fileID: 1225181691}
-    - target: {fileID: 367128951748504587, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 367128951748504587, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
       propertyPath: shopPanel
       value: 
@@ -538337,10 +537971,6 @@ PrefabInstance:
       propertyPath: upgradeHealthButton
       value: 
       objectReference: {fileID: 378025251}
-    - target: {fileID: 2387652457842246842, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
-      propertyPath: MaxDistance
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 2839454554200956696, guid: 7dc20498df9f735489f9d25a75fd52e4, type: 3}
       propertyPath: m_Name
       value: NPC
