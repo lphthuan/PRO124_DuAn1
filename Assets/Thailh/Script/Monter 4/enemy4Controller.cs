@@ -239,7 +239,8 @@ public class enemy4Controller : MonoBehaviour
         if (soulPrefab != null)
         {
             Instantiate(soulPrefab, transform.position, Quaternion.identity);
-        }
+            Debug.Log($"[enemy4Controller] Đã chết tại vị trí: {transform.position}");
+		}
 
         this.enabled = false;
         Destroy(gameObject, 2f);

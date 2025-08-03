@@ -60,6 +60,9 @@ public class PlayerHealth : MonoBehaviour
 			case "Explotion":
 				damage = 150;
 				break;
+			case "DeadZone":
+				damage = 10000;
+				break;
 			default:
 				return;
 		}
@@ -136,15 +139,18 @@ public class PlayerHealth : MonoBehaviour
 
 	private void Respawn()
 	{
-		if (playerController != null)
+		if (CheckpointManager.Instance != null && CheckpointManager.Instance.HasCheckpoint())
 		{
-			playerController.enabled = true;
-			playerAttack.enabled = true;
-			playerController.ResetAfterRespawn();
+			transform.position = CheckpointManager.Instance.GetRespawnPosition();
 		}
+
+		if (playerController != null) playerController.enabled = true;
+		if (playerAttack != null) playerAttack.enabled = true;
+		if (playerController != null) playerController.ResetAfterRespawn();
 
 		currentHealth = maxHealth;
 		isDead = false;
 		UpdateHealthBar();
 	}
+
 }

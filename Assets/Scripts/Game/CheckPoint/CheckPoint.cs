@@ -10,7 +10,7 @@ public class Checkpoint : MonoBehaviour
 
 		if (other.CompareTag("Player"))
 		{
-			Debug.Log($"[Checkpoint] Kích hoạt tại: {transform.position}");
+			Debug.Log($"[Checkpoint] Active at: {transform.position}");
 			CheckpointManager.Instance.SetCheckpoint(transform);
 			ActivateCheckpoint();
 		}
@@ -19,13 +19,13 @@ public class Checkpoint : MonoBehaviour
 	private void ActivateCheckpoint()
 	{
 		isActive = true;
-		// Hiệu ứng hoặc đổi màu ở đây (nếu muốn)
-		// ví dụ: GetComponent<SpriteRenderer>().color = Color.green;
+
+		GetComponent<SpriteRenderer>().color = Color.green;
 	}
 
 	public void Deactivate()
 	{
 		isActive = false;
-		// GetComponent<SpriteRenderer>().color = Color.white;
+		GetComponent<SpriteRenderer>().color = Color.white;
 	}
 }
