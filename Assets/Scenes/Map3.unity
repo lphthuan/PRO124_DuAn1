@@ -5527,11 +5527,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6257477025734606766, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 305196396}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
+--- !u!82 &305196396 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6526364584582766696, guid: 5817f4e40a197af4b8797fc345174faf, type: 3}
+  m_PrefabInstance: {fileID: 305196395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &322175341
 GameObject:
   m_ObjectHideFlags: 0
@@ -537786,6 +537795,10 @@ PrefabInstance:
       propertyPath: upgradeHealthButton
       value: 
       objectReference: {fileID: 378025251}
+    - target: {fileID: 5716754982247268273, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 3055274777760849754}
     - target: {fileID: 6151691477033962098, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
       propertyPath: m_Name
       value: witch
@@ -537795,6 +537808,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
+--- !u!82 &3055274777760849754 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1914783285632424400, guid: 8c2dd8fd502273743a86c405215f00a1, type: 3}
+  m_PrefabInstance: {fileID: 3055274777760849753}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5317030017837752089
 PrefabInstance:
   m_ObjectHideFlags: 0

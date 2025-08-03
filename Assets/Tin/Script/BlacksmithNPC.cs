@@ -204,6 +204,7 @@ public class BlacksmithDialogue : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.maxHealth += 100;
+            playerHealth.currentHealth = playerHealth.maxHealth;
             healthUpgradeCount++;
             PlayerPrefs.SetInt("PlayerHealth", playerHealth.maxHealth);
             PlayerPrefs.SetInt("UpgradeHealthCount", healthUpgradeCount);
