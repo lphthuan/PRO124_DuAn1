@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 121616357}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.07, y: -0.67, z: 0}
+  m_LocalPosition: {x: 18.12, y: -3.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 478411753}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.04, y: 0.53, z: -10}
+  m_LocalPosition: {x: 48.46, y: 0.86, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -520,7 +520,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
+    oldSize: {x: 0.875, y: 1.15625}
     newSize: {x: 1.5, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -591,7 +591,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -260937267, guid: 4c46ddc3f41c0324e8e7d87624325dce, type: 3}
+  m_Sprite: {fileID: -60428539, guid: b69825c59b3a70b4092299dde49b89e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -614,17 +614,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bc281cc7b59b742a2bbf7dd3ed227c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  attackDamage: 5
-  moveSpeed: 3
+  pointA: {fileID: 121616358}
+  pointB: {fileID: 1237225658}
+  patrolSpeed: 0
+  maxHealth: 50
+  currentHealth: 0
+  healThreshold: 25
+  healCooldown: 30
+  healDuration: 3
   attackRange: 1.5
-  detectionRange: 20
+  attackDamage: 5
   attackCooldown: 2
-  attackPoint: {fileID: 1696772227}
-  attackRadius: 0.28
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  onAttackHit:
+    m_PersistentCalls:
+      m_Calls: []
+  attack2Range: 1.36
+  attack2Damage: 20
+  onAttack2Hit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1076122863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 283439882248656046, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
@@ -689,7 +697,7 @@ Transform:
   m_GameObject: {fileID: 1237225657}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.51, y: -3.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
