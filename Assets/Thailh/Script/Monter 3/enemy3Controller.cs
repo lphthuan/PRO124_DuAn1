@@ -33,7 +33,11 @@ public class enemyController : MonoBehaviour
     public GameObject soulPrefab;
     private bool isDead = false;
 
-    private enum State { Walk, Run, Attack }
+	[SerializeField] private LayerMask groundLayer;  // Drag Layer "Terrain" vào đây trong Inspector
+	[SerializeField] private Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
+	[SerializeField] private float groundCheckDistance = 0.1f;
+
+	private enum State { Walk, Run, Attack }
     private State currentState = State.Walk;
     private Transform currentTarget;
 
@@ -83,9 +87,27 @@ public class enemyController : MonoBehaviour
                 AttackPlayer();
                 break;
         }
-    }
 
-    void Patrol()
+		if (!IsGrounded())
+		{
+			//rb.velocity = Vector2.zero;
+            canMove = false;
+			animator.SetBool("IsWalk", false);
+			animator.SetBool("IsRun", false);
+			return;
+		}
+
+	}
+
+	private bool IsGrounded()
+	{
+		Vector2 origin = transform.position;
+		RaycastHit2D hit = Physics2D.BoxCast(origin, groundCheckSize, 0f, Vector2.down, groundCheckDistance, groundLayer);
+
+		return hit.collider != null;
+	}
+
+	void Patrol()
     {
         if (!canMove) return;
 
@@ -185,7 +207,7 @@ public class enemyController : MonoBehaviour
             if (rb != null)
             {
                 rb.velocity = Vector2.zero;
-                float knockbackForce = 5f;
+                float knockbackForce = 9f;
                 rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
             }
 

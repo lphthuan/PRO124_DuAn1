@@ -328,14 +328,19 @@ MonoBehaviour:
   pointB: {fileID: 5423736550632114908}
   patrolSpeed: 3
   chaseSpeed: 5
-  detectionRange: 3.67
+  detectionRange: 1
   attackRange: 3
   player: {fileID: 0}
   fireballPrefab: {fileID: 18095109319929313, guid: fcfada0dfaae56940b17ced6228879d0, type: 3}
   firePoint: {fileID: 5505517707337764430}
-  attackCooldown: 0
+  attackCooldown: 1
   canMove: 1
   soulPrefab: {fileID: 6334112857032349684, guid: 1911cce2f3faabc4fb04d0a2fbdf681f, type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheckSize: {x: 0.5, y: 0.1}
+  groundCheckDistance: 1
 --- !u!114 &5567327463300054562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7da996d3b25db49b5eb0deed3d58b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  health: 999999
   currentHealth: 0
   enemyRigidbody: {fileID: 2197807200888115815}
 --- !u!114 &1410314691001183148
@@ -363,8 +368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3416214d062e94ca7cc49c2c9b22e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 10
-  kinematicPushDistance: 1
+  knockbackForce: 1
+  kinematicPushDistance: 0
   stunDuration: 0.5
 --- !u!114 &4749233870790972833
 MonoBehaviour:
