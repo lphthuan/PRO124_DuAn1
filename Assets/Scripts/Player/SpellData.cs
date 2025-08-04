@@ -6,6 +6,7 @@ public class SpellData : ScriptableObject
 	public string spellName;
 	public GameObject spellPrefab;
 	public float spellSpeed = 10f;
-	public string animationTrigger; // VD: "Cast_Fire"
+	public string animationTrigger;
 	public int StateIntAnim;
+	public Sprite spellIcon;
 }

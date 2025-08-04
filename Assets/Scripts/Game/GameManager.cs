@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,13 +7,19 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private GameObject materialWorld;
 	[SerializeField] private GameObject spiritWorld;
 
+	[Header("UI World Indicator")]
+	[SerializeField] private Image worldIcon;
+	[SerializeField] private Sprite spriteMaterialWorld;
+	[SerializeField] private Sprite spriteSpiritWorld;
+
 	private bool isInSpiritWorld = false;
 
 	void Start()
 	{
-		// Đảm bảo ban đầu chỉ thế giới vật chất hiện
+		// Khởi đầu ở thế giới vật chất
 		materialWorld.SetActive(true);
 		spiritWorld.SetActive(false);
+		UpdateWorldIcon();
 	}
 
 	void Update()
@@ -29,5 +36,15 @@ public class GameManager : MonoBehaviour
 
 		materialWorld.SetActive(!isInSpiritWorld);
 		spiritWorld.SetActive(isInSpiritWorld);
+
+		UpdateWorldIcon();
+	}
+
+	private void UpdateWorldIcon()
+	{
+		if (worldIcon != null)
+		{
+			worldIcon.sprite = isInSpiritWorld ? spriteSpiritWorld : spriteMaterialWorld;
+		}
 	}
 }

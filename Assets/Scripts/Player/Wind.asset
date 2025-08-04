@@ -17,3 +17,4 @@ MonoBehaviour:
   spellSpeed: 7
   animationTrigger: IsAtkWind
   StateIntAnim: 4
+  spellIcon: {fileID: 21300000, guid: 6590305339a7eb54187976f0f559b5df, type: 3}
