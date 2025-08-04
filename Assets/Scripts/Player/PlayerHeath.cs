@@ -60,9 +60,9 @@ public class PlayerHealth : MonoBehaviour
             case "Explotion":
                 damage = 150;
                 break;
-			/*case "DeadZone":
+			case "DeadZone":
 				damage = 1000;
-				break;*/
+				break;
 			default:
                 return;
         }
