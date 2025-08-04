@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -29,11 +29,13 @@ public class CameraManager : MonoBehaviour
 
     public static void Register(CinemachineVirtualCamera camera)
     {
-        cameras.Add(camera);
+        if (!cameras.Contains(camera))
+            cameras.Add(camera);
     }
 
     public static void Unregister(CinemachineVirtualCamera camera)
     {
-        cameras.Remove(camera);
+        if (cameras.Contains(camera))
+            cameras.Remove(camera);
     }
 }

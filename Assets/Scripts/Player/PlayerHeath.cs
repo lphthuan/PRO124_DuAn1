@@ -147,7 +147,7 @@ public class PlayerHealth : MonoBehaviour
         Respawn();
     }
 
-	private void Respawn()
+    private void Respawn()
 	{
 		if (CheckpointManager.Instance != null && CheckpointManager.Instance.HasCheckpoint())
 		{

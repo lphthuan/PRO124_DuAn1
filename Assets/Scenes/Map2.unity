@@ -107819,8 +107819,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c23d028539c98443b112adf637a56ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoneType: 1
   cameraToEnable: {fileID: 643844878}
   cameraToDisable: {fileID: 1507247728}
+  camFL: {fileID: 643844880}
+  player: {fileID: 776313399}
 --- !u!61 &513099745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -110541,11 +110544,11 @@ PrefabInstance:
       objectReference: {fileID: 351970282}
     - target: {fileID: 8572418809735927629, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 34.9
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 8572418809735927629, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.9
+      value: -2.1
       objectReference: {fileID: 0}
     - target: {fileID: 8572418809735927629, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -110674,8 +110677,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c23d028539c98443b112adf637a56ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoneType: 0
   cameraToEnable: {fileID: 1507247728}
   cameraToDisable: {fileID: 643844878}
+  camFL: {fileID: 643844880}
+  player: {fileID: 776313399}
 --- !u!1 &643844878
 GameObject:
   m_ObjectHideFlags: 0
@@ -110703,7 +110709,7 @@ Transform:
   m_GameObject: {fileID: 643844878}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.042843, y: 6.9461007, z: -10.978717}
+  m_LocalPosition: {x: -34.442844, y: 1.9461007, z: -10.978717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -110867,6 +110873,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 283439882248656046, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
   m_PrefabInstance: {fileID: 748324309}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &776313399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 27183530028538441, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+  m_PrefabInstance: {fileID: 544121377}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &839146544 stripped
 Transform:
@@ -112578,7 +112589,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 9
+  m_Priority: 0
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
