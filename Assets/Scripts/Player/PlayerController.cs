@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         defaultJumpForce = jumpForce;
         SetAnimatorIdleState(); // chuyển idle ban đầu
 
-        shieldSpellLevel = PlayerPrefs.GetInt("ShieldSkillLevel", 0);
+        LoadShieldSkillState();
     }
 
     private void Update()
@@ -476,6 +476,20 @@ public class PlayerController : MonoBehaviour
             activeShield = Instantiate(shieldSpell, transform.position + shieldOffset, Quaternion.identity, transform);
             shieldCheck = true;
             shieldHave = true;
+        }
+    }
+
+    private void LoadShieldSkillState()
+    {
+        if (PlayerPrefs.HasKey("ShieldSkillLevel"))
+        {
+            shieldSpellLevel = PlayerPrefs.GetInt("ShieldSkillLevel");
+            shieldHave = shieldSpellLevel > 0;
+        }
+        else
+        {
+            shieldSpellLevel = 0;
+            shieldHave = false;
         }
     }
 

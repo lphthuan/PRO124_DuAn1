@@ -422,6 +422,7 @@ public class BlacksmithDialogue : MonoBehaviour
         PlayerPrefs.DeleteKey("UpgradeSpeedCount");
         PlayerPrefs.DeleteKey("UnlockSkillParry");
         PlayerPrefs.DeleteKey("ParryUnlocked");
+        PlayerPrefs.DeleteKey("ShieldSkillLevel");
 
         Debug.Log("Đã xóa toàn bộ dữ liệu nâng cấp.");
     }
