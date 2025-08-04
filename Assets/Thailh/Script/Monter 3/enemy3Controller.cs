@@ -207,7 +207,7 @@ public class enemyController : MonoBehaviour
             if (rb != null)
             {
                 rb.velocity = Vector2.zero;
-                float knockbackForce = 9f;
+                float knockbackForce = 7f;
                 rb.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
             }
 
