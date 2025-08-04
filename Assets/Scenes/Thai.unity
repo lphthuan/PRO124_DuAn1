@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 121616357}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.12, y: -3.04, z: 0}
+  m_LocalPosition: {x: 18.09, y: -2.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -450,11 +450,12 @@ Transform:
   m_GameObject: {fileID: 983506402}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.65, y: -2.05, z: -0.062274385}
+  m_LocalPosition: {x: 12.43, y: -1.74, z: -0.062274385}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1696772227}
+  - {fileID: 2069385418}
   m_Father: {fileID: 239562692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &983506404
@@ -616,23 +617,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointA: {fileID: 121616358}
   pointB: {fileID: 1237225658}
-  patrolSpeed: 0
+  patrolSpeed: 3
   maxHealth: 50
   currentHealth: 0
   healThreshold: 25
   healCooldown: 30
   healDuration: 3
-  attackRange: 1.5
-  attackDamage: 5
+  attackRange: 1.66
+  attackDamage: 55
   attackCooldown: 2
-  onAttackHit:
-    m_PersistentCalls:
-      m_Calls: []
-  attack2Range: 1.36
-  attack2Damage: 20
-  onAttack2Hit:
-    m_PersistentCalls:
-      m_Calls: []
+  attackPoint1: {fileID: 1696772227}
+  attackRadius1: 0.56
+  attack2Range: 1.08
+  attack2Damage: 19.2
+  attackPoint2: {fileID: 2069385418}
+  attackRadius2: 0.52
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &1076122863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 283439882248656046, guid: d023b7d6c7eef614a865644521a267ac, type: 3}
@@ -697,7 +699,7 @@ Transform:
   m_GameObject: {fileID: 1237225657}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.51, y: -3.04, z: 0}
+  m_LocalPosition: {x: 2.42, y: -2.68, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -713,7 +715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1696772227}
   m_Layer: 0
-  m_Name: AttackPoint
+  m_Name: AttackPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -728,7 +730,38 @@ Transform:
   m_GameObject: {fileID: 1696772226}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.61, y: -0.07, z: 0}
+  m_LocalPosition: {x: 0.85, y: 0.26, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 983506403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2069385417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2069385418}
+  m_Layer: 0
+  m_Name: AttackPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2069385418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069385417}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.34, y: -0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

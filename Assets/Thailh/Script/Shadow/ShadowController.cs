@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 public class ShadowController : MonoBehaviour
 {
@@ -12,24 +11,35 @@ public class ShadowController : MonoBehaviour
     [Header("Stats")]
     public int maxHealth = 50;
     public int currentHealth;
-    public int healThreshold = 25; // Ngưỡng máu để hồi phục
+    public int healThreshold = 25;
 
     [Header("Heal")]
-    public float healCooldown = 30f; // Thời gian cooldown của heal
+    public float healCooldown = 30f;
     private float lastHealTime;
-    public float healDuration = 3f; // Thời gian heal
+    public float healDuration = 3f;
     private float healTimer;
 
     [Header("Attack 1")]
     public float attackRange = 3f;
     public float attackDamage = 10f;
     public float attackCooldown = 2f;
-    public UnityEvent onAttackHit;
+    public Transform attackPoint1; // Điểm tấn công vật lý 1
+    public float attackRadius1 = 0.5f;
 
     [Header("Attack 2")]
     public float attack2Range = 1.5f;
     public float attack2Damage = 20f;
-    public UnityEvent onAttack2Hit;
+    // Đã loại bỏ public float knockbackForce = 5f; 
+    // Đã loại bỏ public float stunDuration = 1f;
+    public Transform attackPoint2; // Điểm tấn công vật lý 2
+    public float attackRadius2 = 0.5f;
+
+    [Header("Physics Detection")]
+    public LayerMask playerLayer; // Lớp của người chơi để kiểm tra va chạm
+
+    [Header("Defense")]
+    public float defendDuration = 2f; // Thời gian phòng thủ
+    private float defendTimer;
 
     // Các tham chiếu đến component
     private Rigidbody2D rb;
@@ -37,12 +47,14 @@ public class ShadowController : MonoBehaviour
     private Transform player;
 
     // Biến trạng thái
-    private enum State { Idle, Patrol, Attack, Attack2, Heal, Hit, Death };
+    // Đã thêm trạng thái "Defend"
+    private enum State { Idle, Patrol, Attack, Attack2, Heal, Hit, Defend, Death };
     private State currentState;
-    private State previousState; // Lưu trạng thái trước đó để quay lại sau khi Hit
+    private State previousState;
     private Transform targetPoint;
     private bool isFacingRight = true;
     private float lastAttackTime;
+    private bool hasTriggeredAttack = false;
 
     void Start()
     {
@@ -50,20 +62,21 @@ public class ShadowController : MonoBehaviour
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
 
-        // Tìm Player có tag "Player"
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        // Chỉ tìm Player để biết vị trí, không cần lấy component
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
 
         currentState = State.Patrol;
         targetPoint = pointA;
-        lastHealTime = -healCooldown; // Cho phép hồi máu ngay lần đầu tiên
-
-        // Khởi tạo isFacingRight dựa trên hướng ban đầu của quái vật
+        lastHealTime = -healCooldown;
         isFacingRight = transform.localScale.x > 0;
     }
 
     void Update()
     {
-        // Chuyển đổi giữa các trạng thái
         switch (currentState)
         {
             case State.Patrol:
@@ -78,36 +91,61 @@ public class ShadowController : MonoBehaviour
             case State.Heal:
                 HealState();
                 break;
+            case State.Defend:
+                DefendState();
+                break;
             case State.Hit:
-                // Trạng thái Hit không cần update, chỉ chờ animation kết thúc
                 break;
             case State.Death:
-                // Không làm gì khi quái vật chết
                 break;
         }
     }
 
-    // --- Phương thức nhận sát thương ---
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Kiểm tra nếu Shadow đang phòng thủ và va chạm với "WindSpell"
+        if (currentState == State.Defend && other.CompareTag("WindSpell"))
+        {
+            Debug.Log("Shadow đã phòng thủ thành công một WindSpell!");
+            // Hủy WindSpell mà không gây sát thương
+            Destroy(other.gameObject);
+            return; // Dừng xử lý va chạm để không gây sát thương
+        }
+
+        // Kiểm tra xem đối tượng va chạm có tag "PlayerBullet" không
+        //if (other.CompareTag("PlayerBullet"))
+        //{
+            
+        //    PlayerBullet bullet = other.GetComponent<PlayerBullet>();
+        //    if (bullet != null)
+        //    {
+        //        // Gọi hàm TakeDamage để Shadow nhận sát thương từ viên đạn
+        //        TakeDamage(bullet.damage);
+        //    }
+
+        //    // Hủy viên đạn sau khi va chạm
+        //    Destroy(other.gameObject);
+        //}
+    }
+
     public void TakeDamage(int damage)
     {
-        // Quái vật không nhận sát thương khi đang ở trạng thái Heal hoặc Death
-        if (currentState == State.Heal || currentState == State.Death)
+        // Không nhận sát thương khi đang hồi máu hoặc đã chết
+        if (currentState == State.Heal || currentState == State.Defend || currentState == State.Death)
         {
             return;
         }
 
         currentHealth -= damage;
 
-        // Kích hoạt trạng thái Hit nếu còn sống
         if (currentHealth > 0)
         {
-            previousState = currentState; // Lưu trạng thái hiện tại
+            previousState = currentState;
             currentState = State.Hit;
             animator.SetTrigger("IsHit");
-            rb.velocity = Vector2.zero; // Dừng lại khi bị đánh
+            rb.velocity = Vector2.zero;
         }
 
-        // Kiểm tra điều kiện chết
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -119,36 +157,27 @@ public class ShadowController : MonoBehaviour
         Debug.Log("Shadow có " + currentHealth + " máu.");
     }
 
-    // --- Các phương thức xử lý trạng thái ---
-
     private void PatrolState()
     {
-        // Kiểm tra điều kiện hồi máu trước tiên
         if (currentHealth < healThreshold && Time.time > lastHealTime + healCooldown)
         {
             currentState = State.Heal;
             animator.SetBool("IsHeal", true);
-            rb.velocity = Vector2.zero; // Dừng di chuyển
-            healTimer = 0f; // Reset bộ đếm thời gian heal
+            rb.velocity = Vector2.zero;
+            healTimer = 0f;
             return;
         }
 
         animator.SetBool("IsRun", true);
+        hasTriggeredAttack = false;
 
-        // Di chuyển đến điểm đích
         transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, patrolSpeed * Time.deltaTime);
-
-        // Lấy tọa độ X của điểm đến tiếp theo
         float nextPointX = targetPoint.position.x;
-
-        // Kiểm tra xem quái vật đã đi qua điểm đích chưa
         bool hasPassedPoint = (isFacingRight && transform.position.x >= nextPointX) ||
                               (!isFacingRight && transform.position.x <= nextPointX);
 
-        // Nếu đã đến đích, đổi hướng và lật mặt
         if (hasPassedPoint)
         {
-            // Đổi điểm đích
             if (targetPoint == pointA)
             {
                 targetPoint = pointB;
@@ -157,11 +186,9 @@ public class ShadowController : MonoBehaviour
             {
                 targetPoint = pointA;
             }
-
             Flip();
         }
 
-        // Kiểm tra phạm vi tấn công
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         if (distanceToPlayer <= attack2Range)
         {
@@ -173,11 +200,25 @@ public class ShadowController : MonoBehaviour
             currentState = State.Attack;
             animator.SetBool("IsRun", false);
         }
+
+        // Logic chuyển sang trạng thái Defend
+        // Có thể thêm điều kiện khác để chuyển sang trạng thái phòng thủ
+        // Ví dụ: khi Player chuẩn bị dùng đòn đánh mạnh
+        // For demonstration, we will just add a timer-based check
+        if (Time.time > lastAttackTime + attackCooldown)
+        {
+            if (Random.Range(0, 100) < 10) // 10% cơ hội để phòng thủ
+            {
+                currentState = State.Defend;
+                animator.SetBool("IsDefend", true);
+                rb.velocity = Vector2.zero;
+                defendTimer = 0f;
+            }
+        }
     }
 
     private void AttackState()
     {
-        // Kiểm tra điều kiện hồi máu
         if (currentHealth < healThreshold && Time.time > lastHealTime + healCooldown)
         {
             currentState = State.Heal;
@@ -187,32 +228,31 @@ public class ShadowController : MonoBehaviour
             return;
         }
 
-        // Dừng di chuyển và quay mặt về phía player
         rb.velocity = Vector2.zero;
         LookAtPlayer();
 
-        // Kiểm tra cooldown và thực hiện tấn công
-        if (Time.time > lastAttackTime + attackCooldown)
+        if (!hasTriggeredAttack && Time.time > lastAttackTime + attackCooldown)
         {
-            animator.SetTrigger("AttackTrigger");
+            animator.SetTrigger("AttackTrigger1");
             lastAttackTime = Time.time;
+            hasTriggeredAttack = true;
         }
 
-        // Kiểm tra lại phạm vi, nếu player ra xa thì trở về tuần tra
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         if (distanceToPlayer > attackRange)
         {
             currentState = State.Patrol;
+            hasTriggeredAttack = false;
         }
         else if (distanceToPlayer <= attack2Range)
         {
             currentState = State.Attack2;
+            hasTriggeredAttack = false;
         }
     }
 
     private void Attack2State()
     {
-        // Kiểm tra điều kiện hồi máu
         if (currentHealth < healThreshold && Time.time > lastHealTime + healCooldown)
         {
             currentState = State.Heal;
@@ -222,17 +262,21 @@ public class ShadowController : MonoBehaviour
             return;
         }
 
-        // Dừng di chuyển và quay mặt về phía player
         rb.velocity = Vector2.zero;
         LookAtPlayer();
 
-        animator.SetTrigger("Attack2Trigger");
+        if (!hasTriggeredAttack)
+        {
+            // Kích hoạt animation tấn công 2
+            animator.SetTrigger("AttackTrigger2");
+            hasTriggeredAttack = true;
+        }
 
-        // Kiểm tra lại phạm vi, nếu player ra xa thì chuyển về trạng thái Attack
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
         if (distanceToPlayer > attack2Range)
         {
             currentState = State.Attack;
+            hasTriggeredAttack = false;
         }
     }
 
@@ -240,21 +284,31 @@ public class ShadowController : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         animator.SetBool("IsHeal", true);
+        hasTriggeredAttack = false;
 
         healTimer += Time.deltaTime;
         if (healTimer >= healDuration)
         {
             currentHealth = maxHealth;
-            lastHealTime = Time.time; // Cập nhật thời gian hồi máu cuối cùng
-
+            lastHealTime = Time.time;
             animator.SetBool("IsHeal", false);
             CheckPlayerRangeAndSetState();
         }
     }
 
-    // --- Các phương thức hỗ trợ ---
+    // === Hàm mới cho trạng thái phòng thủ ===
+    private void DefendState()
+    {
+        rb.velocity = Vector2.zero;
+        defendTimer += Time.deltaTime;
 
-    // Hàm lật quái vật đã được tối ưu
+        if (defendTimer >= defendDuration)
+        {
+            animator.SetBool("IsDefend", false);
+            CheckPlayerRangeAndSetState(); // Quay lại trạng thái hành động bình thường
+        }
+    }
+
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -263,20 +317,16 @@ public class ShadowController : MonoBehaviour
         transform.localScale = scaler;
     }
 
-    // Hàm quay mặt về phía player
     private void LookAtPlayer()
     {
-        // Xác định hướng của player so với quái vật
+        if (player == null) return;
         bool playerIsRight = player.position.x > transform.position.x;
-
-        // Nếu hướng của quái vật không khớp với hướng của player, hãy lật mặt
         if (playerIsRight != isFacingRight)
         {
             Flip();
         }
     }
 
-    // Hàm kiểm tra tầm và chuyển trạng thái
     private void CheckPlayerRangeAndSetState()
     {
         if (player == null) return;
@@ -294,23 +344,63 @@ public class ShadowController : MonoBehaviour
         {
             currentState = State.Patrol;
         }
+        hasTriggeredAttack = false;
     }
 
-    // --- Các phương thức sự kiện (được gọi từ Animation Event) ---
-
-    public void OnAttackEvent()
+    //được gọi từ Animation Event
+    public void DealDamageAttack1()
     {
-        onAttackHit.Invoke();
+        if (attackPoint1 == null) return;
+
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint1.position, attackRadius1, playerLayer);
+        foreach (Collider2D hit in hitObjects)
+        {
+            PlayerHealth playerHealth = hit.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage((int)attackDamage);
+            }
+        }
     }
 
-    public void OnAttack2Event()
+    public void DealDamageAttack2()
     {
-        onAttack2Hit.Invoke();
+        if (attackPoint2 == null) return;
+
+        Collider2D[] hitObjects = Physics2D.OverlapCircleAll(attackPoint2.position, attackRadius2, playerLayer);
+        foreach (Collider2D hit in hitObjects)
+        {
+            PlayerHealth playerHealth = hit.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                // Chỉ gây st
+                playerHealth.TakeDamage((int)attack2Damage);
+            }
+        }
     }
 
-    // Sự kiện khi animation Hit kết thúc
     public void OnHitAnimationEnd()
     {
+        hasTriggeredAttack = false;
         CheckPlayerRangeAndSetState();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attack2Range);
+
+        if (attackPoint1 != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(attackPoint1.position, attackRadius1);
+        }
+        if (attackPoint2 != null)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(attackPoint2.position, attackRadius2);
+        }
     }
 }
