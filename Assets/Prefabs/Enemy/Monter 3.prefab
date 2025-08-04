@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 3424920889546927305}
   - component: {fileID: 5567327463300054562}
   - component: {fileID: 1410314691001183148}
+  - component: {fileID: 4749233870790972833}
   m_Layer: 0
   m_Name: Monter3
   m_TagString: Enemy
@@ -365,3 +366,17 @@ MonoBehaviour:
   knockbackForce: 10
   kinematicPushDistance: 1
   stunDuration: 0.5
+--- !u!114 &4749233870790972833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861005899573158416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ace5d9818b927b4d93bc7f90291c3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToActivate:
+  - {fileID: 0}
