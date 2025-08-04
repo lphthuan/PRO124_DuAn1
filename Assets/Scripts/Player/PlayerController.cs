@@ -136,8 +136,9 @@ public class PlayerController : MonoBehaviour
         {
             int nextIndex = (currentSpellIndex + 1) % availableSpells.Length;
             SwitchSpell(nextIndex);
-        }
-    }
+			PlayerAttack.Instance.UpdateSpellIcon(); //switch spell icon UI
+		}
+	}
 
     private void SwitchSpell(int index)
     {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime = -Mathf.Infinity;
     private SpriteRenderer spriteRenderer;
 
-    private void Awake()
+	[Header("UI")]
+	[SerializeField] private Image spellIconUI;
+
+	private void Awake()
     {
         Instance = this;
         currentDamage = baseDamage;
@@ -123,4 +127,13 @@ public class PlayerAttack : MonoBehaviour
         else
             spriteRenderer.flipX = false;  // Quay phải
     }
+
+	public void UpdateSpellIcon()
+	{
+		if (spellIconUI != null && currentSpell != null)
+		{
+			spellIconUI.sprite = currentSpell.spellIcon;
+		}
+	}
+
 }

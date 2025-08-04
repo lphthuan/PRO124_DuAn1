@@ -17,3 +17,4 @@ MonoBehaviour:
   spellSpeed: 10
   animationTrigger: IsAtkLight
   StateIntAnim: 3
+  spellIcon: {fileID: -1425428598, guid: c81f3977a46ca314daaeb59c8a72b18b, type: 3}
