@@ -143,8 +143,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 877821343
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 3743957659742367504, guid: a48b0037be4645c4c913e26853a053cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -195,9 +195,9 @@ MonoBehaviour:
   patrolSpeed: 3
   chaseSpeed: 6
   detectionRange: 2.3
-  attackRange: 1.5
+  attackRange: 1.68
   attackCooldown: 1
-  damage: 15
+  damage: 50
   fireAttackRange: 9.5
   fireballPrefab: {fileID: 199165253297979706, guid: b1a2826676bdcc54baf94cff1b3cc701, type: 3}
   fireballSpeed: 5
@@ -209,6 +209,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   canMove: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheckSize: {x: 0.5, y: 0.1}
+  groundCheckDistance: 1.5
   soulPrefab: {fileID: 6334112857032349684, guid: 1911cce2f3faabc4fb04d0a2fbdf681f, type: 3}
 --- !u!61 &7906918818729834921
 BoxCollider2D:
@@ -309,8 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3416214d062e94ca7cc49c2c9b22e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 8
-  kinematicPushDistance: 1
+  knockbackForce: 1
+  kinematicPushDistance: 0
   stunDuration: 0.5
 --- !u!114 &4575537875051059165
 MonoBehaviour:
