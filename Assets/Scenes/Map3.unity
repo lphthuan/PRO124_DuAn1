@@ -538454,10 +538454,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8126793374725816904, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 8794673795183082464, guid: 9e43d4003866c51498445348f34c2b58, type: 3}
       propertyPath: m_Name
       value: SoulManager
