@@ -2,40 +2,49 @@
 
 public class CheckpointManager : MonoBehaviour
 {
-	public static CheckpointManager Instance;
+    public static CheckpointManager Instance;
 
-	private Transform currentCheckpoint;
+    private Transform currentCheckpoint;
 
-	private void Awake()
-	{
-		if (Instance == null) Instance = this;
-		else Destroy(gameObject);
-	}
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
-	public void SetCheckpoint(Transform newCheckpoint)
-	{
-		// Nếu đã có checkpoint cũ, vô hiệu hóa nó
-		if (currentCheckpoint != null)
-		{
-			var old = currentCheckpoint.GetComponent<Checkpoint>();
-			if (old != null)
-				old.Deactivate();
-		}
+    public void SetCheckpoint(Transform newCheckpoint)
+    {
+        // Vô hiệu hóa checkpoint cũ
+        if (currentCheckpoint != null)
+        {
+            var old = currentCheckpoint.GetComponent<Checkpoint>();
+            if (old != null)
+                old.Deactivate();
+        }
 
-		currentCheckpoint = newCheckpoint;
-	}
+        currentCheckpoint = newCheckpoint;
+    }
 
-	public Vector3 GetRespawnPosition()
-	{
-		if (currentCheckpoint != null)
-			return currentCheckpoint.position;
+    public Vector3 GetRespawnPosition()
+    {
+        if (currentCheckpoint != null)
+            return currentCheckpoint.position;
 
-		Debug.LogWarning("[CheckpointManager] Không có Checkpoint! Trả về Vector3.zero");
-		return Vector3.zero;
-	}
+        Debug.LogWarning("[CheckpointManager] Không có Checkpoint! Trả về Vector3.zero");
+        return Vector3.zero;
+    }
 
-	public bool HasCheckpoint()
-	{
-		return currentCheckpoint != null;
-	}
+    public bool HasCheckpoint()
+    {
+        return currentCheckpoint != null;
+    }
+
+    // GỌI SAU KHI PLAYER CHẾT & HỒI SINH
+    public void HandleCameraResetOnRespawn()
+    {
+        if (CamGiaiDo.GetActivePuzzleZone() != null)
+        {
+            CamGiaiDo.GetActivePuzzleZone().ForceResetCamera();
+        }
+    }
 }
