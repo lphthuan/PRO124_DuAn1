@@ -87,7 +87,37 @@ public class ShadowController : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
     // --- Phương thức nhận sát thương ---
+=======
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // Kiểm tra nếu Shadow đang phòng thủ và va chạm với "WindSpell"
+        if (currentState == State.Defend && other.CompareTag("WindSpell"))
+        {
+            Debug.Log("Shadow đã phòng thủ thành công một WindSpell!");
+            // Hủy WindSpell mà không gây sát thương
+            Destroy(other.gameObject);
+            return; 
+        }
+
+        // Kiểm tra xem đối tượng va chạm có tag "PlayerBullet" không
+        if (other.CompareTag("PlayerBullet"))
+        {
+            // Lấy component PlayerBullet để lấy giá trị sát thương
+            //PlayerBullet bullet = other.GetComponent<PlayerBullet>();
+            //if (bullet != null)
+            //{
+                
+            //    TakeDamage(bullet.damage);
+            //}
+
+           
+            Destroy(other.gameObject);
+        }
+    }
+
+>>>>>>> Stashed changes
     public void TakeDamage(int damage)
     {
         // Quái vật không nhận sát thương khi đang ở trạng thái Heal hoặc Death
@@ -116,7 +146,6 @@ public class ShadowController : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
 
-        Debug.Log("Shadow có " + currentHealth + " máu.");
     }
 
     // --- Các phương thức xử lý trạng thái ---
