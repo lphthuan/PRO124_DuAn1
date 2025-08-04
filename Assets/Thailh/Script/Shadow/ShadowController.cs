@@ -113,35 +113,32 @@ public class ShadowController : MonoBehaviour
         }
 
         // Kiểm tra xem đối tượng va chạm có tag "PlayerBullet" không
-<<<<<<< Updated upstream
-        //if (other.CompareTag("PlayerBullet"))
-        //{
-            
-        //    PlayerBullet bullet = other.GetComponent<PlayerBullet>();
-        //    if (bullet != null)
-        //    {
-        //        // Gọi hàm TakeDamage để Shadow nhận sát thương từ viên đạn
-        //        TakeDamage(bullet.damage);
-        //    }
-
-        //    // Hủy viên đạn sau khi va chạm
-        //    Destroy(other.gameObject);
-        //}
-=======
         if (other.CompareTag("PlayerBullet"))
         {
-            // Lấy component PlayerBullet để lấy giá trị sát thương
-            //PlayerBullet bullet = other.GetComponent<PlayerBullet>();
-            //if (bullet != null)
-            //{
-            //    // Gọi hàm TakeDamage để Shadow nhận sát thương từ viên đạn
-            //    TakeDamage(bullet.damage);
-            //}
+
+            PlayerLightningSpell bullet = other.GetComponent<PlayerLightningSpell>();
+            if (bullet != null)
+            {
+                // Gọi hàm TakeDamage để Shadow nhận sát thương từ viên đạn
+              //  TakeDamage(bullet.damage);
+            }
 
             // Hủy viên đạn sau khi va chạm
             Destroy(other.gameObject);
         }
->>>>>>> Stashed changes
+        if (other.CompareTag("PlayerBullet"))
+        {
+            //Lấy component PlayerBullet để lấy giá trị sát thương
+            PlayerLightningSpell bullet = other.GetComponent<PlayerLightningSpell>();
+            if (bullet != null)
+            {
+                // Gọi hàm TakeDamage để Shadow nhận sát thương từ viên đạn
+              //  TakeDamage(bullet.damage);
+            }
+
+            // Hủy viên đạn sau khi va chạm
+            Destroy(other.gameObject);
+        }
     }
 
     public void TakeDamage(int damage)
