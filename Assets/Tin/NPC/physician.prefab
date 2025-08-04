@@ -302,6 +302,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a907b3b3f4c51429d3e8a5fa2cd47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parryCostText: {fileID: 0}
+  shieldSoulTextGO: {fileID: 0}
+  legacyUnlockSkillText: {fileID: 0}
   dialoguePanel: {fileID: 0}
   npcText: {fileID: 179999848428659549}
   dialogueText: {fileID: 0}
@@ -339,14 +342,17 @@ MonoBehaviour:
   upgradeDamageButton: {fileID: 0}
   upgradeHealthButton: {fileID: 0}
   upgradeSpeedButton: {fileID: 0}
+  unlockSkill: {fileID: 0}
   backgroundMusic: {fileID: 6526364584582766696}
   floatingTextPrefab: {fileID: 6820456874638325130, guid: df4bb0e517409ea459273eeb502dcc6d, type: 3}
   damageUpgradeSoul: 3
   healthUpgradeSoul: 3
   speedUpgradeSoul: 2
+  shieldUpgradeSoul: 20
   damageSoulText: {fileID: 0}
   healthSoulText: {fileID: 0}
   speedSoulText: {fileID: 0}
+  shieldSoulText: {fileID: 0}
 --- !u!114 &6257477025734606766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textObject: {fileID: 179999848428659549}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 6526364584582766696}
 --- !u!82 &6526364584582766696
 AudioSource:
   m_ObjectHideFlags: 0

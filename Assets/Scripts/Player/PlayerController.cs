@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
         defaultMoveSpeed = moveSpeed;
         defaultJumpForce = jumpForce;
         SetAnimatorIdleState(); // chuyển idle ban đầu
+
+        shieldSpellLevel = PlayerPrefs.GetInt("ShieldSkillLevel", 0);
     }
 
     private void Update()
@@ -103,10 +105,13 @@ public class PlayerController : MonoBehaviour
         attackPressed = false;
         switchSpellPressed = false;
 
-        //chỗ này khoa đụng nè hjhj
-        if (Input.GetKeyDown(shieldKey))
+        //chỗ này khoa đụng nè hjhj -> Tín fix của Khoa
+        if (Input.GetKeyDown(shieldKey) && CanReceiveInput())
         {
-            TryCastShield();
+            if (IsParryUnlocked())
+                TryCastShield();
+            else
+                Debug.Log("Kỹ năng Parry chưa được mở!");
         }
 
     }
@@ -447,6 +452,11 @@ public class PlayerController : MonoBehaviour
 
 
     //dưới này Khoa đụng nè hjhj
+
+    private bool IsParryUnlocked()
+    {
+        return shieldSpellLevel > 0;
+    }
     private void TryCastShield()
     {
         if (shieldSpellLevel == 0)

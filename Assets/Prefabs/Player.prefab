@@ -194,7 +194,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f2ef32be9205c454b8f58bd3d1140565, type: 2}
   - {fileID: 11400000, guid: 383cb11c40e17314a81dda5b1e376aed, type: 2}
   shieldKey: 102
-  shieldSpellLevel: 1
+  shieldSpellLevel: 0
   shieldCheck: 0
   shieldHave: 0
   shieldSpell: {fileID: 7978290534127446212, guid: f59309aa85c2f5a4dbfb119e249aad8b, type: 3}
