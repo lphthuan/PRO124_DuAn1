@@ -40,7 +40,7 @@ public class SoulUIManager : MonoBehaviour
 
     private void UpdateSoulUI()
     {
-        soulText.text = soulCount.ToString();
+        soulText.text = $"{soulCount} Soul";
     }
 
     public int GetCurrentSoul()

@@ -5,6 +5,12 @@ using System.Collections;
 
 public class BlacksmithDialogue : MonoBehaviour
 {
+
+    [Header("UI Parry Unlock")]
+    public TMP_Text parryCostText;              // Text trên nút unlock
+    public GameObject shieldSoulTextGO;        // GameObject chứa "Soul: 20"
+    public Text legacyUnlockSkillText;         // Text (Legacy) nếu có
+
     [Header("Dialogue")]
     public GameObject dialoguePanel;
     public GameObject npcText;
@@ -24,6 +30,7 @@ public class BlacksmithDialogue : MonoBehaviour
     public Button upgradeDamageButton;
     public Button upgradeHealthButton;
     public Button upgradeSpeedButton;
+    public Button unlockSkill;
     public AudioSource backgroundMusic;
 
     [Header("Floating Text")]
@@ -33,11 +40,13 @@ public class BlacksmithDialogue : MonoBehaviour
     public int damageUpgradeSoul = 3;
     public int healthUpgradeSoul = 3;
     public int speedUpgradeSoul = 2;
+    public int shieldUpgradeSoul = 20;
 
     [Header("Upgrade Soul Texts")]
     public TMP_Text damageSoulText;
     public TMP_Text healthSoulText; 
     public TMP_Text speedSoulText;
+    public TMP_Text shieldSoulText;
 
     private int currentLine = 0;
     private bool playerInRange = false;
@@ -47,10 +56,12 @@ public class BlacksmithDialogue : MonoBehaviour
     private int damageUpgradeCount;
     private int healthUpgradeCount;
     private int speedUpgradeCount;
+    private int shieldUpgradeCount;
 
     private const int maxDamageUpgradeCount = 5;
     private const int maxHealthUpgradeCount = 10;
     private const int maxSpeedUpgradeCount = 5;
+    private const int maxShieldUpgradeCount = 1;
 
     private GameObject player;
     private MonoBehaviour[] playerScriptsToDisable;
@@ -68,6 +79,7 @@ public class BlacksmithDialogue : MonoBehaviour
         upgradeDamageButton.onClick.RemoveAllListeners();
         upgradeHealthButton.onClick.RemoveAllListeners();
         upgradeSpeedButton.onClick.RemoveAllListeners();
+        unlockSkill.onClick.RemoveAllListeners();
         buyButton.onClick.RemoveAllListeners();
         exitButton.onClick.RemoveAllListeners();
         shopExitButton.onClick.RemoveAllListeners();
@@ -76,18 +88,21 @@ public class BlacksmithDialogue : MonoBehaviour
         upgradeDamageButton.onClick.AddListener(UpgradePlayerDamage);
         upgradeHealthButton.onClick.AddListener(UpgradePlayerHealth);
         upgradeSpeedButton.onClick.AddListener(UpgradePlayerSpeed);
+        unlockSkill.onClick.AddListener(UnlockSkillParry);
         buyButton.onClick.AddListener(OpenShop);
         exitButton.onClick.AddListener(CloseDialogue);
         shopExitButton.onClick.AddListener(CloseShopToChoices);
 
         // Gán hiển thị giá
-        damageSoulText.text = $"Soul: {damageUpgradeSoul}";
-        healthSoulText.text = $"Soul: {healthUpgradeSoul}";
-        speedSoulText.text = $"Soul: {speedUpgradeSoul}";
+        damageSoulText.text = $"{damageUpgradeSoul} Soul";
+        healthSoulText.text = $"{healthUpgradeSoul} Soul";
+        speedSoulText.text = $"{speedUpgradeSoul} Soul";
+        shieldSoulText.text = $"{shieldUpgradeSoul} Soul";
 
         damageUpgradeCount = PlayerPrefs.GetInt("UpgradeDamageCount", 0);
         healthUpgradeCount = PlayerPrefs.GetInt("UpgradeHealthCount", 0);
         speedUpgradeCount = PlayerPrefs.GetInt("UpgradeSpeedCount", 0);
+        shieldUpgradeCount = PlayerPrefs.GetInt("UnlockSkillParry", 0);
     }
 
 
@@ -157,6 +172,18 @@ public class BlacksmithDialogue : MonoBehaviour
         choicePanel.SetActive(false);
         dialoguePanel.SetActive(false);
 
+        if (PlayerPrefs.GetInt("ParryUnlocked", 0) == 1)
+        {
+            if (parryCostText != null)
+                parryCostText.text = "Đã Unlock Skill";
+
+            if (shieldSoulTextGO != null)
+                shieldSoulTextGO.SetActive(false);
+
+            if (legacyUnlockSkillText != null)
+                legacyUnlockSkillText.enabled = false;
+        }
+
         UpdateShopCostColors();
     }
 
@@ -183,6 +210,8 @@ public class BlacksmithDialogue : MonoBehaviour
             PlayerPrefs.SetInt("UpgradeDamageCount", damageUpgradeCount);
             PlayerPrefs.Save();
             ShowFloatingText($"Damage +20 ({damageUpgradeCount}/{maxDamageUpgradeCount})");
+
+            UpdateShopCostColors();
         }
     }
 
@@ -210,6 +239,8 @@ public class BlacksmithDialogue : MonoBehaviour
             PlayerPrefs.SetInt("UpgradeHealthCount", healthUpgradeCount);
             PlayerPrefs.Save();
             ShowFloatingText($"Health +100 ({healthUpgradeCount}/{maxHealthUpgradeCount})");
+
+            UpdateShopCostColors();
         }
     }
 
@@ -237,8 +268,54 @@ public class BlacksmithDialogue : MonoBehaviour
             PlayerPrefs.SetInt("UpgradeSpeedCount", speedUpgradeCount);
             PlayerPrefs.Save();
             ShowFloatingText($"Speed +1 ({speedUpgradeCount}/{maxSpeedUpgradeCount})");
+
+            UpdateShopCostColors();
         }
     }
+
+    private void UnlockSkillParry()
+    {
+        if (shieldUpgradeCount >= maxShieldUpgradeCount)
+        {
+            ShowFloatingText("Bạn đã mở khóa kỹ năng này!");
+            return;
+        }
+
+        if (!SoulUIManager.instance.SpendSoul(shieldUpgradeSoul))
+        {
+            ShowFloatingText("Không đủ Soul!");
+            return;
+        }
+
+        PlayerController unlock = player.GetComponent<PlayerController>();
+        if (unlock != null)
+        {
+            unlock.shieldSpellLevel += 1;
+            shieldUpgradeCount++;
+
+            // Ghi trạng thái đã unlock
+            PlayerPrefs.SetInt("UnlockSkillParry", shieldUpgradeCount);
+            PlayerPrefs.SetInt("ParryUnlocked", 1); // Flag toàn cục cho Parry
+            PlayerPrefs.Save();
+
+            // ✅ Đổi text nút thành "Đã Unlock Skill"
+            if (parryCostText != null)
+                parryCostText.text = "Đã Unlock Skill";
+
+            // ✅ Ẩn dòng "Soul: xxx" nếu có
+            if (shieldSoulTextGO != null)
+                shieldSoulTextGO.SetActive(false);
+
+            // ✅ Ẩn Text (Legacy) nếu được gán
+            if (legacyUnlockSkillText != null)
+                legacyUnlockSkillText.enabled = false;
+
+            ShowFloatingText("Đã mở khóa kỹ năng Parry!");
+        }
+    }
+
+
+
     private void UpdateShopCostColors()
     {
         int currentSoul = SoulUIManager.instance.GetCurrentSoul();
@@ -246,6 +323,7 @@ public class BlacksmithDialogue : MonoBehaviour
         damageSoulText.color = (currentSoul >= damageUpgradeSoul) ? Color.white : Color.red;
         healthSoulText.color = (currentSoul >= healthUpgradeSoul) ? Color.white : Color.red;
         speedSoulText.color = (currentSoul >= speedUpgradeSoul  ) ? Color.white : Color.red;
+        shieldSoulText.color = (currentSoul >= shieldUpgradeSoul) ? Color.white : Color.red;
     }
 
 
@@ -342,6 +420,8 @@ public class BlacksmithDialogue : MonoBehaviour
         PlayerPrefs.DeleteKey("UpgradeHealthCount");
         PlayerPrefs.DeleteKey("PlayerSpeed");
         PlayerPrefs.DeleteKey("UpgradeSpeedCount");
+        PlayerPrefs.DeleteKey("UnlockSkillParry");
+        PlayerPrefs.DeleteKey("ParryUnlocked");
 
         Debug.Log("Đã xóa toàn bộ dữ liệu nâng cấp.");
     }
