@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class ShadowController : MonoBehaviour
+public partial class ShadowController : MonoBehaviour
 {
-    // Các biến có thể chỉnh sửa trong Inspector
+    // Các biến đã được khai báo ở phần trước
     [Header("Patrol")]
     public Transform pointA;
     public Transform pointB;
@@ -23,28 +23,26 @@ public class ShadowController : MonoBehaviour
     public float attackRange = 3f;
     public float attackDamage = 10f;
     public float attackCooldown = 2f;
-    public Transform attackPoint1; // Điểm tấn công vật lý 1
+    public Transform attackPoint1;
     public float attackRadius1 = 0.5f;
 
     [Header("Attack 2")]
     public float attack2Range = 1.5f;
     public float attack2Damage = 20f;
-    public Transform attackPoint2; // Điểm tấn công vật lý 2
+    public Transform attackPoint2;
     public float attackRadius2 = 0.5f;
 
     [Header("Physics Detection")]
-    public LayerMask playerLayer; // Lớp của người chơi để kiểm tra va chạm
+    public LayerMask playerLayer;
 
     [Header("Defense")]
-    public float defendDuration = 2f; // Thời gian phòng thủ
+    public float defendDuration = 2f;
     private float defendTimer;
 
-    // Các tham chiếu đến component
     private Rigidbody2D rb;
     private Animator animator;
     private Transform player;
 
-    // Biến trạng thái
     private enum State { Idle, Patrol, Attack, Attack2, Heal, Hit, Defend, Death };
     private State currentState;
     private State previousState;
@@ -73,13 +71,49 @@ public class ShadowController : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
+        if (currentState == State.Defend || currentState == State.Hit || currentState == State.Heal || currentState == State.Death)
+        {
+            if (currentState == State.Defend) DefendState();
+            if (currentState == State.Heal) HealState();
+            return;
+        }
+
+        if (player != null)
+        {
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+            // Xử lý chuyển trạng thái tấn công
+            if (distanceToPlayer <= attack2Range)
+            {
+                currentState = State.Attack2;
+                animator.SetBool("IsAttack2", true);
+                animator.SetBool("IsAttack1", false);
+                animator.SetBool("IsRun", false);
+            }
+            else if (distanceToPlayer <= attackRange)
+            {
+                currentState = State.Attack;
+                animator.SetBool("IsAttack1", true);
+                animator.SetBool("IsAttack2", false);
+                animator.SetBool("IsRun", false);
+            }
+            // Chuyển về trạng thái đi tuần và quay mặt đúng hướng
+            else
+            {
+                currentState = State.Patrol;
+                animator.SetBool("IsRun", true);
+                animator.SetBool("IsAttack1", false);
+                animator.SetBool("IsAttack2", false);
+                LookAtTarget(targetPoint);
+            }
+        }
+        else
         {
             if (currentState != State.Patrol)
             {
                 currentState = State.Patrol;
                 animator.SetBool("IsRun", true);
-                animator.SetBool("IsDefend", false);
+                LookAtTarget(targetPoint);
             }
         }
 
@@ -94,16 +128,6 @@ public class ShadowController : MonoBehaviour
             case State.Attack2:
                 Attack2State();
                 break;
-            case State.Heal:
-                HealState();
-                break;
-            case State.Defend:
-                DefendState();
-                break;
-            case State.Hit:
-                break;
-            case State.Death:
-                break;
         }
     }
 
@@ -114,6 +138,7 @@ public class ShadowController : MonoBehaviour
             Debug.Log("Shadow phát hiện WindSpell và đang phòng thủ!");
             currentState = State.Defend;
             animator.SetBool("IsDefend", true);
+            animator.SetBool("IsRun", false);
             rb.velocity = Vector2.zero;
             defendTimer = 0f;
             LookAtTarget(other.transform);
@@ -130,13 +155,10 @@ public class ShadowController : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("PlayerBullet"))
+        PlayerLightningSpell bullet = other.GetComponent<PlayerLightningSpell>();
+        if (bullet != null)
         {
-            PlayerLightningSpell bullet = other.GetComponent<PlayerLightningSpell>();
-            if (bullet != null)
-            {
-               // TakeDamage((int)bullet.damage);
-            }
+           // TakeDamage((int)bullet.damage);
             Destroy(other.gameObject);
         }
     }
@@ -165,6 +187,7 @@ public class ShadowController : MonoBehaviour
             previousState = currentState;
             currentState = State.Hit;
             animator.SetTrigger("IsHit");
+            animator.SetBool("IsRun", false);
             rb.velocity = Vector2.zero;
         }
 
@@ -173,157 +196,8 @@ public class ShadowController : MonoBehaviour
             currentHealth = 0;
             currentState = State.Death;
             animator.SetBool("IsDead", true);
-            rb.velocity = Vector2.zero;
-        }
-    }
-
-    private void PatrolState()
-    {
-        if (player == null)
-        {
-            animator.SetBool("IsRun", true);
-            transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, patrolSpeed * Time.deltaTime);
-            if (Vector2.Distance(transform.position, targetPoint.position) < 0.1f)
-            {
-                if (targetPoint == pointA)
-                {
-                    targetPoint = pointB;
-                }
-                else
-                {
-                    targetPoint = pointA;
-                }
-                Flip();
-            }
-            return;
-        }
-
-        if (currentHealth < healThreshold && Time.time > lastHealTime + healCooldown)
-        {
-            currentState = State.Heal;
-            animator.SetBool("IsHeal", true);
-            rb.velocity = Vector2.zero;
-            healTimer = 0f;
-            return;
-        }
-
-        animator.SetBool("IsRun", true);
-        hasTriggeredAttack = false;
-
-        transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, patrolSpeed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, targetPoint.position) < 0.1f)
-        {
-            if (targetPoint == pointA)
-            {
-                targetPoint = pointB;
-            }
-            else
-            {
-                targetPoint = pointA;
-            }
-            Flip();
-        }
-
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer <= attack2Range)
-        {
-            currentState = State.Attack2;
             animator.SetBool("IsRun", false);
-        }
-        else if (distanceToPlayer <= attackRange)
-        {
-            currentState = State.Attack;
-            animator.SetBool("IsRun", false);
-        }
-    }
-
-    private void AttackState()
-    {
-        if (player == null)
-        {
-            currentState = State.Patrol;
-            return;
-        }
-
-        rb.velocity = Vector2.zero;
-        LookAtPlayer();
-
-        if (!hasTriggeredAttack && Time.time > lastAttackTime + attackCooldown)
-        {
-            animator.SetTrigger("AttackTrigger1");
-            lastAttackTime = Time.time;
-            hasTriggeredAttack = true;
-        }
-
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer > attackRange)
-        {
-            currentState = State.Patrol;
-            hasTriggeredAttack = false;
-        }
-        else if (distanceToPlayer <= attack2Range)
-        {
-            currentState = State.Attack2;
-            hasTriggeredAttack = false;
-        }
-    }
-
-    private void Attack2State()
-    {
-        if (player == null)
-        {
-            currentState = State.Patrol;
-            return;
-        }
-
-        rb.velocity = Vector2.zero;
-        LookAtPlayer();
-
-        if (!hasTriggeredAttack)
-        {
-            animator.SetTrigger("AttackTrigger2");
-            hasTriggeredAttack = true;
-        }
-
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer > attack2Range)
-        {
-            currentState = State.Attack;
-            hasTriggeredAttack = false;
-        }
-    }
-
-    private void HealState()
-    {
-        rb.velocity = Vector2.zero;
-        animator.SetBool("IsHeal", true);
-        hasTriggeredAttack = false;
-
-        healTimer += Time.deltaTime;
-        if (healTimer >= healDuration)
-        {
-            currentHealth = maxHealth;
-            lastHealTime = Time.time;
-            animator.SetBool("IsHeal", false);
-            CheckPlayerRangeAndSetState();
-        }
-    }
-
-    private void DefendState()
-    {
-        rb.velocity = Vector2.zero;
-        defendTimer += Time.deltaTime;
-
-        if (defendTimer >= defendDuration)
-        {
-            animator.SetBool("IsDefend", false);
-            CheckPlayerRangeAndSetState(); // Quay lại trạng thái hành động bình thường
-
-            // Bổ sung: Nếu trạng thái sau phòng thủ là tuần tra, quay mặt về hướng tuần tra
-            if (currentState == State.Patrol)
-            {
-                LookAtTarget(targetPoint);
-            }
+            rb.velocity = Vector2.zero;
         }
     }
 
@@ -353,16 +227,25 @@ public class ShadowController : MonoBehaviour
         if (distanceToPlayer <= attack2Range)
         {
             currentState = State.Attack2;
+            animator.SetBool("IsAttack2", true);
+            animator.SetBool("IsAttack1", false);
+            animator.SetBool("IsRun", false);
         }
         else if (distanceToPlayer <= attackRange)
         {
             currentState = State.Attack;
+            animator.SetBool("IsAttack1", true);
+            animator.SetBool("IsAttack2", false);
+            animator.SetBool("IsRun", false);
         }
         else
         {
             currentState = State.Patrol;
+            animator.SetBool("IsRun", true);
+            animator.SetBool("IsAttack1", false);
+            animator.SetBool("IsAttack2", false);
+            LookAtTarget(targetPoint);
         }
-        hasTriggeredAttack = false;
     }
 
     public void DealDamageAttack1()
