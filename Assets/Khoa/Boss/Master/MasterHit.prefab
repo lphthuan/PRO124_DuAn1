@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3781556149750447204}
   - component: {fileID: 6292897609671863708}
+  - component: {fileID: 731708219706505751}
   m_Layer: 0
   m_Name: MasterHit
   m_TagString: Untagged
@@ -77,3 +78,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.1047707, y: 4.6037517}
   m_EdgeRadius: 0
+--- !u!114 &731708219706505751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812888054337139930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7e15f46d6886448a3cd836f6300008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
