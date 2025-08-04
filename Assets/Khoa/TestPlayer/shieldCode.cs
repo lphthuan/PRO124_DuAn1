@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class shieldCode : MonoBehaviour
 {
+    public bool parryWindow = false;
     public PlayerController playerController;
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,16 @@ public class shieldCode : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         playerController.shieldHave = false; // Player giờ có thể bị sát thương
+    }
+    public void EnableParryWindow()
+    {
+        parryWindow = true;
+        Invoke("DisableParryWindow", 0.3f); // Cho phép parry trong 0.2 giây
+    }
+
+    private void DisableParryWindow()
+    {
+        parryWindow = false;
     }
 }
 
