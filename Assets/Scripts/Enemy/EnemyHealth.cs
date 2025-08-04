@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter2D(Collider2D collision)
     { 
-        if (collision.CompareTag("WindSpell") || collision.CompareTag("PlayerBullet"))
+        if (collision.CompareTag("PlayerBullet"))
         {
             float damage = PlayerAttack.Instance.GetDamage();
             TakeDamage(damage, collision.gameObject);
