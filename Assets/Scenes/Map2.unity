@@ -110509,15 +110509,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 327263498191021367, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.642845
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 327263498191021367, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6538992
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 327263498191021367, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.208397
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 1615506078187993515, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -110529,7 +110529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5157670242468574159, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: orthographic size
-      value: 12
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5579747650445305098, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: healthText
@@ -111430,8 +111430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f569fdf854df5bf439c683b5741b2510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectA: {fileID: 454491474}
-  objectB: {fileID: 857151560}
+  objectA: {fileID: 857151560}
+  objectB: {fileID: 454491474}
   animator: {fileID: 890187660}
   animationTrigger: Spin
   triggeringTag: WindSpell
@@ -112543,7 +112543,7 @@ Transform:
   m_GameObject: {fileID: 1507247728}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.6, y: 4.1, z: -20.187115}
+  m_LocalPosition: {x: 4.26, y: 1.95, z: -20.187115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -112578,7 +112578,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 9
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
