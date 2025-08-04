@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 841605500598593323}
   - component: {fileID: 8459920904768915719}
   - component: {fileID: 6968020963910650340}
+  - component: {fileID: 261108715093880697}
   m_Layer: 0
   m_Name: Enemy2Hau
   m_TagString: Enemy
@@ -803,6 +804,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &261108715093880697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3917225594547168572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ace5d9818b927b4d93bc7f90291c3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToActivate: []
 --- !u!1 &5460091078426625903
 GameObject:
   m_ObjectHideFlags: 0

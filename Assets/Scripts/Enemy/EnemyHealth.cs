@@ -35,8 +35,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
             Destroy(collision.gameObject);
         }
-    }
-
+        if (collision.CompareTag("DeadZone"))
+        {
+            Die();
+		}
+	}
 
     void Die()
     {
@@ -49,6 +52,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         enemyRigidbody.isKinematic = true;
 
 
-		Destroy(gameObject, 1f);
+		Destroy(gameObject, 2f);
     }
 }
