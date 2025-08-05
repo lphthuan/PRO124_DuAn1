@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 public class TrapMoveUp : MonoBehaviour
 {
-    [SerializeField] GameObject spawnTeleZone;
     public int timing = 0;
     public int winCheck = 0;
     public float riseSpeed = 1.5f; // Tốc độ di chuyển lên
@@ -17,7 +16,6 @@ public class TrapMoveUp : MonoBehaviour
 
     private void Update()
     {
-        ifWinCheck();
         if (timing == 0)
         {
             return; // Không làm gì nếu timing bằng 0
@@ -61,14 +59,4 @@ public class TrapMoveUp : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
-    private void ifWinCheck()
-    {
-        if (winCheck == 1 && winCheck < 2)
-        {
-            Vector3 spawnPos = new Vector3(-42.32f, -46.57f, 0.04519607f);
-            Instantiate(spawnTeleZone, spawnPos, Quaternion.identity);
-
-        }
-    }
 }
-
