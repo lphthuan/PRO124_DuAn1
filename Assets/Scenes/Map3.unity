@@ -559682,7 +559682,7 @@ MonoBehaviour:
   - {fileID: 309480901}
   - {fileID: 121720770}
   - {fileID: 1136717453}
-  sequenceLengthInInspector: 3
+  sequenceLengthInInspector: 10
   emojiLibrary:
   - {fileID: 0}
   - {fileID: 0}
@@ -559748,7 +559748,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  targetSequence: 
+  targetSequence: []
   emojiTargets:
   - {fileID: 734042539}
   - {fileID: 416611112}
