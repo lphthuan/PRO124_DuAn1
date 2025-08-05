@@ -246823,7 +246823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPortal: {fileID: 1403493574}
-  promptMessage: 
+  promptMessage: mlemmlem
   promptText: {fileID: 299078459}
   fadeImage: {fileID: 1418425967}
 --- !u!61 &946660205
@@ -559682,7 +559682,7 @@ MonoBehaviour:
   - {fileID: 309480901}
   - {fileID: 121720770}
   - {fileID: 1136717453}
-  sequenceLengthInInspector: 10
+  sequenceLengthInInspector: 3
   emojiLibrary:
   - {fileID: 0}
   - {fileID: 0}
@@ -562106,8 +562106,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756922308}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 206.02254, y: 36.31302, z: 0.9220073}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -54.961136, y: 3.4432526, z: 0.056150198}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -562141,7 +562141,7 @@ Transform:
   - {fileID: 584210212}
   - {fileID: 376180763}
   - {fileID: 1356752906}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2071099640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1762772840
 GameObject:
@@ -565170,6 +565170,7 @@ Transform:
   - {fileID: 2130300086}
   - {fileID: 1403493574}
   - {fileID: 946660203}
+  - {fileID: 1756922309}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2074093067
@@ -566050,7 +566051,6 @@ SceneRoots:
   - {fileID: 383961651}
   - {fileID: 1988091089}
   - {fileID: 2071099640}
-  - {fileID: 1756922309}
   - {fileID: 1441131213}
   - {fileID: 572272064}
   - {fileID: 2198606073232548530}

@@ -9,6 +9,8 @@ public class EmojiTarget : MonoBehaviour
     private int currentEmojiIndex = 0;
     private int changeCount = 0;
 
+    private bool isLocked = false;
+
     private int correctEmojiIndex = -1;
 
     private void Start()
@@ -56,6 +58,26 @@ public class EmojiTarget : MonoBehaviour
 
         emojiRenderer.sprite = manager.emojiLibrary[currentEmojiIndex];
         manager.OnEmojiSelected(currentEmojiIndex);
+    }
+
+    public void ChangeEmoji()
+    {
+        if (isLocked) return;
+
+        currentEmojiIndex = (currentEmojiIndex + 1) % manager.emojiLibrary.Count;
+        emojiRenderer.sprite = manager.emojiLibrary[currentEmojiIndex];
+
+        manager.OnEmojiSelected(currentEmojiIndex);
+    }
+
+    public void LockEmoji()
+    {
+        isLocked = true;
+    }
+
+    public void UnlockEmoji()
+    {
+        isLocked = false;
     }
 
 
