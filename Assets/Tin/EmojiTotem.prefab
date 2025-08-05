@@ -336,5 +336,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emojiRenderer: {fileID: 4583609946963780074}
-  manager: {fileID: 0}
-  maxChangeCount: 2
+  maxChangeCount: 5

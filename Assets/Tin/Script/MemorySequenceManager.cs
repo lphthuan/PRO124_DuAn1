@@ -18,7 +18,8 @@ public class MemorySequenceManager : MonoBehaviour
 
     public TMP_Text countdownText;
     public float memorizationTime = 10f;
-    public GameObject Telezone;
+    public GameObject Telezone4B;
+    public GameObject Telezone4C;
 
     private void Awake()
     {
@@ -30,6 +31,13 @@ public class MemorySequenceManager : MonoBehaviour
 
     private void Start()
     {
+        Telezone4C.SetActive(false);
+    }
+
+    public void StartMemorization()
+    {
+        StopAllCoroutines();
+        if (countdownText != null) countdownText.gameObject.SetActive(true);
         StartCoroutine(MemorizationCountdown());
     }
 
@@ -108,7 +116,7 @@ public class MemorySequenceManager : MonoBehaviour
     private void OnSequenceCompleted()
     {
         Debug.Log("Hoàn thành chuỗi chính xác!");
-        if (Telezone != null) Telezone.SetActive(true);
+        if (Telezone4C != null) Telezone4C.SetActive(true);
         foreach (var t in emojiTargets) t.LockEmoji();
     }
 
@@ -130,7 +138,8 @@ public class MemorySequenceManager : MonoBehaviour
         }
         if (countdownText != null) countdownText.text = "Đã hết thời gian ghi nhớ!";
         yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
         if (countdownText != null) countdownText.gameObject.SetActive(false);
-        if (Telezone != null) Telezone.SetActive(false);
+        if (Telezone4B != null) Telezone4B.SetActive(false);
     }
 }
