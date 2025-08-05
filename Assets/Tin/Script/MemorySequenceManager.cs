@@ -6,58 +6,63 @@ using TMPro;
 
 public class MemorySequenceManager : MonoBehaviour
 {
-    [Header("Thư mục emoji trong Resources/")]
-    public string emojiFolderName = "EmojiSprites"; // Thư mục: Assets/Resources/EmojiSprites
-
-    [Header("Hiển thị chuỗi lên UI Panel")]
-    public Image[] sequenceSlots; // Kéo các Image UI để hiển thị emoji gợi nhớ
-
-    [Header("Số lượng emoji cần nhớ")]
+    public string emojiFolderName = "EmojiSprites";
+    public Image[] sequenceSlots;
     [Range(1, 64)] public int sequenceLengthInInspector = 10;
 
     [HideInInspector] public List<Sprite> emojiLibrary = new List<Sprite>();
-    [HideInInspector] public List<int> targetSequence = new List<int>();
+    [HideInInspector] public List<Sprite> targetSequence = new List<Sprite>();
 
-    [Header("Các emoji target trong scene")]
     public List<EmojiTarget> emojiTargets = new List<EmojiTarget>();
+    private Sprite[] currentSelectedSprites;
 
-    private int currentIndex = 0;
-
-    [Header("Giao diện đếm thời gian ghi nhớ")]
-    public TMP_Text countdownText; // Gán TMP_Text trong Inspector
-    public float memorizationTime = 10f; // Thời gian người chơi ghi nhớ
-
+    public TMP_Text countdownText;
+    public float memorizationTime = 10f;
     public GameObject Telezone;
 
     private void Awake()
     {
         LoadEmojiLibraryFromFolder();
         GenerateSequence();
+        SetupTargets();
         ShowSequence();
     }
 
     private void Start()
     {
-        StartCoroutine(MemorizationCountdown()); // Bắt đầu đếm ngược khi hiện chuỗi
+        StartCoroutine(MemorizationCountdown());
     }
 
     private void LoadEmojiLibraryFromFolder()
     {
         emojiLibrary.Clear();
-        Sprite[] loadedSprites = Resources.LoadAll<Sprite>(emojiFolderName);
-        emojiLibrary.AddRange(loadedSprites);
+        Sprite[] loaded = Resources.LoadAll<Sprite>(emojiFolderName);
+        emojiLibrary.AddRange(loaded);
+        Debug.Log($"Loaded {emojiLibrary.Count} sprites from {emojiFolderName}");
     }
 
     public void GenerateSequence()
     {
         targetSequence.Clear();
+        if (emojiLibrary.Count == 0) return;
+
         for (int i = 0; i < sequenceLengthInInspector; i++)
         {
-            int randomIndex = Random.Range(0, emojiLibrary.Count);
-            targetSequence.Add(randomIndex);
+            int r = Random.Range(0, emojiLibrary.Count);
+            targetSequence.Add(emojiLibrary[r]);
         }
+        currentSelectedSprites = new Sprite[targetSequence.Count];
+        for (int i = 0; i < currentSelectedSprites.Length; i++) currentSelectedSprites[i] = null;
+    }
 
-        currentIndex = 0;
+    private void SetupTargets()
+    {
+        // Bắt buộc: thứ tự trong emojiTargets phải tương ứng với thứ tự sequenceSlots (slot 0 -> emojiTargets[0])
+        for (int i = 0; i < emojiTargets.Count; i++)
+        {
+            int slot = (i < targetSequence.Count) ? i : -1;
+            emojiTargets[i].Initialize(this, slot);
+        }
     }
 
     public void ShowSequence()
@@ -66,80 +71,66 @@ public class MemorySequenceManager : MonoBehaviour
         {
             if (i < targetSequence.Count)
             {
-                sequenceSlots[i].sprite = emojiLibrary[targetSequence[i]];
+                sequenceSlots[i].sprite = targetSequence[i];
                 sequenceSlots[i].enabled = true;
             }
-            else
-            {
-                sequenceSlots[i].enabled = false;
-            }
+            else sequenceSlots[i].enabled = false;
         }
     }
 
-    public void OnEmojiSelected(int selectedIndex)
+    // Gọi khi 1 target thay đổi; slotIndex được gán khi Initialize
+    public void OnTargetChanged(int slotIndex, Sprite selectedSprite)
     {
-        // Nếu người chơi đã hoàn thành chuỗi thì bỏ qua không xử lý nữa
-        /*if (currentIndex >= targetSequence.Count)
-            return;*/
+        if (slotIndex < 0 || slotIndex >= targetSequence.Count) return;
 
-        if (selectedIndex == targetSequence[currentIndex])
-        {
-            // Nếu emoji cuối cùng đã chọn đúng
-            if (currentIndex == targetSequence.Count)
-            {
-                Debug.Log("Hoàn thành chuỗi chính xác!");
-                Telezone.SetActive(true);
-                currentIndex++; // Đánh dấu hoàn thành để các lần sau bỏ qua
-            }
-            else
-            {
-                currentIndex++; // Tiếp tục đến emoji kế tiếp
-            }
+        currentSelectedSprites[slotIndex] = selectedSprite;
+        Debug.Log($"Slot {slotIndex} changed -> {selectedSprite?.name}. Expect {targetSequence[slotIndex].name}");
 
-            // Khóa không cho emoji hiện tại bị đổi nữa
-            emojiTargets[currentIndex - 1].LockEmoji();
-        }
+        // Tự động lock nếu đúng
+        if (selectedSprite == targetSequence[slotIndex])
+            emojiTargets[slotIndex].LockEmoji();
         else
-        {
-            currentIndex = 0;
+            emojiTargets[slotIndex].UnlockEmoji();
 
-            // Mở khóa lại tất cả emoji để người chơi chọn lại
-            foreach (var emoji in emojiTargets)
-            {
-                emoji.UnlockEmoji();
-            }
-        }
+        if (CheckAllMatched())
+            OnSequenceCompleted();
     }
 
-
-    public int GetCorrectEmojiIndexForTarget(EmojiTarget target)
+    private bool CheckAllMatched()
     {
-        int index = emojiTargets.IndexOf(target);
-        if (index >= 0 && index < targetSequence.Count)
-            return targetSequence[index];
-        return -1;
+        for (int i = 0; i < targetSequence.Count; i++)
+        {
+            if (currentSelectedSprites[i] != targetSequence[i]) return false;
+        }
+        return true;
+    }
+
+    private void OnSequenceCompleted()
+    {
+        Debug.Log("Hoàn thành chuỗi chính xác!");
+        if (Telezone != null) Telezone.SetActive(true);
+        foreach (var t in emojiTargets) t.LockEmoji();
+    }
+
+    public Sprite GetCorrectSpriteForSlot(int slotIndex)
+    {
+        if (slotIndex >= 0 && slotIndex < targetSequence.Count) return targetSequence[slotIndex];
+        return null;
     }
 
     private IEnumerator MemorizationCountdown()
     {
-        countdownText.gameObject.SetActive(true);
-        float remainingTime = memorizationTime;
-
-        while (remainingTime > 0f)
+        if (countdownText != null) countdownText.gameObject.SetActive(true);
+        float remaining = memorizationTime;
+        while (remaining > 0f)
         {
-            countdownText.text = $"Ghi nhớ: {Mathf.CeilToInt(remainingTime)}s";
+            if (countdownText != null) countdownText.text = $"Ghi nhớ: {Mathf.CeilToInt(remaining)}s";
             yield return new WaitForSeconds(1f);
-            remainingTime -= 1f;
+            remaining -= 1f;
         }
-
-        // Khi hết giờ:
-        countdownText.text = "Đã hết thời gian ghi nhớ!";
-
-        yield return new WaitForSeconds(1f); // Cho người chơi thấy thông báo một chút
-
-        countdownText.gameObject.SetActive(false);
-        gameObject.SetActive(false); // Tắt toàn bộ MemorySequenceManager
-        Telezone.SetActive(false);
+        if (countdownText != null) countdownText.text = "Đã hết thời gian ghi nhớ!";
+        yield return new WaitForSeconds(1f);
+        if (countdownText != null) countdownText.gameObject.SetActive(false);
+        if (Telezone != null) Telezone.SetActive(false);
     }
-
 }
