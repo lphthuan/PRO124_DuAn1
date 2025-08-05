@@ -792,6 +792,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shadow
       objectReference: {fileID: 0}
+    - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
+      propertyPath: maxHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
+      propertyPath: healCooldown
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
+      propertyPath: healDuration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
+      propertyPath: attack2Damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
+      propertyPath: currentHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
+      propertyPath: healThreshold
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6167366050408667487, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 43.15
