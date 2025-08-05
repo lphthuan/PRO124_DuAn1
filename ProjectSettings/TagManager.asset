@@ -16,6 +16,10 @@ TagManager:
   - Explotion
   - TeleZone
   - DeadZone
+  - platform
+  - Movable
+  - Door
+  - Limit
   layers:
   - Default
   - TransparentFX
