@@ -20,6 +20,7 @@ TagManager:
   - Movable
   - Door
   - Limit
+  - Test
   layers:
   - Default
   - TransparentFX
