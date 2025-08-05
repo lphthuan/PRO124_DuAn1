@@ -199,5 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e560734b38e198346abb58cab51fe9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToActivate: {fileID: 8734971600710288594, guid: 9fb4e41bd8381bc40a9c7e363244e60c, type: 3}
+  spawnTeleZone: {fileID: 8734971600710288594, guid: 9fb4e41bd8381bc40a9c7e363244e60c, type: 3}
   timing: 0
+  winCheck: 0
   riseSpeed: 1.5

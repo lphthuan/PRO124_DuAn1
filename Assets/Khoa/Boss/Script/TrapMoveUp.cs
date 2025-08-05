@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 public class TrapMoveUp : MonoBehaviour
 {
+    [SerializeField] GameObject spawnTeleZone;
     public int timing = 0;
+    public int winCheck = 0;
     public float riseSpeed = 1.5f; // Tốc độ di chuyển lên
     private bool isActivated = false;
     private void Start()
@@ -15,19 +17,29 @@ public class TrapMoveUp : MonoBehaviour
 
     private void Update()
     {
-        if(timing == 0)
+        ifWinCheck();
+        if (timing == 0)
         {
             return; // Không làm gì nếu timing bằng 0
         }
-        if (timing == 2)
+        if (timing > 2)
         {
+            winCheck = 2;
             return;
         }
+        else if (timing == 2)
+        {
+            winCheck = 1;
+            timing = 3;
+            return;
+        }
+
+
         else if (timing == 1)
         {
             transform.position += Vector3.up * riseSpeed * Time.deltaTime;
         }
-         
+
     }
     void IncreaseA()
     {
@@ -48,6 +60,15 @@ public class TrapMoveUp : MonoBehaviour
         player.transform.position = teleportPosition;
         yield return new WaitForSeconds(3f);
         Destroy(gameObject);
+    }
+    private void ifWinCheck()
+    {
+        if (winCheck == 1 && winCheck < 2)
+        {
+            Vector3 spawnPos = new Vector3(-42.32f, -46.57f, 0.04519607f);
+            Instantiate(spawnTeleZone, spawnPos, Quaternion.identity);
+
+        }
     }
 }
 
