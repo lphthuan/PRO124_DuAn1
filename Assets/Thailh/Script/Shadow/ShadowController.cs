@@ -198,8 +198,6 @@ public partial class ShadowController : MonoBehaviour
             animator.SetBool("IsDead", true);
             animator.SetBool("IsRun", false);
             rb.velocity = Vector2.zero;
-<<<<<<< Updated upstream
-=======
             Destroy(gameObject, 1f);
         }
         else
@@ -398,7 +396,7 @@ public partial class ShadowController : MonoBehaviour
                 currentState = State.Patrol;
                 SetAnimatorBools(false, false, false, false, false, true);
             }
->>>>>>> Stashed changes
+
         }
     }
 
