@@ -50,6 +50,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: General
+    uniqueID: 816616379
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -59,12 +62,12 @@ TagManager:
   - name: MaterialWorld
     uniqueID: 2223872247
     locked: 0
+  - name: Boss
+    uniqueID: 2198608601
+    locked: 0
   - name: Player
     uniqueID: 877821343
     locked: 0
   - name: Midground
     uniqueID: 1356557549
-    locked: 0
-  - name: Boss
-    uniqueID: 2198608601
     locked: 0
