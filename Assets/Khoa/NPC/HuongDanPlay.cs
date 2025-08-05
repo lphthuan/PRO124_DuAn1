@@ -22,6 +22,9 @@ public class HuongDanPlay : MonoBehaviour
     [Header("Minigame")]
     public GameObject PanelEmoji;
 
+    [Header("References")]
+    public MemorySequenceManager memoryManager; // gán trong Inspector (hoặc tìm runtime)
+
     private int currentLine = 0;
     private bool playerInRange = false;
     private bool isTalking = false;
@@ -29,7 +32,8 @@ public class HuongDanPlay : MonoBehaviour
     private bool hasTalked = false;
 
     private GameObject player;
-    private MonoBehaviour[] playerScriptsToDisable;
+    private MonoBehaviour[] playerScripts; // all scripts trên player
+    private bool[] originalEnabledStates; // lưu trạng thái ban đầu
 
     // Tham chiếu TMP_Text của npcText
     private TMP_Text npcTextTMP;
@@ -118,7 +122,16 @@ public class HuongDanPlay : MonoBehaviour
         {
             playerInRange = true;
 
-            playerScriptsToDisable = player.GetComponents<MonoBehaviour>();
+            // Lấy và lưu tất cả MonoBehaviour trên player (chỉ khi chưa lưu)
+            if (playerScripts == null || playerScripts.Length == 0)
+            {
+                playerScripts = player.GetComponents<MonoBehaviour>();
+                originalEnabledStates = new bool[playerScripts.Length];
+                for (int i = 0; i < playerScripts.Length; i++)
+                {
+                    originalEnabledStates[i] = playerScripts[i].enabled;
+                }
+            }
 
             npcText.SetActive(true);
 
@@ -140,13 +153,14 @@ public class HuongDanPlay : MonoBehaviour
 
     private void DisablePlayerControl()
     {
-        if (playerScriptsToDisable != null)
+        if (playerScripts != null)
         {
-            foreach (var script in playerScriptsToDisable)
+            for (int i = 0; i < playerScripts.Length; i++)
             {
-                if (script != this && script.enabled)
+                // không tắt chính script này nếu attach trên cùng object NPC/this
+                if (playerScripts[i] != null && playerScripts[i] != this)
                 {
-                    script.enabled = false;
+                    playerScripts[i].enabled = false;
                 }
             }
         }
@@ -154,13 +168,14 @@ public class HuongDanPlay : MonoBehaviour
 
     private void EnablePlayerControl()
     {
-        if (playerScriptsToDisable != null)
+        if (playerScripts != null && originalEnabledStates != null)
         {
-            foreach (var script in playerScriptsToDisable)
+            for (int i = 0; i < playerScripts.Length; i++)
             {
-                if (!script.enabled)
+                if (playerScripts[i] != null)
                 {
-                    script.enabled = true;
+                    // restore trạng thái ban đầu
+                    playerScripts[i].enabled = originalEnabledStates[i];
                 }
             }
         }
@@ -174,6 +189,26 @@ public class HuongDanPlay : MonoBehaviour
 
         if (PanelEmoji != null)
             PanelEmoji.SetActive(true);
+
+        // Gọi manager để bắt đầu memorization (nếu có)
+        if (memoryManager == null)
+        {
+            memoryManager = FindObjectOfType<MemorySequenceManager>();
+        }
+
+        if (memoryManager != null)
+        {
+            // Nếu memoryManager object đang bị inactive, bật trước khi gọi
+            if (!memoryManager.gameObject.activeInHierarchy)
+                memoryManager.gameObject.SetActive(true);
+
+            // gọi phương thức public để bắt đầu đếm / hiển thị
+            memoryManager.StartMemorization(); // hoặc StartMemory() tùy bạn đã đặt tên
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy MemorySequenceManager khi nhấn Play.");
+        }
 
         EnablePlayerControl();
     }
@@ -193,5 +228,4 @@ public class HuongDanPlay : MonoBehaviour
         yield return new WaitForSeconds(2f);
         npcText.SetActive(false);
     }
-
 }
