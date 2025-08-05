@@ -11,16 +11,6 @@ TagManager:
   - Ground
   - WindSpell
   - Boss
-<<<<<<< Updated upstream
-=======
-  - SkillSummonMagic
-  - Arrow
-  - Explotion
-  - TeleZone
-  - DeadZone
-  - Door
-  - Movable
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -29,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - Movable
+  - 
   - 
   - 
   - 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5920018307189794658}
   - component: {fileID: 6635371248334553823}
   - component: {fileID: 3630769690755695765}
+  - component: {fileID: -4675489092915257682}
   m_Layer: 0
   m_Name: WindSpell
   m_TagString: WindSpell
@@ -180,3 +181,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.803729, y: 0.59212804}
   m_EdgeRadius: 0
+--- !u!114 &-4675489092915257682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146088961179750802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a0de51865ef0f4bac087d138290ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 50
