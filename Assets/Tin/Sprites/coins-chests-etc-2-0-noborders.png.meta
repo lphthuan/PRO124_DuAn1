@@ -1,0 +1,1170 @@
+fileFormatVersion: 2
+guid: d781f5a338405f7429111b6b8dd695df
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 130
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c94004204c90448923ed3bab31b727
+      internalID: 214866838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 130
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5429599f24452b24db3952103839ad79
+      internalID: 864834833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_2
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 130
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60d4ebc27e9680d4fb07c4577fc1834e
+      internalID: -1026882475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_3
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 130
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 884ad48d4dfff344b8b051172aceb63d
+      internalID: 1386990329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_4
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 130
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ae768c89acd45a4ba85b055ea94b634
+      internalID: 676958007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_5
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 130
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 019301de645d0e544873ccf40d15c127
+      internalID: -2075716990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_6
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 130
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f34ec4eeb677fa4abb74792ed4fc82b
+      internalID: 1338502082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_7
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 114
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64c499733ab05f14cb04618b323864a3
+      internalID: -468274606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_8
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 114
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00168f641a8abdb49bcd10c734cec016
+      internalID: -1078501049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 114
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3480dd07bf8fab4e939cde86e01fd45
+      internalID: 1655832014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_10
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 114
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7341ca15e1584b848a0e8bc85af3e457
+      internalID: 594870528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_11
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 114
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29f188f9fa792004696995edbc104401
+      internalID: 762002784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_12
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 114
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0253c32f1dbde43838a7c149d76ae7
+      internalID: 1056091501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_13
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 114
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60c01c3522795594f9420b5d9bab0628
+      internalID: -2040443970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_14
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 98
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7945278dc5b2fb144a1b271ffd545c1e
+      internalID: 1225995580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_15
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 98
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f0b2b27c5a4fef4fb0eeaf6b2d538ff
+      internalID: -1867489451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_16
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 98
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aa0df9372a696f478fb7cf289cfd2ef
+      internalID: 219936766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_17
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 98
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e9a0057e02bac24ba7d34d8ce82aa2c
+      internalID: -1839759292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_18
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 98
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 327101d0eb308ab47a62a4dbbd3ff374
+      internalID: -574019519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_19
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 98
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b172c9f3ef7ca944e964e96062bf7c18
+      internalID: -1159259471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_20
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 98
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a9bf45026f69874c9075c99daf5da6e
+      internalID: -1917439170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_21
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 82
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fd4de4ce563b1a41ba25b53be0e53aa
+      internalID: -1566843839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_22
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 82
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b27c9ef959ce5a544b1c452a0d4b9d34
+      internalID: 1070539614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_23
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 82
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e241dd5224728f94fa67e7f6ed954453
+      internalID: -778974223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_24
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 82
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9350bae4150325048907f973cbc3c183
+      internalID: 1707496112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_25
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 82
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a97c0bd76f3f9e4d8cae408a9fbb233
+      internalID: 1758765828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_26
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 82
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43d663aa2cf289f4d8cf57144b9d95f8
+      internalID: -1934555789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_27
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 82
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f95d7b8e86cfd0c448c34493050be85c
+      internalID: -685586001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_28
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 52
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 332a1be9e67beb14781b45da91f1e247
+      internalID: -599762013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_29
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 52
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e47f337c5e392d46b1038c10577dcc6
+      internalID: 233771123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_30
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 52
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bb789644aff68348841302b628b4668
+      internalID: 1156544009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_31
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 52
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 053d18dafd469c04190495fecad661ad
+      internalID: 1768076230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_32
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 52
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44aff84a972bae048a528001142bbe7a
+      internalID: -171583924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_33
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 36
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1974764f7535ba746a89cec0a2f552cc
+      internalID: 11424638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_34
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 36
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 730ab982a16a15c4eb88f8dfe0908bee
+      internalID: 1477921609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_35
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 36
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce942780cb53397439bd9323dc41973b
+      internalID: -82834182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_36
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 36
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f8dfb85c4cc05249a91d2a3f8e8ea2a
+      internalID: 1247826815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_37
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 36
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd92f07be6e0c4743a2138551a89d333
+      internalID: 1511240487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_38
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 20
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f54ceff24ffdd934b9a11839a527deab
+      internalID: -852031814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_39
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 20
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf654c2b6db8dd4da21386bc4d9d244
+      internalID: 64630482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_40
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 20
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7392fca5e21a6e748a92ea3305c4443b
+      internalID: -1356944475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_41
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 20
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 367774c77e147ce438d44ab6a0fe5bb9
+      internalID: -48275827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_42
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 20
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0694102b376d064c9e813aab4833816
+      internalID: -739971949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_43
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 4
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4049894a637620c47b81c2800059d4c7
+      internalID: 1215366473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_44
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 4
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2d1594387081ce439c618c63a9a8428
+      internalID: 193099566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_45
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 4
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 771e57f388e097e4ebf6129deb7e40e4
+      internalID: 1014707579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_46
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 4
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 582695aea2fda80418cfca39c0d8439a
+      internalID: 1604774810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: coins-chests-etc-2-0-noborders_47
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 4
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9d24892cbf8b274984b0518ba58947c
+      internalID: 917512084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      coins-chests-etc-2-0-noborders_0: 214866838
+      coins-chests-etc-2-0-noborders_1: 864834833
+      coins-chests-etc-2-0-noborders_10: 594870528
+      coins-chests-etc-2-0-noborders_11: 762002784
+      coins-chests-etc-2-0-noborders_12: 1056091501
+      coins-chests-etc-2-0-noborders_13: -2040443970
+      coins-chests-etc-2-0-noborders_14: 1225995580
+      coins-chests-etc-2-0-noborders_15: -1867489451
+      coins-chests-etc-2-0-noborders_16: 219936766
+      coins-chests-etc-2-0-noborders_17: -1839759292
+      coins-chests-etc-2-0-noborders_18: -574019519
+      coins-chests-etc-2-0-noborders_19: -1159259471
+      coins-chests-etc-2-0-noborders_2: -1026882475
+      coins-chests-etc-2-0-noborders_20: -1917439170
+      coins-chests-etc-2-0-noborders_21: -1566843839
+      coins-chests-etc-2-0-noborders_22: 1070539614
+      coins-chests-etc-2-0-noborders_23: -778974223
+      coins-chests-etc-2-0-noborders_24: 1707496112
+      coins-chests-etc-2-0-noborders_25: 1758765828
+      coins-chests-etc-2-0-noborders_26: -1934555789
+      coins-chests-etc-2-0-noborders_27: -685586001
+      coins-chests-etc-2-0-noborders_28: -599762013
+      coins-chests-etc-2-0-noborders_29: 233771123
+      coins-chests-etc-2-0-noborders_3: 1386990329
+      coins-chests-etc-2-0-noborders_30: 1156544009
+      coins-chests-etc-2-0-noborders_31: 1768076230
+      coins-chests-etc-2-0-noborders_32: -171583924
+      coins-chests-etc-2-0-noborders_33: 11424638
+      coins-chests-etc-2-0-noborders_34: 1477921609
+      coins-chests-etc-2-0-noborders_35: -82834182
+      coins-chests-etc-2-0-noborders_36: 1247826815
+      coins-chests-etc-2-0-noborders_37: 1511240487
+      coins-chests-etc-2-0-noborders_38: -852031814
+      coins-chests-etc-2-0-noborders_39: 64630482
+      coins-chests-etc-2-0-noborders_4: 676958007
+      coins-chests-etc-2-0-noborders_40: -1356944475
+      coins-chests-etc-2-0-noborders_41: -48275827
+      coins-chests-etc-2-0-noborders_42: -739971949
+      coins-chests-etc-2-0-noborders_43: 1215366473
+      coins-chests-etc-2-0-noborders_44: 193099566
+      coins-chests-etc-2-0-noborders_45: 1014707579
+      coins-chests-etc-2-0-noborders_46: 1604774810
+      coins-chests-etc-2-0-noborders_47: 917512084
+      coins-chests-etc-2-0-noborders_5: -2075716990
+      coins-chests-etc-2-0-noborders_6: 1338502082
+      coins-chests-etc-2-0-noborders_7: -468274606
+      coins-chests-etc-2-0-noborders_8: -1078501049
+      coins-chests-etc-2-0-noborders_9: 1655832014
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

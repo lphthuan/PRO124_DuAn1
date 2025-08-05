@@ -78,29 +78,45 @@ public class MemorySequenceManager : MonoBehaviour
 
     public void OnEmojiSelected(int selectedIndex)
     {
+        // Nếu người chơi đã hoàn thành chuỗi thì bỏ qua không xử lý nữa
+        /*if (currentIndex >= targetSequence.Count)
+            return;*/
+
         if (selectedIndex == targetSequence[currentIndex])
         {
-            currentIndex++;
-
-            if (currentIndex >= targetSequence.Count)
+            // Nếu emoji cuối cùng đã chọn đúng
+            if (currentIndex == targetSequence.Count)
             {
                 Debug.Log("Hoàn thành chuỗi chính xác!");
-                // Xử lý thắng puzzle
+                Telezone.SetActive(true);
+                currentIndex++; // Đánh dấu hoàn thành để các lần sau bỏ qua
             }
+            else
+            {
+                currentIndex++; // Tiếp tục đến emoji kế tiếp
+            }
+
+            // Khóa không cho emoji hiện tại bị đổi nữa
+            emojiTargets[currentIndex - 1].LockEmoji();
         }
         else
         {
             currentIndex = 0;
+
+            // Mở khóa lại tất cả emoji để người chơi chọn lại
+            foreach (var emoji in emojiTargets)
+            {
+                emoji.UnlockEmoji();
+            }
         }
     }
+
 
     public int GetCorrectEmojiIndexForTarget(EmojiTarget target)
     {
         int index = emojiTargets.IndexOf(target);
         if (index >= 0 && index < targetSequence.Count)
             return targetSequence[index];
-
-        Debug.LogWarning("Không tìm thấy EmojiTarget tương ứng hoặc index nằm ngoài giới hạn!");
         return -1;
     }
 
@@ -123,7 +139,7 @@ public class MemorySequenceManager : MonoBehaviour
 
         countdownText.gameObject.SetActive(false);
         gameObject.SetActive(false); // Tắt toàn bộ MemorySequenceManager
-        Telezone.gameObject.SetActive(false);
+        Telezone.SetActive(false);
     }
 
 }
