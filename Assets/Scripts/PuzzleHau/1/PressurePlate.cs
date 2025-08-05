@@ -2,19 +2,28 @@ using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
-    
-    private bool doorDestroyed = false;
+    public GameObject door; 
+    private bool objectOnPlate = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!doorDestroyed && other.CompareTag("Movable"))
+        if (other.CompareTag("Movable"))
         {
-            GameObject door = GameObject.FindWithTag("Door");
+            objectOnPlate = true;
+
             if (door != null)
-            {
-                Destroy(door);
-                doorDestroyed = true;
-            }
+                door.SetActive(false); 
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Movable"))
+        {
+            objectOnPlate = false;
+
+            if (door != null)
+                door.SetActive(true); 
         }
     }
 }
