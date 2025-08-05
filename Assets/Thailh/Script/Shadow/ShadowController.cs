@@ -198,6 +198,207 @@ public partial class ShadowController : MonoBehaviour
             animator.SetBool("IsDead", true);
             animator.SetBool("IsRun", false);
             rb.velocity = Vector2.zero;
+<<<<<<< Updated upstream
+=======
+            Destroy(gameObject, 1f);
+        }
+        else
+        {
+            currentState = State.Hit;
+            SetAnimatorBools(false, true, false, false, false, false);
+            rb.velocity = Vector2.zero;
+            hitTimer = 0f;
+        }
+    }
+
+    private void HandleHitState()
+    {
+        hitTimer += Time.deltaTime;
+        float hitAnimationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+
+        if (hitTimer >= hitAnimationLength)
+        {
+            animator.SetBool("IsHit", false);
+            hasTriggeredAttack = false;
+
+            if (player == null)
+            {
+                currentState = State.Patrol;
+                SetAnimatorBools(false, false, false, false, false, true);
+                return;
+            }
+
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            if (distanceToPlayer <= attack2Range)
+            {
+                currentState = State.Attack2;
+                SetAnimatorBools(false, false, false, true, false, false);
+            }
+            else if (distanceToPlayer <= attackRange)
+            {
+                currentState = State.Attack;
+                SetAnimatorBools(false, false, true, false, false, false);
+            }
+            else
+            {
+                currentState = State.Patrol;
+                SetAnimatorBools(false, false, false, false, false, true);
+            }
+        }
+    }
+
+    private void PatrolState()
+    {
+        if (player == null)
+        {
+            animator.SetBool("IsRun", true);
+            transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, patrolSpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, targetPoint.position) < 0.1f)
+            {
+                if (targetPoint == pointA)
+                {
+                    targetPoint = pointB;
+                }
+                else
+                {
+                    targetPoint = pointA;
+                }
+                Flip();
+            }
+            return;
+        }
+
+        animator.SetBool("IsRun", true);
+        hasTriggeredAttack = false;
+
+        transform.position = Vector2.MoveTowards(transform.position, targetPoint.position, patrolSpeed * Time.deltaTime);
+        if (Vector2.Distance(transform.position, targetPoint.position) < 0.1f)
+        {
+            if (targetPoint == pointA)
+            {
+                targetPoint = pointB;
+            }
+            else
+            {
+                targetPoint = pointA;
+            }
+            Flip();
+        }
+    }
+
+    private void AttackState()
+    {
+        if (player == null)
+        {
+            currentState = State.Patrol;
+            animator.SetBool("IsRun", true);
+            return;
+        }
+
+        rb.velocity = Vector2.zero;
+        LookAtPlayer();
+
+        if (!hasTriggeredAttack && Time.time > lastAttackTime + attackCooldown)
+        {
+            animator.SetBool("IsAttack1", true);
+            lastAttackTime = Time.time;
+            hasTriggeredAttack = true;
+        }
+    }
+
+    private void Attack2State()
+    {
+        if (player == null)
+        {
+            currentState = State.Patrol;
+            animator.SetBool("IsRun", true);
+            return;
+        }
+
+        rb.velocity = Vector2.zero;
+        LookAtPlayer();
+
+        if (!hasTriggeredAttack)
+        {
+            animator.SetBool("IsAttack2", true);
+            hasTriggeredAttack = true;
+        }
+    }
+
+    private void HealState()
+    {
+        rb.velocity = Vector2.zero;
+        animator.SetBool("IsHeal", true);
+        hasTriggeredAttack = false;
+
+        healTimer += Time.deltaTime;
+        if (healTimer >= healDuration)
+        {
+            currentHealth = maxHealth;
+            lastHealTime = Time.time;
+            animator.SetBool("IsHeal", false);
+
+            if (player != null)
+            {
+                float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+                if (distanceToPlayer <= attack2Range)
+                {
+                    currentState = State.Attack2;
+                    SetAnimatorBools(false, false, false, true, false, false);
+                }
+                else if (distanceToPlayer <= attackRange)
+                {
+                    currentState = State.Attack;
+                    SetAnimatorBools(false, false, true, false, false, false);
+                }
+                else
+                {
+                    currentState = State.Patrol;
+                    SetAnimatorBools(false, false, false, false, false, true);
+                }
+            }
+            else
+            {
+                currentState = State.Patrol;
+                SetAnimatorBools(false, false, false, false, false, true);
+            }
+        }
+    }
+
+    private void DefendState()
+    {
+        rb.velocity = Vector2.zero;
+        defendTimer += Time.deltaTime;
+
+        if (defendTimer >= defendDuration)
+        {
+            animator.SetBool("IsDefend", false);
+
+            if (player != null)
+            {
+                float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+                if (distanceToPlayer <= attack2Range)
+                {
+                    currentState = State.Attack2;
+                    SetAnimatorBools(false, false, false, true, false, false);
+                }
+                else if (distanceToPlayer <= attackRange)
+                {
+                    currentState = State.Attack;
+                    SetAnimatorBools(false, false, true, false, false, false);
+                }
+                else
+                {
+                    currentState = State.Patrol;
+                    SetAnimatorBools(false, false, false, false, false, true);
+                }
+            }
+            else
+            {
+                currentState = State.Patrol;
+                SetAnimatorBools(false, false, false, false, false, true);
+            }
+>>>>>>> Stashed changes
         }
     }
 
