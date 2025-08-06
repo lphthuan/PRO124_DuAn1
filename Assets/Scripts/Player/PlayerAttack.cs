@@ -10,8 +10,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float spellSpeed = 12f;
     [SerializeField] private float attackAngle = 120f;
-    [SerializeField] private float attackCooldown = 0.8f;
-    public float baseDamage = 10f;
+    [SerializeField] private float attackCooldown = 1f;
+	[Header("Audio")]
+	[SerializeField] private AudioSource audioSource;
+
+	public float baseDamage = 10f;
     private float currentDamage;
 
     public SpellData currentSpell;
@@ -92,8 +95,14 @@ public class PlayerAttack : MonoBehaviour
         if (Time.time - lastAttackTime < attackCooldown) return;
         if (currentSpell == null) return;
 
-        // 👉 Quay mặt theo hướng chuột
-        FlipToMouse();
+		// 🔊 Phát âm thanh bùa phép
+		if (audioSource != null && currentSpell.SpellSound != null)
+		{
+			audioSource.PlayOneShot(currentSpell.SpellSound);
+		}
+
+		// 👉 Quay mặt theo hướng chuột
+		FlipToMouse();
 
         lastAttackTime = Time.time;
 

@@ -9,4 +9,7 @@ public class SpellData : ScriptableObject
 	public string animationTrigger;
 	public int StateIntAnim;
 	public Sprite spellIcon;
+	[SerializeField] private AudioClip spellSound;
+	public AudioClip SpellSound => spellSound;
+
 }

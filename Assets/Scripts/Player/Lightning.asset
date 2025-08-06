@@ -18,3 +18,4 @@ MonoBehaviour:
   animationTrigger: IsAtkLight
   StateIntAnim: 3
   spellIcon: {fileID: -1425428598, guid: c81f3977a46ca314daaeb59c8a72b18b, type: 3}
+  spellSound: {fileID: 8300000, guid: 3bf53210c29a9b4408c2b13e33e3773d, type: 3}

@@ -47427,6 +47427,10 @@ PrefabInstance:
       propertyPath: spellIconUI
       value: 
       objectReference: {fileID: 1552274966}
+    - target: {fileID: 5486054915979075621, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
+      propertyPath: m_Volume
+      value: 0.833
+      objectReference: {fileID: 0}
     - target: {fileID: 5579747650445305098, guid: d88f5aa4dc26f6c4794f0a638d3cc73f, type: 3}
       propertyPath: m_Enabled
       value: 1
