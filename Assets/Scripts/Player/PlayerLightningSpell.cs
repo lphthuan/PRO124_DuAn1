@@ -31,8 +31,13 @@ public class PlayerLightningSpell : MonoBehaviour
         if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
         {
             hasHit = true; // ✅ Đánh dấu đã trúng
-            Destroy(gameObject); // ✅ Huỷ spell sau 1 hit
+            //Destroy(gameObject);
         }
-    }
+        if (other.CompareTag("Ground"))
+        {
+            hasHit = true;
+            Destroy(gameObject);
+		}
+	}
 
 }
