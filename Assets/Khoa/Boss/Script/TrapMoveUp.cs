@@ -56,7 +56,7 @@ public class TrapMoveUp : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Vector3 teleportPosition = new Vector3(-37.02f, 35.12f, 0f);
         player.transform.position = teleportPosition;
-        yield return new WaitForSeconds(3f);
+        
         Destroy(gameObject);
     }
 }
