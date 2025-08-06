@@ -539,11 +539,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
       propertyPath: maxHealth
-      value: 50
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
+      propertyPath: attackDamage
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
       propertyPath: healCooldown
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
       propertyPath: healDuration
@@ -551,15 +555,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
       propertyPath: attack2Damage
-      value: 30
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
       propertyPath: currentHealth
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
       propertyPath: healThreshold
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3470023307110363078, guid: aa3d7d19bf704a148a8bd2bf4d09ef3d, type: 3}
       propertyPath: playerLayer.m_Bits
