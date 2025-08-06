@@ -6,7 +6,7 @@ using System.Collections;
 public class TeleZone6A : MonoBehaviour
 {
     [SerializeField] private TrapActive trapScript;
-    [SerializeField] GameObject spawnTriggerTrap;
+    [SerializeField] GameObject batDauDenGio;
     [Header("Portal Settings")]
     public Transform targetPortal;
     public string promptMessage = "Press E to teleport";
@@ -37,11 +37,6 @@ public class TeleZone6A : MonoBehaviour
         if (isPlayerInRange && !isTeleporting && Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(TeleportWithFade());
-            
-            
-
-            // Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            // Instantiate(spawnTriggerTrap, spawnPos, Quaternion.identity);
         }
     }
 

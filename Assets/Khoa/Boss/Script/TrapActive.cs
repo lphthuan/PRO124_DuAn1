@@ -13,7 +13,7 @@ public class TrapActive : MonoBehaviour
 
     private IEnumerator ActiveGameObject()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(45f);
 
             trapVisual.SetActive(false);
 
