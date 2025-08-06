@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class TrapActive : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject trapVisual; // GameObject chứa collider/hiển thị trap
+
+    public void StartTrapCycle()
     {
         StartCoroutine(ActiveGameObject());
+        Debug.Log("Trap is now active and will be deactivated after 30 seconds.");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private IEnumerator ActiveGameObject()
     {
-        yield return new WaitForSeconds(10f);
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(2f);
+
+            trapVisual.SetActive(false);
+
+        yield return new WaitForSeconds(5f);
+
+            trapVisual.SetActive(true);
     }
 }
