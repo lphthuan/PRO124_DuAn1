@@ -21,6 +21,7 @@ TagManager:
   - Door
   - Limit
   - Test
+  - Trap2
   layers:
   - Default
   - TransparentFX
