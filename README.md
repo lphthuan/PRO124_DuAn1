@@ -6,12 +6,12 @@ Chronicles of the Lost Souls (Vong Hồn Ký) là một dự án game 2D phục 
 
 ## 👤 Người thực hiện
 
-**Lê Phan Hòa Thuận** (lphthuan)
-**Trần Ngọc Đăng Khoa** (khoatnd223)
-**Trần Nguyễn Yên Nhi** (Nhi30101)
-**Nguyễn Văn Hậu** (nguyenvanhau2244)
-**Nguyễn Trí Tín** (NguyenTriTin3008)
-**Lê Hoàng Thái** (lethai-02)
+- **Lê Phan Hòa Thuận** (lphthuan)
+- **Trần Ngọc Đăng Khoa** (khoatnd223)
+- **Trần Nguyễn Yên Nhi** (Nhi30101)
+- **Nguyễn Văn Hậu** (nguyenvanhau2244)
+- **Nguyễn Trí Tín** (NguyenTriTin3008)
+- **Lê Hoàng Thái** (lethai-02)
 
 ## 📅 Thông tin dự án
 
