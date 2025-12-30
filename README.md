@@ -36,4 +36,4 @@ Chronicles of the Lost Souls (Vong Hồn Ký) là một dự án game 2D phục 
 
 ---
 
-© 2025 Lê Phúc Thuận. All rights reserved.
+© 2025 Lê Phan Hòa Thuận. All rights reserved.
