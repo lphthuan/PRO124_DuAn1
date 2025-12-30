@@ -1,8 +1,8 @@
-# Lost Souls
+# The Lost Souls
 
 ## 📋 Mô tả dự án
 
-Lost Souls (Vong hồn ký) là một dự án game 2D phục vụ cho môn học "Dự án 1 - PRO124"
+Chronicles of the Lost Souls (Vong Hồn Ký) là một dự án game 2D phục vụ cho môn học "Dự án 1 - PRO124"
 
 ## 👤 Người thực hiện
 
